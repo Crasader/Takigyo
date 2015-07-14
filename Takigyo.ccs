@@ -1,0 +1,23 @@
+<Solution>
+  <PropertyGroup Name="Takigyo" Version="2.3.0.1" Type="CocosStudio" />
+  <SolutionFolder>
+    <Group ctype="ResourceGroup">
+      <RootFolder Name=".">
+        <Project Name="MainScene.csd" Type="Scene" />
+        <Project Name="Charactor.csd" Type="Node" />
+        <Image Name="54.png" />
+        <Image Name="54@2x.png" />
+        <Image Name="54@3x.png" />
+        <Image Name="Oval 69.png" />
+        <Image Name="Oval 69@2x.png" />
+        <Image Name="Oval 69@3x.png" />
+        <Image Name="BottomRock.png" />
+        <Image Name="BottomRock@2x.png" />
+        <Image Name="BottomRock@3x.png" />
+        <Image Name="Background.png" />
+        <Image Name="Background@2x.png" />
+        <Image Name="Background@3x.png" />
+      </RootFolder>
+    </Group>
+  </SolutionFolder>
+</Solution>

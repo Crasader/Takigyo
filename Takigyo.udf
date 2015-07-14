@@ -1,0 +1,28 @@
+<UserData>
+  <Properties>
+    <Item Key="CocosRecentOperation">
+      <Value ctype="CocosRecentOperation">
+        <LastPublishType Value="XCode" />
+        <IsLastPublish Value="True" />
+        <LastRunType Value="Unknown" />
+      </Value>
+    </Item>
+    <Item Key="PackageParamsKey">
+      <Value ctype="PackageParams">
+        <LuaIsEncrypt Value="False" />
+        <LuaEncryptKey Value="" />
+        <LuaEncryptSign Value="" />
+        <Android_PackageName Value="org.cocos.Takigyo" />
+        <AndroidkeyStore Value="" />
+        <AndroidVersion Value="" />
+        <iOS_Target Value="Takigyo iOS" />
+        <iOS_BundleID Value="iPhone Developer: Shota Oiyama (AY76Q872SX)" />
+        <Platform Value="None" />
+        <FrameworkVersion Value="cocos2d-x-3.6" />
+        <IsDebugKeystore Value="True" />
+        <EnableSourceMap Value="False" />
+        <EnableHTML5Advanced Value="False" />
+      </Value>
+    </Item>
+  </Properties>
+</UserData>
