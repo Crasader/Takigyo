@@ -3,6 +3,14 @@
 
 #include "cocos2d.h"
 
+enum class GameState
+{
+    Title,
+    Ready,
+    Playing,
+    GameOver
+};
+
 class MainScene : public cocos2d::Layer
 {
 public:
@@ -14,6 +22,11 @@ public:
 
     // implement the "static create()" method manually
     CREATE_FUNC(MainScene);
+    
+private:
+    void onEnter() override;
+    
+    GameState gameState;
 };
 
 #endif // __MainScene_SCENE_H__
