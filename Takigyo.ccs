@@ -4,7 +4,7 @@
     <Group ctype="ResourceGroup">
       <RootFolder Name=".">
         <Project Name="MainScene.csd" Type="Scene" />
-        <Project Name="Charactor.csd" Type="Node" />
+        <Project Name="Character.csd" Type="Node" />
         <Image Name="54.png" />
         <Image Name="54@2x.png" />
         <Image Name="54@3x.png" />
@@ -54,6 +54,9 @@
         <PlistParticleFile Name="particle_waterfall.plist" />
         <Image Name="cloud.png" />
         <PlistParticleFile Name="shibuki.plist" />
+        <Folder Name="Fonts">
+          <TTF Name="Game of Three.ttf" />
+        </Folder>
       </RootFolder>
     </Group>
   </SolutionFolder>

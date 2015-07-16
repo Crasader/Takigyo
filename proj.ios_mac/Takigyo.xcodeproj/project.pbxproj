@@ -52,6 +52,10 @@
 		7AB94C6A95BCF2B4CA3DF1DC /* res in Resources */ = {isa = PBXBuildFile; fileRef = FA144D09A52357282113E0F8 /* res */; };
 		8262943E1AAF051F00CB7CF7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8262943D1AAF051F00CB7CF7 /* Security.framework */; };
 		966CF45B1B55BC380046A1B9 /* particle.plist in Resources */ = {isa = PBXBuildFile; fileRef = 966CF45A1B55BC380046A1B9 /* particle.plist */; };
+		96C8C4FC1B56E50200D07B2C /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96C8C4FA1B56E50200D07B2C /* Character.cpp */; };
+		96C8C4FD1B56E50200D07B2C /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96C8C4FA1B56E50200D07B2C /* Character.cpp */; };
+		96C8C5001B56E57300D07B2C /* CharacterReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96C8C4FE1B56E57300D07B2C /* CharacterReader.cpp */; };
+		96C8C5011B56E57300D07B2C /* CharacterReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96C8C4FE1B56E57300D07B2C /* CharacterReader.cpp */; };
 		9F8B4F24824617F9A0E5789A /* libcocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62FC4D32A80EFB11E0A6CF2A /* libcocos2d Mac.a */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
@@ -110,6 +114,11 @@
 		62FC4D32A80EFB11E0A6CF2A /* libcocos2d Mac.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libcocos2d Mac.a"; path = "/Applications/Cocos/frameworks/cocos2d-x-3.6/prebuilt/mac/libcocos2d Mac.a"; sourceTree = "<absolute>"; };
 		8262943D1AAF051F00CB7CF7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		966CF45A1B55BC380046A1B9 /* particle.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = particle.plist; path = ../proj.ios_mac/particle.plist; sourceTree = "<group>"; };
+		96C8C4F91B56E47400D07B2C /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
+		96C8C4FA1B56E50200D07B2C /* Character.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Character.cpp; sourceTree = "<group>"; };
+		96C8C4FB1B56E50200D07B2C /* Character.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Character.h; sourceTree = "<group>"; };
+		96C8C4FE1B56E57300D07B2C /* CharacterReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CharacterReader.cpp; sourceTree = "<group>"; };
+		96C8C4FF1B56E57300D07B2C /* CharacterReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterReader.h; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -240,6 +249,11 @@
 			children = (
 				46880B8419C43A87006E1F66 /* AppDelegate.cpp */,
 				46880B8519C43A87006E1F66 /* AppDelegate.h */,
+				96C8C4FA1B56E50200D07B2C /* Character.cpp */,
+				96C8C4FB1B56E50200D07B2C /* Character.h */,
+				96C8C4FE1B56E57300D07B2C /* CharacterReader.cpp */,
+				96C8C4FF1B56E57300D07B2C /* CharacterReader.h */,
+				96C8C4F91B56E47400D07B2C /* Globals.h */,
 				46880B8619C43A87006E1F66 /* MainScene.cpp */,
 				46880B8719C43A87006E1F66 /* MainScene.h */,
 			);
@@ -424,9 +438,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96C8C5001B56E57300D07B2C /* CharacterReader.cpp in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				46880B8A19C43A87006E1F66 /* MainScene.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
+				96C8C4FC1B56E50200D07B2C /* Character.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 			);
@@ -439,6 +455,8 @@
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				46880B8B19C43A87006E1F66 /* MainScene.cpp in Sources */,
+				96C8C5011B56E57300D07B2C /* CharacterReader.cpp in Sources */,
+				96C8C4FD1B56E50200D07B2C /* Character.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
