@@ -8,7 +8,7 @@
 
 #include "Character.h"
 
-using namespace cocos2d;
+USING_NS_TIMELINE
 
 bool Character::init()
 {
@@ -40,10 +40,16 @@ void Character::setNen(Nen nen)
     
     if (this->nen == Nen::Ken)
     {
-        this->setScaleX(-1.0f);
+        ActionTimeline* titleTimeline = CSLoader::createTimeline("Character.csb");
+        this->stopAllActions();
+        this->runAction(titleTimeline);
+        titleTimeline->play("Ken", false);
     }
     else
     {
-        this->setScaleX(1.0f);
+        ActionTimeline* titleTimeline = CSLoader::createTimeline("Character.csb");
+        this->stopAllActions();
+        this->runAction(titleTimeline);
+        titleTimeline->play("Ten", false);
     }
 }

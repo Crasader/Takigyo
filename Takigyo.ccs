@@ -57,6 +57,16 @@
         <Folder Name="Fonts">
           <TTF Name="Game of Three.ttf" />
         </Folder>
+        <Image Name="Ken.png" />
+        <Image Name="Ken@2x.png" />
+        <Image Name="Ken@3x.png" />
+        <Image Name="Ten.png" />
+        <Image Name="Ten@2x.png" />
+        <Image Name="Ten@3x.png" />
+        <PlistParticleFile Name="ten.plist" />
+        <Image Name="CharacterShadow.png" />
+        <Image Name="CharacterShadow@2x.png" />
+        <Image Name="CharacterShadow@3x.png" />
       </RootFolder>
     </Group>
   </SolutionFolder>

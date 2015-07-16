@@ -45,6 +45,8 @@ private:
     void triggerGameOver();
     void dropObstacles();
     void resetGameState();
+    void setKen();
+    void setTen();
     void singlePlayerPressed(cocos2d::Ref* pSender, cocos2d::ui::Widget::TouchEventType eEventType);
     void setRemainingAura(float auraLeft);
     

@@ -6,9 +6,7 @@
 #include "Character.h"
 #include "CharacterReader.h"
 
-USING_NS_CC;
-
-using namespace cocostudio::timeline;
+USING_NS_TIMELINE
 
 Scene* MainScene::createScene()
 {
@@ -46,20 +44,19 @@ bool MainScene::init()
     
     Size size = Director::getInstance()->getVisibleSize();
     this->rootNode->setContentSize(size);
-    ui::Helper::doLayout(this->rootNode);
-
-    addChild(this->rootNode);
-    
     auto lifeBG = rootNode->getChildByName("lifeBG");
     this->auraBar = lifeBG->getChildByName<Sprite*>("lifeBar");
     this->scoreLabel = rootNode->getChildByName<cocos2d::ui::Text*>("scoreLabel");
-    
     this->countDown = 0.0f;
     
-    this->resetGameState();
+    ui::Helper::doLayout(this->rootNode);
     
     ui::Button* playButton = this->rootNode->getChildByName<ui::Button*>("PlayButton");
     playButton->addTouchEventListener(CC_CALLBACK_2(MainScene::singlePlayerPressed, this));
+    
+    addChild(this->rootNode);
+    
+    this->resetGameState();
     
     return true;
 }
@@ -67,9 +64,9 @@ bool MainScene::init()
 void MainScene::onEnter() {
     Layer::onEnter();
     
-    this->setupTouchHandling();
-    
     this->triggerTitle();
+    
+    this->setupTouchHandling();
     
     // schedule the update method to be called every frame
     this->scheduleUpdate();
@@ -96,7 +93,7 @@ void MainScene::update(float dt)
             this->dropObstacles();
             
             // load and run the title animation
-            cocostudio::timeline::ActionTimeline* titleTimeline = CSLoader::createTimeline("MainScene.csb");
+            ActionTimeline* titleTimeline = CSLoader::createTimeline("MainScene.csb");
             this->stopAllActions();
             this->runAction(titleTimeline);
             titleTimeline->play("countDown", false);
@@ -134,12 +131,12 @@ void MainScene::setCountDown(int timeLeft)
 }
 
 void MainScene::dropObstacles() {
-    //init
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Sprite* rock = Sprite::create("FallenRock.png");
     rock->setScale(0.5f);
     rock->setZOrder(-1);
     rock->setPosition(Vec2(visibleSize.width * 0.5f, visibleSize.height * 1.2f));
+    
     auto big        = ScaleTo::create(0.0f, 1.0);
     auto moveDown   = MoveBy::create(1.0f, Vec2(0,-760));
     auto moveDown2  = MoveBy::create(0.8f, Vec2(0,-680));
@@ -155,10 +152,12 @@ void MainScene::dropObstacles() {
                                                       ),
                                      easeIn,
                                      CallFunc::create([this]() {
+                                                            if (this->gameState == GameState::Playing) {
                                                                 if (this->character->getNen() == Nen::Ten) {
-                                                                    float decreaceAura = this->auraLeft - 1.0f;
+                                                                    float decreaceAura = this->auraLeft - HIT_DAMAGE;
                                                                     this->setRemainingAura(decreaceAura);
                                                                 }
+                                                            }
                                                             }),
                                      CallFunc::create([rock](){rock->removeFromParent();}),
                                      NULL));
@@ -198,7 +197,7 @@ void MainScene::triggerTitle()
     this->gameState = GameState::Title;
     
     // load and run the title animation
-    cocostudio::timeline::ActionTimeline* titleTimeline = CSLoader::createTimeline("MainScene.csb");
+    ActionTimeline* titleTimeline = CSLoader::createTimeline("MainScene.csb");
     this->stopAllActions();
     this->runAction(titleTimeline);
     titleTimeline->play("title", false);
@@ -210,14 +209,13 @@ void MainScene::triggerReady() {
     this->gameState = GameState::Ready;
     
     // load and run the ready animations
-    cocostudio::timeline::ActionTimeline* readyTimeline = CSLoader::createTimeline("MainScene.csb");
+    ActionTimeline* readyTimeline = CSLoader::createTimeline("MainScene.csb");
     this->stopAllActions();
     this->runAction(readyTimeline);
     readyTimeline->play("ready", false);
     
     auto background = this->rootNode->getChildByName("background");
     background->setZOrder(-1);
-    
 }
 
 void MainScene::triggerGameOver()
@@ -281,6 +279,8 @@ void MainScene::setupTouchHandling() {
                 //this->resetGameState();
                 //this->triggerTitle();
                 //this->gameState = GameState::Title;
+                break;
+            default:
                 break;
         }
         
