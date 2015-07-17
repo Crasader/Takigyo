@@ -130,16 +130,20 @@ void MainScene::setCountDown(int timeLeft)
 }
 
 void MainScene::dropObstacles() {
+    
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Sprite* rock = Sprite::create("FallenRock.png");
     rock->setScale(0.5f);
     rock->setZOrder(-1);
     rock->setPosition(Vec2(visibleSize.width * 0.5f, visibleSize.height * 1.2f));
     
+    auto waterfall = rootNode->getChildByName("waterfall");
+    auto watertop = (waterfall->getAnchorPointInPoints() - Vec2(rock->getContentSize().width / 2, rock->getContentSize().height / 2 - 30));
+    
     auto big        = ScaleTo::create(0.0f, 1.0);
     auto moveDown   = MoveBy::create(1.0f, Vec2(0,-760));
     auto moveDown2  = MoveBy::create(0.8f, Vec2(0,-680));
-    auto moveUp     = MoveBy::create(0.5f, Vec2(0,300));
+    auto moveUp     = MoveTo::create(0.5f, watertop);
     auto easeIn     = EaseIn::create(moveDown2, 4);
     rock->runAction(Sequence::create(moveDown,
                                      big,
@@ -181,6 +185,9 @@ void MainScene::resetGameState()
     this->auraLeft = PRESENT_OUTPUT_POTENTIAL;
     this->countDown = 0.0f;
     this->auraBar->setScaleX(1.0f);
+    if (this->countDown > 0.0f) {
+        this->character->setNen(Nen::Ten);
+    }
     // BAD
     //this->character->setNen(Nen::Ten);
     
@@ -188,7 +195,7 @@ void MainScene::resetGameState()
     Sprite* cloud = Sprite::create("cloud.png");
     cloud->setZOrder(-1);
     cloud->setScale(2.0f);
-    cloud->setPosition(Vec2(visibleSize.width * 0.5f, visibleSize.height * 0.9f));
+    cloud->setPosition(Vec2(visibleSize.width * 0.5f + 100, visibleSize.height * 0.9f));
     this->rootNode->addChild(cloud);
 }
 
@@ -207,6 +214,7 @@ void MainScene::triggerTitle()
 void MainScene::triggerReady() {
     // set the game state to Ready
     this->gameState = GameState::Ready;
+    this->character->setNen(Nen::Ten);
     
     // load and run the ready animations
     ActionTimeline* readyTimeline = CSLoader::createTimeline("MainScene.csb");
@@ -265,7 +273,6 @@ void MainScene::setupTouchHandling() {
         {
             case GameState::Title:
                 //this->triggerReady();
-                this->character->setNen(Nen::Ten);
                 break;
                 
             case GameState::Ready:
