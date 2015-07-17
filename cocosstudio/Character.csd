@@ -24,10 +24,10 @@
       </Animation>
       <AnimationList>
         <AnimationInfo Name="Ten" StartIndex="0" EndIndex="20">
-          <RenderColor A="150" R="127" G="255" B="0" />
+          <RenderColor A="255" R="127" G="255" B="0" />
         </AnimationInfo>
         <AnimationInfo Name="Ken" StartIndex="31" EndIndex="50">
-          <RenderColor A="150" R="221" G="160" B="221" />
+          <RenderColor A="255" R="221" G="160" B="221" />
         </AnimationInfo>
       </AnimationList>
       <ObjectData Name="Node" Tag="10" ctype="GameNodeObjectData">

@@ -36,27 +36,26 @@ bool MainScene::init()
     // Be very careful to do CharacterReader::getInstance, not CharacterReader::getInstance() which will crash
     CSLoader* instance = CSLoader::getInstance();
     instance->registReaderObject("CharacterReader", (ObjectFactory::Instance) CharacterReader::getInstance);
+    Size size = Director::getInstance()->getVisibleSize();
     
     this->rootNode = CSLoader::createNode("MainScene.csb");
+    ui::Helper::doLayout(this->rootNode);
     
-    this->character = this->rootNode->getChildByName<Character*>("Character");
-    this->character->setNen(Nen::Ten);
-    
-    Size size = Director::getInstance()->getVisibleSize();
     this->rootNode->setContentSize(size);
+    auto waterfall = rootNode->getChildByName("waterfall");
+    auto bottomRock = waterfall->getChildByName("bottomRock");
+    this->character = bottomRock->getChildByName<Character*>("Character");
     auto lifeBG = rootNode->getChildByName("lifeBG");
     this->auraBar = lifeBG->getChildByName<Sprite*>("lifeBar");
     this->scoreLabel = rootNode->getChildByName<cocos2d::ui::Text*>("scoreLabel");
     this->countDown = 0.0f;
     
-    ui::Helper::doLayout(this->rootNode);
-    
     ui::Button* playButton = this->rootNode->getChildByName<ui::Button*>("PlayButton");
     playButton->addTouchEventListener(CC_CALLBACK_2(MainScene::singlePlayerPressed, this));
     
-    addChild(this->rootNode);
-    
     this->resetGameState();
+    
+    addChild(this->rootNode);
     
     return true;
 }
@@ -182,7 +181,8 @@ void MainScene::resetGameState()
     this->auraLeft = PRESENT_OUTPUT_POTENTIAL;
     this->countDown = 0.0f;
     this->auraBar->setScaleX(1.0f);
-    this->character->setNen(Nen::Ten);
+    // BAD
+    //this->character->setNen(Nen::Ten);
     
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Sprite* cloud = Sprite::create("cloud.png");
@@ -265,6 +265,7 @@ void MainScene::setupTouchHandling() {
         {
             case GameState::Title:
                 //this->triggerReady();
+                this->character->setNen(Nen::Ten);
                 break;
                 
             case GameState::Ready:

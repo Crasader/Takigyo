@@ -67,6 +67,9 @@
         <Image Name="CharacterShadow.png" />
         <Image Name="CharacterShadow@2x.png" />
         <Image Name="CharacterShadow@3x.png" />
+        <Image Name="sky.png" />
+        <Image Name="sky@2x.png" />
+        <Image Name="sky@3x.png" />
       </RootFolder>
     </Group>
   </SolutionFolder>

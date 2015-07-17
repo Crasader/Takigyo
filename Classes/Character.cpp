@@ -38,18 +38,15 @@ void Character::setNen(Nen nen)
 {
     this->nen = nen;
     
+    ActionTimeline* characterTimeline = CSLoader::createTimeline("Character.csb");
+    this->stopAllActions();
+    this->runAction(characterTimeline);
     if (this->nen == Nen::Ken)
     {
-        ActionTimeline* titleTimeline = CSLoader::createTimeline("Character.csb");
-        this->stopAllActions();
-        this->runAction(titleTimeline);
-        titleTimeline->play("Ken", false);
+        characterTimeline->play("Ken", false);
     }
     else
     {
-        ActionTimeline* titleTimeline = CSLoader::createTimeline("Character.csb");
-        this->stopAllActions();
-        this->runAction(titleTimeline);
-        titleTimeline->play("Ten", false);
+        characterTimeline->play("Ten", false);
     }
 }
