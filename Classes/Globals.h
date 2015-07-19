@@ -16,6 +16,13 @@ enum class Nen
     None
 };
 
+enum class Obstacle
+{
+    Ten,
+    Ken,
+    None
+};
+
 static const float PRESENT_OUTPUT_POTENTIAL = 10.0f;
 
 static const float COUNT_DOWN_TIME = 3.0f;

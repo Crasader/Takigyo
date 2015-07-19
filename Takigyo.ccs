@@ -70,6 +70,10 @@
         <Image Name="sky.png" />
         <Image Name="sky@2x.png" />
         <Image Name="sky@3x.png" />
+        <Image Name="heart.png" />
+        <Image Name="heart@2x.png" />
+        <Image Name="heart@3x.png" />
+        <Project Name="Clouds.csd" Type="Node" />
       </RootFolder>
     </Group>
   </SolutionFolder>

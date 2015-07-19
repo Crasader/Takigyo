@@ -89,7 +89,7 @@ void MainScene::update(float dt)
     
         if (this->countDown > COUNT_DOWN_TIME) {
             this->gameState = GameState::Playing;
-            this->dropObstacles();
+            //this->dropObstacles();
             
             // load and run the title animation
             ActionTimeline* titleTimeline = CSLoader::createTimeline("MainScene.csb");
@@ -130,27 +130,34 @@ void MainScene::setCountDown(int timeLeft)
 }
 
 void MainScene::dropObstacles() {
-    
     Size visibleSize = Director::getInstance()->getVisibleSize();
-    Sprite* rock = Sprite::create("FallenRock.png");
-    rock->setScale(0.5f);
-    rock->setZOrder(-1);
-    rock->setPosition(Vec2(visibleSize.width * 0.5f, visibleSize.height * 1.2f));
+    
+    Sprite* obstacle;
+    int randomNum = rand() % 10;
+    if (randomNum == 0) {
+        obstacle = Sprite::create("heart.png");
+    } else {
+        obstacle = Sprite::create("FallenRock.png");
+    }
+    
+    obstacle->setScale(0.5f);
+    obstacle->setZOrder(-1);
+    obstacle->setPosition(Vec2(visibleSize.width * 0.5f, visibleSize.height * 1.2f));
     
     auto waterfall = rootNode->getChildByName("waterfall");
-    auto watertop = (waterfall->getAnchorPointInPoints() - Vec2(rock->getContentSize().width / 2, rock->getContentSize().height / 2 - 30));
+    auto watertop = (waterfall->getAnchorPointInPoints() - Vec2(obstacle->getContentSize().width / 2, obstacle->getContentSize().height / 2 - 30));
     
     auto big        = ScaleTo::create(0.0f, 1.0);
     auto moveDown   = MoveBy::create(1.0f, Vec2(0,-760));
     auto moveDown2  = MoveBy::create(0.8f, Vec2(0,-680));
     auto moveUp     = MoveTo::create(0.5f, watertop);
     auto easeIn     = EaseIn::create(moveDown2, 4);
-    rock->runAction(Sequence::create(moveDown,
+    obstacle->runAction(Sequence::create(moveDown,
                                      big,
                                      moveUp,
                                      CallFunc::create(
-                                                      [rock,this]() {
-                                                          rock->setZOrder(0);
+                                                      [obstacle,this]() {
+                                                          obstacle->setZOrder(0);
                                                       }
                                                       ),
                                      easeIn,
@@ -162,10 +169,10 @@ void MainScene::dropObstacles() {
                                                                 }
                                                             }
                                                             }),
-                                     CallFunc::create([rock](){rock->removeFromParent();}),
+                                     CallFunc::create([obstacle](){obstacle->removeFromParent();}),
                                      NULL));
     
-    this->rootNode->addChild(rock);
+    this->rootNode->addChild(obstacle);
 }
 
 #pragma mark -
