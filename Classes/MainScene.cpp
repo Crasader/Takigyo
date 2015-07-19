@@ -48,14 +48,16 @@ bool MainScene::init()
     auto lifeBG = rootNode->getChildByName("lifeBG");
     this->auraBar = lifeBG->getChildByName<Sprite*>("lifeBar");
     this->scoreLabel = rootNode->getChildByName<cocos2d::ui::Text*>("scoreLabel");
+    this->cloudsNode = rootNode->getChildByName("clouds");
     this->countDown = 0.0f;
+    this->playCount = 0;
     
     ui::Button* playButton = this->rootNode->getChildByName<ui::Button*>("PlayButton");
     playButton->addTouchEventListener(CC_CALLBACK_2(MainScene::singlePlayerPressed, this));
     
-    this->resetGameState();
-    
     addChild(this->rootNode);
+    
+    this->resetGameState();
     
     return true;
 }
@@ -63,12 +65,14 @@ bool MainScene::init()
 void MainScene::onEnter() {
     Layer::onEnter();
     
+    // schedule the update method to be called every frame
+    this->scheduleUpdate();
+    
     this->triggerTitle();
     
     this->setupTouchHandling();
     
-    // schedule the update method to be called every frame
-    this->scheduleUpdate();
+    this->playWeather();
 }
 
 #pragma mark -
@@ -93,7 +97,6 @@ void MainScene::update(float dt)
             
             // load and run the title animation
             ActionTimeline* titleTimeline = CSLoader::createTimeline("MainScene.csb");
-            this->stopAllActions();
             this->runAction(titleTimeline);
             titleTimeline->play("countDown", false);
         }
@@ -192,18 +195,10 @@ void MainScene::resetGameState()
     this->auraLeft = PRESENT_OUTPUT_POTENTIAL;
     this->countDown = 0.0f;
     this->auraBar->setScaleX(1.0f);
-    if (this->countDown > 0.0f) {
+    if (this->playCount > 0) {
         this->character->setNen(Nen::Ten);
+        this->playWeather();
     }
-    // BAD
-    //this->character->setNen(Nen::Ten);
-    
-    Size visibleSize = Director::getInstance()->getVisibleSize();
-    Sprite* cloud = Sprite::create("cloud.png");
-    cloud->setZOrder(-1);
-    cloud->setScale(2.0f);
-    cloud->setPosition(Vec2(visibleSize.width * 0.5f + 100, visibleSize.height * 0.9f));
-    this->rootNode->addChild(cloud);
 }
 
 void MainScene::triggerTitle()
@@ -212,7 +207,6 @@ void MainScene::triggerTitle()
     
     // load and run the title animation
     ActionTimeline* titleTimeline = CSLoader::createTimeline("MainScene.csb");
-    this->stopAllActions();
     this->runAction(titleTimeline);
     titleTimeline->play("title", false);
     
@@ -225,7 +219,6 @@ void MainScene::triggerReady() {
     
     // load and run the ready animations
     ActionTimeline* readyTimeline = CSLoader::createTimeline("MainScene.csb");
-    this->stopAllActions();
     this->runAction(readyTimeline);
     readyTimeline->play("ready", false);
     
@@ -235,35 +228,13 @@ void MainScene::triggerReady() {
 
 void MainScene::triggerGameOver()
 {
-    // set the game state to Game Over
+    this->playCount++;
+    
     this->gameState = GameState::GameOver;
     
     this->triggerTitle();
     
     this->resetGameState();
-    
-    // set the timer to 0
-    //this->setTimeLeft(0.0f);
-    
-    /*
-    // get a reference to the top-most node
-    auto scene = this->getChildByName("Scene");
-    
-    // get a reference to tha mat sprite
-    auto mat = scene->getChildByName("mat");
-    
-    // get a reference to the game over score label
-    cocos2d::ui::Text* gameOverScoreLabel = mat->getChildByName<cocos2d::ui::Text*>("gameOverScoreLabel");
-    
-    // set the score label to the user's score
-    gameOverScoreLabel->setString(std::to_string(this->score));
-    
-    // load and run the game over animations
-    cocostudio::timeline::ActionTimeline* gameOverTimeline = CSLoader::createTimeline("MainScene.csb");
-    this->stopAllActions();
-    this->runAction(gameOverTimeline);
-    gameOverTimeline->play("gameOver", false);
-     */
 }
 
 void MainScene::setupTouchHandling() {
@@ -291,7 +262,6 @@ void MainScene::setupTouchHandling() {
                 this->character->setNen(Nen::Ken);
                 break;
             case GameState::GameOver:
-                //this->resetGameState();
                 //this->triggerTitle();
                 //this->gameState = GameState::Title;
                 break;
@@ -312,4 +282,10 @@ void MainScene::singlePlayerPressed(Ref *pSender, ui::Widget::TouchEventType eEv
     if (eEventType == ui::Widget::TouchEventType::ENDED) {
         this->triggerReady();
     }
+}
+
+void MainScene::playWeather() {
+    ActionTimeline* cloudsTimeline = CSLoader::createTimeline("Clouds.csb");
+    this->runAction(cloudsTimeline);
+    cloudsTimeline->play("icloud", true);
 }

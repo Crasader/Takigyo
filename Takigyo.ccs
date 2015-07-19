@@ -74,6 +74,10 @@
         <Image Name="heart@2x.png" />
         <Image Name="heart@3x.png" />
         <Project Name="Clouds.csd" Type="Node" />
+        <Image Name="waterfall2.png" />
+        <Image Name="waterfall2@2x.png" />
+        <Image Name="waterfall2@3x.png" />
+        <PlistParticleFile Name="nami.plist" />
       </RootFolder>
     </Group>
   </SolutionFolder>

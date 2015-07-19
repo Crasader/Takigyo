@@ -2,11 +2,10 @@
   <PropertyGroup Type="Node" Name="Character" ID="a58d6a62-cfa3-442f-8b50-e485becd7713" Version="2.3.0.1" />
   <Content ctype="GameProjectContent">
     <Content>
-      <Animation Duration="50" Speed="1.0000">
+      <Animation Duration="50" Speed="1.0000" ActivedAnimationName="Ten">
         <Timeline ActionTag="-990567327" Property="VisibleForFrame">
-          <BoolFrame FrameIndex="0" Tween="False" Value="True" />
-          <BoolFrame FrameIndex="31" Tween="False" Value="False" />
-          <BoolFrame FrameIndex="50" Tween="False" Value="False" />
+          <BoolFrame FrameIndex="0" Tween="False" Value="False" />
+          <BoolFrame FrameIndex="31" Tween="False" Value="True" />
         </Timeline>
         <Timeline ActionTag="-616467882" Property="VisibleForFrame">
           <BoolFrame FrameIndex="0" Tween="False" Value="False" />
@@ -44,7 +43,7 @@
             <FileData Type="Normal" Path="CharacterShadow.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Ten" ActionTag="-990567327" Tag="65" IconVisible="True" TopMargin="-50.0000" BottomMargin="50.0000" ctype="ParticleObjectData">
+          <AbstractNodeData Name="Ten" ActionTag="-990567327" Tag="65" VisibleForFrame="False" IconVisible="True" TopMargin="-50.0000" BottomMargin="50.0000" ctype="ParticleObjectData">
             <Size />
             <AnchorPoint />
             <Position Y="50.0000" />

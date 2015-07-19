@@ -49,12 +49,15 @@ private:
     void setTen();
     void singlePlayerPressed(cocos2d::Ref* pSender, cocos2d::ui::Widget::TouchEventType eEventType);
     void setRemainingAura(float auraLeft);
+    void playWeather();
     
     float countDown;
     float auraLeft;
     
     int timeLeft;
+    int playCount;
     
+    cocos2d::Node* cloudsNode;
     
     GameState gameState;
 };

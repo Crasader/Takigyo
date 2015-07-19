@@ -135,13 +135,32 @@
             <FileData Type="Normal" Path="sky.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="waterfall" ActionTag="-1039371130" Tag="42" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="-64.0003" RightMargin="-63.9997" TopMargin="96.0000" BottomMargin="-38.0000" ctype="SpriteObjectData">
-            <Size X="768.0000" Y="902.0000" />
+          <AbstractNodeData Name="clouds" ActionTag="-574451166" Tag="176" Alpha="242" IconVisible="True" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="320.0000" RightMargin="320.0000" BottomMargin="960.0000" InnerActionSpeed="1.0000" ctype="ProjectNodeObjectData">
+            <Size />
+            <AnchorPoint />
+            <Position X="320.0000" Y="960.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.5000" Y="1.0000" />
+            <PreSize />
+            <FileData Type="Normal" Path="Clouds.csd" Plist="" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="rockNode" ActionTag="1156501201" Tag="168" IconVisible="True" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="320.0000" RightMargin="320.0000" TopMargin="-288.0000" BottomMargin="1248.0000" ctype="SingleNodeObjectData">
+            <Size />
+            <AnchorPoint />
+            <Position X="320.0000" Y="1248.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.5000" Y="1.3000" />
+            <PreSize />
+          </AbstractNodeData>
+          <AbstractNodeData Name="waterfall" ActionTag="-1039371130" Tag="42" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="-66.5000" RightMargin="-66.5000" TopMargin="96.0000" BottomMargin="-59.0000" ctype="SpriteObjectData">
+            <Size X="773.0000" Y="923.0000" />
             <Children>
-              <AbstractNodeData Name="shibuki" ActionTag="-10252958" Tag="41" IconVisible="True" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="384.0000" RightMargin="384.0000" BottomMargin="902.0000" ctype="ParticleObjectData">
+              <AbstractNodeData Name="shibuki" Visible="False" ActionTag="-10252958" Tag="41" IconVisible="True" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="386.5000" RightMargin="386.5000" BottomMargin="923.0000" ctype="ParticleObjectData">
                 <Size />
                 <AnchorPoint />
-                <Position X="384.0000" Y="902.0000" />
+                <Position X="386.5000" Y="923.0000" />
                 <Scale ScaleX="3.3500" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.5000" Y="1.0000" />
@@ -149,7 +168,7 @@
                 <FileData Type="Normal" Path="shibuki.plist" Plist="" />
                 <BlendFunc Src="770" Dst="1" />
               </AbstractNodeData>
-              <AbstractNodeData Name="bottomRock" ActionTag="1614960746" Tag="106" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="296.5000" RightMargin="296.5000" TopMargin="649.4400" BottomMargin="134.5600" ctype="SpriteObjectData">
+              <AbstractNodeData Name="bottomRock" ActionTag="1614960746" Tag="106" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="299.0000" RightMargin="299.0000" TopMargin="664.5600" BottomMargin="140.4400" ctype="SpriteObjectData">
                 <Size X="175.0000" Y="118.0000" />
                 <Children>
                   <AbstractNodeData Name="Character" ActionTag="-302421540" Tag="1" IconVisible="True" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="87.5000" RightMargin="87.5000" TopMargin="53.1000" BottomMargin="64.9000" InnerActionSpeed="1.0000" ctype="ProjectNodeObjectData">
@@ -164,7 +183,7 @@
                   </AbstractNodeData>
                 </Children>
                 <AnchorPoint ScaleX="0.5000" ScaleY="1.0000" />
-                <Position X="384.0000" Y="252.5600" />
+                <Position X="386.5000" Y="258.4400" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.5000" Y="0.2800" />
@@ -174,34 +193,12 @@
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="1.0000" />
-            <Position X="319.9997" Y="864.0000" />
+            <Position X="320.0000" Y="864.0000" />
             <Scale ScaleX="1.0000" ScaleY="0.9734" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.9000" />
             <PreSize X="1.2000" Y="0.7146" />
             <FileData Type="Normal" Path="waterfall.png" Plist="" />
-            <BlendFunc Src="1" Dst="771" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="leftLeaves" ActionTag="81320276" Tag="43" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="-213.6498" RightMargin="630.6498" TopMargin="-38.2399" BottomMargin="-108.7601" ctype="SpriteObjectData">
-            <Size X="223.0000" Y="1107.0000" />
-            <AnchorPoint ScaleY="0.5000" />
-            <Position X="-213.6498" Y="444.7399" />
-            <Scale ScaleX="1.1065" ScaleY="0.6467" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="-0.3338" Y="0.4633" />
-            <PreSize X="0.3484" Y="1.1531" />
-            <FileData Type="Normal" Path="leftLeaves.png" Plist="" />
-            <BlendFunc Src="1" Dst="771" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="rightLeaves" ActionTag="-2072031189" Tag="44" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="622.8522" RightMargin="-196.8522" TopMargin="-31.4398" BottomMargin="-124.5602" ctype="SpriteObjectData">
-            <Size X="214.0000" Y="1116.0000" />
-            <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
-            <Position X="836.8522" Y="433.4398" />
-            <Scale ScaleX="1.1065" ScaleY="0.6467" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="1.3076" Y="0.4515" />
-            <PreSize X="0.3344" Y="1.1625" />
-            <FileData Type="Normal" Path="rightLeaves.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="title" ActionTag="-1086158147" Tag="38" VisibleForFrame="False" Alpha="128" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="123.0000" RightMargin="123.0000" TopMargin="235.3920" BottomMargin="545.6080" ctype="SpriteObjectData">

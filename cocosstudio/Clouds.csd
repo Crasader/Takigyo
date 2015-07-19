@@ -2,8 +2,87 @@
   <PropertyGroup Type="Node" Name="Clouds" ID="45beea94-69d9-4d6e-be71-1efd2df1fe83" Version="2.3.0.1" />
   <Content ctype="GameProjectContent">
     <Content>
-      <Animation Duration="0" Speed="1.0000" />
-      <ObjectData Name="Node" Tag="169" ctype="GameNodeObjectData" />
+      <Animation Duration="500" Speed="1.0000" ActivedAnimationName="icloud">
+        <Timeline ActionTag="611320670" Property="Position">
+          <PointFrame FrameIndex="0" X="0.0000" Y="0.0000">
+            <EasingData Type="0" />
+          </PointFrame>
+          <PointFrame FrameIndex="500" X="-500.0000" Y="0.0000">
+            <EasingData Type="0" />
+          </PointFrame>
+        </Timeline>
+        <Timeline ActionTag="611320670" Property="VisibleForFrame">
+          <BoolFrame FrameIndex="0" Tween="False" Value="True" />
+          <BoolFrame FrameIndex="1" Tween="False" Value="True" />
+        </Timeline>
+        <Timeline ActionTag="1469431230" Property="Position">
+          <PointFrame FrameIndex="0" X="399.9990" Y="-60.0000">
+            <EasingData Type="0" />
+          </PointFrame>
+          <PointFrame FrameIndex="500" X="-500.0000" Y="-50.0000">
+            <EasingData Type="0" />
+          </PointFrame>
+        </Timeline>
+        <Timeline ActionTag="1469431230" Property="VisibleForFrame">
+          <BoolFrame FrameIndex="0" Tween="False" Value="True" />
+          <BoolFrame FrameIndex="1" Tween="False" Value="True" />
+        </Timeline>
+        <Timeline ActionTag="2091380205" Property="Position">
+          <PointFrame FrameIndex="0" X="500.0000" Y="0.0000">
+            <EasingData Type="0" />
+          </PointFrame>
+          <PointFrame FrameIndex="500" X="0.0000" Y="0.0000">
+            <EasingData Type="0" />
+          </PointFrame>
+        </Timeline>
+        <Timeline ActionTag="2091380205" Property="VisibleForFrame">
+          <BoolFrame FrameIndex="0" Tween="False" Value="True" />
+          <BoolFrame FrameIndex="1" Tween="False" Value="True" />
+        </Timeline>
+      </Animation>
+      <AnimationList>
+        <AnimationInfo Name="icloud" StartIndex="1" EndIndex="500">
+          <RenderColor A="150" R="47" G="79" B="79" />
+        </AnimationInfo>
+      </AnimationList>
+      <ObjectData Name="Node" Tag="169" ctype="GameNodeObjectData">
+        <Size />
+        <Children>
+          <AbstractNodeData Name="cloud" ActionTag="611320670" Tag="41" IconVisible="False" LeftMargin="-51.0000" RightMargin="-49.0000" TopMargin="-31.5000" BottomMargin="-31.5000" ctype="SpriteObjectData">
+            <Size X="100.0000" Y="63.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="-1.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition />
+            <PreSize />
+            <FileData Type="Normal" Path="cloud.png" Plist="" />
+            <BlendFunc Src="1" Dst="771" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="cloud2" ActionTag="1469431230" Tag="44" IconVisible="False" LeftMargin="348.1990" RightMargin="-448.1990" TopMargin="28.4800" BottomMargin="-91.4800" ctype="SpriteObjectData">
+            <Size X="100.0000" Y="63.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="398.1990" Y="-59.9800" />
+            <Scale ScaleX="1.1771" ScaleY="1.2108" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition />
+            <PreSize />
+            <FileData Type="Normal" Path="cloud.png" Plist="" />
+            <BlendFunc Src="1" Dst="771" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="cloud3" ActionTag="2091380205" Tag="48" IconVisible="False" LeftMargin="449.0000" RightMargin="-549.0000" TopMargin="-31.5000" BottomMargin="-31.5000" ctype="SpriteObjectData">
+            <Size X="100.0000" Y="63.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="499.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition />
+            <PreSize />
+            <FileData Type="Normal" Path="cloud.png" Plist="" />
+            <BlendFunc Src="1" Dst="771" />
+          </AbstractNodeData>
+        </Children>
+      </ObjectData>
     </Content>
   </Content>
 </GameProjectFile>
