@@ -128,8 +128,11 @@ void MainScene::update(float dt)
         // if the timer is less than or equal to 0, the game is over
         if (this->auraLeft <= 0.0f)
         {
-            std::string scoreString = StringUtils::toString(this->countDown - 3.0f);
-            std::string messageContent = "Your score is " + scoreString + "sec!";
+            CCLOG("f:%f", this->countDown);
+            CCLOG("i:%d", (int)this->countDown);
+            CCLOG("MAX:%d", this->maxComboCount);
+            std::string scoreString = StringUtils::toString((int)this->countDown - 3 + this->maxComboCount);
+            std::string messageContent = "Your earned " + scoreString + " Meditation Points!   (Seconds + MaxCombo)";
             MessageBox(messageContent.c_str(), "Game Over");
             
             this->triggerGameOver();
@@ -240,6 +243,9 @@ void MainScene::gotHit() {
 }
 
 void MainScene::setComboCount(int combo) {
+    if (this->maxComboCount < combo) {
+        this->maxComboCount = combo;
+    }
     // update the score label
     this->scoreLabel->setString(std::to_string(combo));
     
@@ -265,6 +271,7 @@ void MainScene::resetGameState()
     this->auraLeft = PRESENT_OUTPUT_POTENTIAL;
     this->countDown = 0.0f;
     this->comboCount = 1;
+    this->maxComboCount = 0;
     this->gettingHit = false;
     this->gettingHitCount = 0.0f;
     this->auraBar->setScaleX(1.0f);

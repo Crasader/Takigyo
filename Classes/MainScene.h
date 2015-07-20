@@ -71,6 +71,7 @@ private:
     int timeLeft;
     int playCount;
     int comboCount;
+    int maxComboCount;
     int soundId;
     
     cocos2d::Node* cloudsNode;
