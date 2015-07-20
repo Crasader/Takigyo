@@ -12,6 +12,13 @@ enum class GameState
     GameOver
 };
 
+enum class Obstacle
+{
+    Rock,
+    Heart,
+    None
+};
+
 class Character;
 enum class Nen;
 
@@ -50,6 +57,7 @@ private:
     void singlePlayerPressed(cocos2d::Ref* pSender, cocos2d::ui::Widget::TouchEventType eEventType);
     void setRemainingAura(float auraLeft);
     void playWeather();
+    void onEnterTransitionDidFinish() override;
     
     float countDown;
     float auraLeft;
@@ -60,6 +68,7 @@ private:
     cocos2d::Node* cloudsNode;
     
     GameState gameState;
+    Obstacle obstacleType;
 };
 
 #endif // __MainScene_SCENE_H__

@@ -5,6 +5,7 @@
 #include "Globals.h"
 #include "Character.h"
 #include "CharacterReader.h"
+#include "SimpleAudioEngine.h"
 
 USING_NS_TIMELINE
 
@@ -93,7 +94,6 @@ void MainScene::update(float dt)
     
         if (this->countDown > COUNT_DOWN_TIME) {
             this->gameState = GameState::Playing;
-            //this->dropObstacles();
             
             // load and run the title animation
             ActionTimeline* titleTimeline = CSLoader::createTimeline("MainScene.csb");
@@ -135,12 +135,15 @@ void MainScene::setCountDown(int timeLeft)
 void MainScene::dropObstacles() {
     Size visibleSize = Director::getInstance()->getVisibleSize();
     
-    Sprite* obstacle;
+    // default obstacle
+    Sprite* obstacle = Sprite::create("FallenRock.png");
+    Obstacle obstacleType = Obstacle::Rock;
+    
+    // sometimes recovery item
     int randomNum = rand() % 10;
-    if (randomNum == 0) {
+    if (randomNum <= 2) {
         obstacle = Sprite::create("heart.png");
-    } else {
-        obstacle = Sprite::create("FallenRock.png");
+        obstacleType = Obstacle::Heart;
     }
     
     obstacle->setScale(0.5f);
@@ -148,27 +151,44 @@ void MainScene::dropObstacles() {
     obstacle->setPosition(Vec2(visibleSize.width * 0.5f, visibleSize.height * 1.2f));
     
     auto waterfall = rootNode->getChildByName("waterfall");
-    auto watertop = (waterfall->getAnchorPointInPoints() - Vec2(obstacle->getContentSize().width / 2, obstacle->getContentSize().height / 2 - 30));
+    auto intoWater          = MoveTo::create(1.0f, waterfall->getPosition() - Vec2(0, 100));
+    auto getCloser          = ScaleTo::create(0.0f, 1.0);
+    auto upAboveWater       = MoveTo::create(0.5f, waterfall->getPosition() - Vec2(0, 30));
+    auto downToCharacter    = MoveBy::create(0.8f, Vec2(0, -530));
+    auto easeIn             = EaseIn::create(downToCharacter, 4);
     
-    auto big        = ScaleTo::create(0.0f, 1.0);
-    auto moveDown   = MoveBy::create(1.0f, Vec2(0,-760));
-    auto moveDown2  = MoveBy::create(0.8f, Vec2(0,-680));
-    auto moveUp     = MoveTo::create(0.5f, watertop);
-    auto easeIn     = EaseIn::create(moveDown2, 4);
-    obstacle->runAction(Sequence::create(moveDown,
-                                     big,
-                                     moveUp,
+    auto denshion = CocosDenshion::SimpleAudioEngine::getInstance();
+    obstacle->runAction(Sequence::create(
+                                     intoWater,
+                                     // Enlarge the obstacle
+                                     getCloser,
+                                     CallFunc::create(
+                                                      [denshion]() {
+                                                          denshion->playEffect("splash_rock.wav");
+                                                      }
+                                                      ),
+                                     upAboveWater,
                                      CallFunc::create(
                                                       [obstacle,this]() {
                                                           obstacle->setZOrder(0);
                                                       }
                                                       ),
                                      easeIn,
-                                     CallFunc::create([this]() {
+                                     CallFunc::create(
+                                                      [denshion]() {
+                                                          denshion->playEffect("heart.wav");
+                                                      }
+                                                      ),
+                                     CallFunc::create([this, obstacleType]() {
                                                             if (this->gameState == GameState::Playing) {
                                                                 if (this->character->getNen() == Nen::Ten) {
-                                                                    float decreaceAura = this->auraLeft - HIT_DAMAGE;
-                                                                    this->setRemainingAura(decreaceAura);
+                                                                    if (obstacleType == Obstacle::Rock) {
+                                                                        float remainingAura = this->auraLeft - HIT_DAMAGE;
+                                                                        this->setRemainingAura(remainingAura);
+                                                                    } else {
+                                                                        float remainingAura = this->auraLeft + RECOVERY;
+                                                                        this->setRemainingAura(remainingAura);
+                                                                    }
                                                                 }
                                                             }
                                                             }),
@@ -187,7 +207,7 @@ void MainScene::setRemainingAura(float auraLeft)
     this->auraLeft = clampf(auraLeft, 0.0f, PRESENT_OUTPUT_POTENTIAL);
     
     // update the UI to reflect the correct time left
-    this->auraBar->setScaleX(auraLeft / PRESENT_OUTPUT_POTENTIAL);
+    this->auraBar->setScaleX(this->auraLeft / PRESENT_OUTPUT_POTENTIAL);
 }
 void MainScene::resetGameState()
 {
@@ -232,6 +252,8 @@ void MainScene::triggerGameOver()
     
     this->gameState = GameState::GameOver;
     
+    
+    
     this->triggerTitle();
     
     this->resetGameState();
@@ -250,20 +272,13 @@ void MainScene::setupTouchHandling() {
         switch (this->gameState)
         {
             case GameState::Title:
-                //this->triggerReady();
                 break;
-                
             case GameState::Ready:
-                //this->triggerPlaying();
-                // no break here!
-                // if we're in the playing state, use the touch to chop the sushi roll
                 break;
             case GameState::Playing:
                 this->character->setNen(Nen::Ken);
                 break;
             case GameState::GameOver:
-                //this->triggerTitle();
-                //this->gameState = GameState::Title;
                 break;
             default:
                 break;
@@ -288,4 +303,10 @@ void MainScene::playWeather() {
     ActionTimeline* cloudsTimeline = CSLoader::createTimeline("Clouds.csb");
     this->runAction(cloudsTimeline);
     cloudsTimeline->play("icloud", true);
+}
+
+void MainScene::onEnterTransitionDidFinish() {
+    auto backgroundMusic = CocosDenshion::SimpleAudioEngine::getInstance();
+    backgroundMusic->playBackgroundMusic("waterfall.wav", true);
+    backgroundMusic->setBackgroundMusicVolume(0.5f);
 }
