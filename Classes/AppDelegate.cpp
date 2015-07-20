@@ -60,7 +60,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     }
     else
     {
-        searchResolutionsOrder[0] = "resources-4x";
+        searchResolutionsOrder[0] = "resources-3x";
     }
     
     FileUtils::getInstance()->setSearchResolutionsOrder(searchResolutionsOrder);

@@ -68,7 +68,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize />
-            <FileData Type="Normal" Path="cloud.png" Plist="" />
+            <FileData Type="Normal" Path="Images/resources-1x/cloud.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="cloud2" ActionTag="1469431230" Tag="44" IconVisible="False" LeftMargin="348.1990" RightMargin="-448.1990" TopMargin="28.3000" BottomMargin="-91.3000" ctype="SpriteObjectData">
@@ -79,7 +79,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize />
-            <FileData Type="Normal" Path="cloud.png" Plist="" />
+            <FileData Type="Normal" Path="Images/resources-1x/cloud.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="cloud3" ActionTag="2091380205" Tag="48" IconVisible="False" LeftMargin="449.0000" RightMargin="-549.0000" TopMargin="-31.5000" BottomMargin="-31.5000" ctype="SpriteObjectData">
@@ -90,7 +90,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize />
-            <FileData Type="Normal" Path="cloud.png" Plist="" />
+            <FileData Type="Normal" Path="Images/resources-1x/cloud.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
         </Children>
