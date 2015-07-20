@@ -60,13 +60,18 @@ private:
     void playWeather();
     void setComboCount(int combo);
     void onEnterTransitionDidFinish() override;
+    void gotHit();
     
     float countDown;
     float auraLeft;
+    float gettingHitCount;
+    
+    bool gettingHit;
     
     int timeLeft;
     int playCount;
     int comboCount;
+    int soundId;
     
     cocos2d::Node* cloudsNode;
     

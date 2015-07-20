@@ -88,7 +88,7 @@ void MainScene::update(float dt)
     // call the superclass method update
     Layer::update(dt);
     
-    int random = rand() % 10;
+    int random = rand() % 100;
     if (random == 0) {
         auto denshion = CocosDenshion::SimpleAudioEngine::getInstance();
         denshion->playEffect("bird.wav");
@@ -117,6 +117,13 @@ void MainScene::update(float dt)
         this->countDown += dt;
         if (this->character->getNen() == Nen::Ken) {
             setRemainingAura(auraLeft - dt);
+        }
+        if (this->gettingHit == true) {
+            this->gettingHitCount += dt;
+            if (this->gettingHitCount >= 1.0f) {
+                this->gettingHit = false;
+                this->gettingHitCount = 0.0f;
+            }
         }
         // if the timer is less than or equal to 0, the game is over
         if (this->auraLeft <= 0.0f)
@@ -162,7 +169,7 @@ void MainScene::dropObstacles() {
     auto getCloser          = ScaleTo::create(0.0f, 1.0);
     auto upAboveWater       = MoveTo::create(0.5f, waterfall->getPosition() - Vec2(0, 30));
     auto downToCharacter    = MoveBy::create(0.8f, Vec2(0, -530));
-    auto easeInDown             = EaseIn::create(downToCharacter, 4);
+    auto easeInDown         = EaseIn::create(downToCharacter, 4);
     
     auto denshion = CocosDenshion::SimpleAudioEngine::getInstance();
     obstacle->runAction(Sequence::create(
@@ -190,10 +197,7 @@ void MainScene::dropObstacles() {
                                                                 // While not touching the screen
                                                                 if (this->character->getNen() == Nen::Ten) {
                                                                     if (obstacleType == Obstacle::Rock) {
-                                                                        float remainingAura = this->auraLeft - HIT_DAMAGE;
-                                                                        this->setRemainingAura(remainingAura);
-                                                                        denshion->playEffect("gothit.wav");
-                                                                        this->comboCount = 1;
+                                                                        this->gotHit();
                                                                     } else if (obstacleType == Obstacle::Heart) {
                                                                         float remainingAura = this->auraLeft + RECOVERY;
                                                                         this->setRemainingAura(remainingAura);
@@ -211,10 +215,28 @@ void MainScene::dropObstacles() {
                                                                 }
                                                             }
                                                             }),
+                                     // Remove from Parent
                                      CallFunc::create([obstacle](){obstacle->removeFromParent();}),
                                      NULL));
     
     this->rootNode->addChild(obstacle);
+}
+
+void MainScene::gotHit() {
+    if (this->gettingHit == false) {
+        this->gettingHit = true;
+        auto yoko = ScaleBy::create(0.1f, 4, 0.25);
+        auto tate = ScaleBy::create(0.1f, 0.25, 4.0);
+        auto yoko2 = ScaleBy::create(0.15f, 2, 0.5);
+        auto tate2 = ScaleBy::create(0.15f, 0.5, 2);
+        auto yoko3 = ScaleBy::create(0.3f, 2, 0.5);
+        auto tate3 = CCEaseBackIn::create(ScaleBy::create(0.3f, 0.5, 2));
+        this->character->runAction(Sequence::create(yoko,tate,yoko2,tate2,yoko3,tate3,NULL));
+    }
+    float remainingAura = this->auraLeft - HIT_DAMAGE;
+    this->setRemainingAura(remainingAura);
+    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("gothit.wav");
+    this->comboCount = 1;
 }
 
 void MainScene::setComboCount(int combo) {
@@ -243,6 +265,8 @@ void MainScene::resetGameState()
     this->auraLeft = PRESENT_OUTPUT_POTENTIAL;
     this->countDown = 0.0f;
     this->comboCount = 1;
+    this->gettingHit = false;
+    this->gettingHitCount = 0.0f;
     this->auraBar->setScaleX(1.0f);
     if (this->playCount > 0) {
         this->character->setNen(Nen::Ten);
@@ -281,8 +305,6 @@ void MainScene::triggerGameOver()
     
     this->gameState = GameState::GameOver;
     
-    
-    
     this->triggerTitle();
     
     this->resetGameState();
@@ -305,7 +327,10 @@ void MainScene::setupTouchHandling() {
             case GameState::Ready:
                 break;
             case GameState::Playing:
-                this->character->setNen(Nen::Ken);
+                if (this->gettingHit == false) {
+                    this->character->setNen(Nen::Ken);
+                    this->soundId = CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("ken.wav", true);
+                }
                 break;
             case GameState::GameOver:
                 break;
@@ -317,6 +342,7 @@ void MainScene::setupTouchHandling() {
     };
     touchListener->onTouchEnded = [&](Touch* touch, Event* event) {
         this->character->setNen(Nen::Ten);
+        CocosDenshion::SimpleAudioEngine::getInstance()->stopEffect(soundId);
     };
     
     this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(touchListener, this);

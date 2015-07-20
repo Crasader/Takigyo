@@ -39,7 +39,6 @@ void Character::setNen(Nen nen)
     this->nen = nen;
     
     ActionTimeline* characterTimeline = CSLoader::createTimeline("Character.csb");
-    this->stopAllActions();
     this->runAction(characterTimeline);
     if (this->nen == Nen::Ken)
     {
