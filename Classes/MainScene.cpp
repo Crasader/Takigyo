@@ -48,7 +48,8 @@ bool MainScene::init()
     this->character = bottomRock->getChildByName<Character*>("Character");
     auto lifeBG = rootNode->getChildByName("lifeBG");
     this->auraBar = lifeBG->getChildByName<Sprite*>("lifeBar");
-    this->scoreLabel = rootNode->getChildByName<cocos2d::ui::Text*>("scoreLabel");
+    this->countDownLabel = rootNode->getChildByName<cocos2d::ui::Text*>("countDownLabel");
+    this->scoreLabel     = rootNode->getChildByName<cocos2d::ui::Text*>("scoreLabel");
     this->cloudsNode = rootNode->getChildByName("clouds");
     this->countDown = 0.0f;
     this->playCount = 0;
@@ -86,6 +87,12 @@ void MainScene::update(float dt)
     
     // call the superclass method update
     Layer::update(dt);
+    
+    int random = rand() % 10;
+    if (random == 0) {
+        auto denshion = CocosDenshion::SimpleAudioEngine::getInstance();
+        denshion->playEffect("bird.wav");
+    }
     
     if (this->gameState == GameState::Ready) {
         this->countDown += dt;
@@ -129,7 +136,7 @@ void MainScene::setCountDown(int timeLeft)
     this->timeLeft = timeLeft;
     
     // update the score label
-    this->scoreLabel->setString(std::to_string(this->timeLeft));
+    this->countDownLabel->setString(std::to_string(this->timeLeft));
 }
 
 void MainScene::dropObstacles() {
@@ -141,7 +148,7 @@ void MainScene::dropObstacles() {
     
     // sometimes recovery item
     int randomNum = rand() % 10;
-    if (randomNum <= 2) {
+    if (randomNum <= 1) {
         obstacle = Sprite::create("heart.png");
         obstacleType = Obstacle::Heart;
     }
@@ -155,39 +162,51 @@ void MainScene::dropObstacles() {
     auto getCloser          = ScaleTo::create(0.0f, 1.0);
     auto upAboveWater       = MoveTo::create(0.5f, waterfall->getPosition() - Vec2(0, 30));
     auto downToCharacter    = MoveBy::create(0.8f, Vec2(0, -530));
-    auto easeIn             = EaseIn::create(downToCharacter, 4);
+    auto easeInDown             = EaseIn::create(downToCharacter, 4);
     
     auto denshion = CocosDenshion::SimpleAudioEngine::getInstance();
     obstacle->runAction(Sequence::create(
                                      intoWater,
                                      // Enlarge the obstacle
                                      getCloser,
+                                     // Splash Sound
                                      CallFunc::create(
                                                       [denshion]() {
                                                           denshion->playEffect("splash_rock.wav");
                                                       }
                                                       ),
+                                     // Half above the water
                                      upAboveWater,
+                                     // Change Z order into front
                                      CallFunc::create(
                                                       [obstacle,this]() {
                                                           obstacle->setZOrder(0);
                                                       }
                                                       ),
-                                     easeIn,
-                                     CallFunc::create(
-                                                      [denshion]() {
-                                                          denshion->playEffect("heart.wav");
-                                                      }
-                                                      ),
-                                     CallFunc::create([this, obstacleType]() {
+                                     // Ease In Down
+                                     easeInDown,
+                                     CallFunc::create([this, denshion, obstacleType]() {
                                                             if (this->gameState == GameState::Playing) {
+                                                                // While not touching the screen
                                                                 if (this->character->getNen() == Nen::Ten) {
                                                                     if (obstacleType == Obstacle::Rock) {
                                                                         float remainingAura = this->auraLeft - HIT_DAMAGE;
                                                                         this->setRemainingAura(remainingAura);
-                                                                    } else {
+                                                                        denshion->playEffect("gothit.wav");
+                                                                        this->comboCount = 1;
+                                                                    } else if (obstacleType == Obstacle::Heart) {
                                                                         float remainingAura = this->auraLeft + RECOVERY;
                                                                         this->setRemainingAura(remainingAura);
+                                                                        denshion->playEffect("heart.wav");
+                                                                    }
+                                                                // While "TOUCHING" the screen
+                                                                } else if (this->character->getNen() == Nen::Ken) {
+                                                                    if (obstacleType == Obstacle::Rock) {
+                                                                        denshion->playEffect("break.wav");
+                                                                        int combo = this->comboCount++;
+                                                                        this->setComboCount(combo);
+                                                                    } else if (obstacleType == Obstacle::Heart) {
+                                                                        denshion->playEffect("break.wav");
                                                                     }
                                                                 }
                                                             }
@@ -196,6 +215,15 @@ void MainScene::dropObstacles() {
                                      NULL));
     
     this->rootNode->addChild(obstacle);
+}
+
+void MainScene::setComboCount(int combo) {
+    // update the score label
+    this->scoreLabel->setString(std::to_string(combo));
+    
+    ActionTimeline* titleTimeline = CSLoader::createTimeline("MainScene.csb");
+    this->runAction(titleTimeline);
+    titleTimeline->play("playing", false);
 }
 
 #pragma mark -
@@ -214,6 +242,7 @@ void MainScene::resetGameState()
     // these variables must be reset every new game
     this->auraLeft = PRESENT_OUTPUT_POTENTIAL;
     this->countDown = 0.0f;
+    this->comboCount = 1;
     this->auraBar->setScaleX(1.0f);
     if (this->playCount > 0) {
         this->character->setNen(Nen::Ten);

@@ -2,7 +2,7 @@
   <PropertyGroup Type="Scene" Name="MainScene" ID="a2ee0952-26b5-49ae-8bf9-4f1d6279b798" Version="2.3.0.1" />
   <Content ctype="GameProjectContent">
     <Content>
-      <Animation Duration="260" Speed="1.0000">
+      <Animation Duration="300" Speed="1.0000" ActivedAnimationName="title">
         <Timeline ActionTag="-1086158147" Property="Position">
           <PointFrame FrameIndex="20" X="320.0000" Y="724.6080">
             <EasingData Type="0" />
@@ -109,6 +109,26 @@
           <BoolFrame FrameIndex="210" Tween="False" Value="True" />
           <BoolFrame FrameIndex="260" Tween="False" Value="False" />
         </Timeline>
+        <Timeline ActionTag="-438826232" Property="Position">
+          <PointFrame FrameIndex="270" X="185.6000" Y="220.8000">
+            <EasingData Type="0" />
+          </PointFrame>
+          <PointFrame FrameIndex="300" X="185.6000" Y="336.0000">
+            <EasingData Type="0" />
+          </PointFrame>
+        </Timeline>
+        <Timeline ActionTag="-438826232" Property="VisibleForFrame">
+          <BoolFrame FrameIndex="0" Tween="False" Value="False" />
+          <BoolFrame FrameIndex="270" Tween="False" Value="True" />
+        </Timeline>
+        <Timeline ActionTag="-438826232" Property="Alpha">
+          <IntFrame FrameIndex="270" Value="255">
+            <EasingData Type="0" />
+          </IntFrame>
+          <IntFrame FrameIndex="300" Value="0">
+            <EasingData Type="0" />
+          </IntFrame>
+        </Timeline>
       </Animation>
       <AnimationList>
         <AnimationInfo Name="title" StartIndex="1" EndIndex="140">
@@ -119,6 +139,9 @@
         </AnimationInfo>
         <AnimationInfo Name="countDown" StartIndex="210" EndIndex="260">
           <RenderColor A="255" R="255" G="69" B="0" />
+        </AnimationInfo>
+        <AnimationInfo Name="playing" StartIndex="270" EndIndex="300">
+          <RenderColor A="150" R="240" G="255" B="255" />
         </AnimationInfo>
       </AnimationList>
       <ObjectData Name="Scene" ctype="GameNodeObjectData">
@@ -145,7 +168,7 @@
             <PreSize />
             <FileData Type="Normal" Path="Clouds.csd" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="rockNode" ActionTag="1156501201" Tag="168" IconVisible="True" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="320.0000" RightMargin="320.0000" TopMargin="-288.0000" BottomMargin="1248.0000" ctype="SingleNodeObjectData">
+          <AbstractNodeData Name="obstacleNode" ActionTag="1156501201" Tag="168" IconVisible="True" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="320.0000" RightMargin="320.0000" TopMargin="-288.0000" BottomMargin="1248.0000" ctype="SingleNodeObjectData">
             <Size />
             <AnchorPoint />
             <Position X="320.0000" Y="1248.0000" />
@@ -273,7 +296,7 @@
             <FileData Type="Normal" Path="life_bg.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="scoreLabel" ActionTag="593341563" Tag="64" VisibleForFrame="False" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="288.0000" RightMargin="288.0000" TopMargin="-254.4999" BottomMargin="1089.4999" FontSize="100" LabelText="0" OutlineSize="5" OutlineEnabled="True" ShadowOffsetX="5" ShadowOffsetY="-5" ShadowEnabled="True" ctype="TextObjectData">
+          <AbstractNodeData Name="countDownLabel" ActionTag="593341563" Tag="64" VisibleForFrame="False" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="288.0000" RightMargin="288.0000" TopMargin="-254.4999" BottomMargin="1089.4999" FontSize="100" LabelText="0" OutlineSize="5" OutlineEnabled="True" ShadowOffsetX="5" ShadowOffsetY="-5" ShadowEnabled="True" ctype="TextObjectData">
             <Size X="64.0000" Y="125.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="320.0000" Y="1151.9999" />
@@ -281,6 +304,18 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="1.2000" />
             <PreSize X="0.1422" Y="0.0240" />
+            <FontResource Type="Normal" Path="Fonts/Game of Three.ttf" Plist="" />
+            <OutlineColor A="255" R="0" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="scoreLabel" ActionTag="-438826232" Tag="117" VisibleForFrame="False" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="161.1000" RightMargin="429.9000" TopMargin="692.7000" BottomMargin="174.3000" FontSize="72" LabelText="0" OutlineSize="5" OutlineEnabled="True" ShadowEnabled="True" ctype="TextObjectData">
+            <Size X="49.0000" Y="93.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="185.6000" Y="220.8000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.2900" Y="0.2300" />
+            <PreSize X="0.0172" Y="0.0240" />
             <FontResource Type="Normal" Path="Fonts/Game of Three.ttf" Plist="" />
             <OutlineColor A="255" R="0" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />

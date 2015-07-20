@@ -42,6 +42,7 @@ private:
     cocos2d::Node* rootNode;
     cocos2d::Sprite* auraBar;
     cocos2d::ui::Text* scoreLabel;
+    cocos2d::ui::Text* countDownLabel;
     
     void onEnter() override;
     void setupTouchHandling();
@@ -57,6 +58,7 @@ private:
     void singlePlayerPressed(cocos2d::Ref* pSender, cocos2d::ui::Widget::TouchEventType eEventType);
     void setRemainingAura(float auraLeft);
     void playWeather();
+    void setComboCount(int combo);
     void onEnterTransitionDidFinish() override;
     
     float countDown;
@@ -64,6 +66,7 @@ private:
     
     int timeLeft;
     int playCount;
+    int comboCount;
     
     cocos2d::Node* cloudsNode;
     
