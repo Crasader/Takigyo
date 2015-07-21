@@ -351,6 +351,10 @@ void MainScene::setupTouchHandling() {
         this->character->setNen(Nen::Ten);
         CocosDenshion::SimpleAudioEngine::getInstance()->stopEffect(soundId);
     };
+    touchListener->onTouchCancelled = [&](Touch* touch, Event* event) {
+        this->character->setNen(Nen::Ten);
+        CocosDenshion::SimpleAudioEngine::getInstance()->stopEffect(soundId);
+    };
     
     this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(touchListener, this);
 }
