@@ -61,6 +61,7 @@ private:
     void setComboCount(int combo);
     void onEnterTransitionDidFinish() override;
     void gotHit();
+    void startNewRound();
     
     float countDown;
     float auraLeft;

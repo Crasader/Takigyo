@@ -80,6 +80,24 @@ void MainScene::onEnter() {
 #pragma mark -
 #pragma mark Game Loop
 
+// パターンを開始する
+void MainScene::startNewRound() {
+    // auto pattern = _levelInfo->getPattern();
+    
+    // TODO: パターン通りに岩を降らす処理
+    
+    
+    // パターンが終わったタイミングで次のパターンを開始する
+//    float duration = pattern->duration;
+//    this->runAction(Sequense::create(
+//                                     DelayTime::create(duration),
+//                                     CallFunc::create([this](){
+//                                        this->startNewRound();
+//                                     }),
+//                                     NULL
+//                                     ));
+}
+
 void MainScene::update(float dt)
 {
     // update is called before every new frame is rendered
@@ -101,6 +119,7 @@ void MainScene::update(float dt)
     
         if (this->countDown > COUNT_DOWN_TIME) {
             this->gameState = GameState::Playing;
+            this->startNewRound();
             
             // load and run the title animation
             ActionTimeline* titleTimeline = CSLoader::createTimeline("MainScene.csb");
