@@ -232,7 +232,7 @@ void MainScene::gotHit() {
         auto tate = ScaleBy::create(0.1f, 0.25, 4.0);
         auto yoko2 = ScaleBy::create(0.15f, 2, 0.5);
         auto tate2 = ScaleBy::create(0.15f, 0.5, 2);
-        auto yoko3 = ScaleBy::create(0.3f, 2, 0.5);
+        auto yoko3 = ScaleBy::create(0.2f, 2, 0.5);
         auto tate3 = CCEaseBackIn::create(ScaleBy::create(0.3f, 0.5, 2));
         this->character->runAction(Sequence::create(yoko,tate,yoko2,tate2,yoko3,tate3,NULL));
     }
