@@ -52,10 +52,10 @@
 		8262943E1AAF051F00CB7CF7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8262943D1AAF051F00CB7CF7 /* Security.framework */; };
 		96424DD11B5E126200BF3DA5 /* LevelInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96424DCF1B5E126200BF3DA5 /* LevelInfo.cpp */; };
 		96424DD21B5E126200BF3DA5 /* LevelInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96424DCF1B5E126200BF3DA5 /* LevelInfo.cpp */; };
-		96424DD81B5E179100BF3DA5 /* PatternList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96424DD61B5E179100BF3DA5 /* PatternList.cpp */; };
-		96424DD91B5E179100BF3DA5 /* PatternList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96424DD61B5E179100BF3DA5 /* PatternList.cpp */; };
-		965BC3E51B5F027E0054CCEF /* JSONPacker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 965BC3E31B5F027E0054CCEF /* JSONPacker.cpp */; };
-		965BC3E61B5F027E0054CCEF /* JSONPacker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 965BC3E31B5F027E0054CCEF /* JSONPacker.cpp */; };
+		965BC3F31B60113D0054CCEF /* PatternRate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 965BC3F11B60113D0054CCEF /* PatternRate.cpp */; };
+		965BC3F41B60113D0054CCEF /* PatternRate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 965BC3F11B60113D0054CCEF /* PatternRate.cpp */; };
+		965BC3F91B60118D0054CCEF /* JSONPacker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 965BC3F71B60118D0054CCEF /* JSONPacker.cpp */; };
+		965BC3FA1B60118D0054CCEF /* JSONPacker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 965BC3F71B60118D0054CCEF /* JSONPacker.cpp */; };
 		966CF45B1B55BC380046A1B9 /* particle.plist in Resources */ = {isa = PBXBuildFile; fileRef = 966CF45A1B55BC380046A1B9 /* particle.plist */; };
 		96C8C4FC1B56E50200D07B2C /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96C8C4FA1B56E50200D07B2C /* Character.cpp */; };
 		96C8C4FD1B56E50200D07B2C /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96C8C4FA1B56E50200D07B2C /* Character.cpp */; };
@@ -137,10 +137,10 @@
 		8262943D1AAF051F00CB7CF7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		96424DCF1B5E126200BF3DA5 /* LevelInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LevelInfo.cpp; sourceTree = "<group>"; };
 		96424DD01B5E126200BF3DA5 /* LevelInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelInfo.h; sourceTree = "<group>"; };
-		96424DD61B5E179100BF3DA5 /* PatternList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PatternList.cpp; sourceTree = "<group>"; };
-		96424DD71B5E179100BF3DA5 /* PatternList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatternList.h; sourceTree = "<group>"; };
-		965BC3E31B5F027E0054CCEF /* JSONPacker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JSONPacker.cpp; sourceTree = "<group>"; };
-		965BC3E41B5F027E0054CCEF /* JSONPacker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONPacker.h; sourceTree = "<group>"; };
+		965BC3F11B60113D0054CCEF /* PatternRate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PatternRate.cpp; sourceTree = "<group>"; };
+		965BC3F21B60113D0054CCEF /* PatternRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatternRate.h; sourceTree = "<group>"; };
+		965BC3F71B60118D0054CCEF /* JSONPacker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JSONPacker.cpp; sourceTree = "<group>"; };
+		965BC3F81B60118D0054CCEF /* JSONPacker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONPacker.h; sourceTree = "<group>"; };
 		966CF45A1B55BC380046A1B9 /* particle.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = particle.plist; path = ../proj.ios_mac/particle.plist; sourceTree = "<group>"; };
 		96C8C4F91B56E47400D07B2C /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
 		96C8C4FA1B56E50200D07B2C /* Character.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Character.cpp; sourceTree = "<group>"; };
@@ -283,14 +283,14 @@
 				96C8C4FE1B56E57300D07B2C /* CharacterReader.cpp */,
 				96C8C4FF1B56E57300D07B2C /* CharacterReader.h */,
 				96C8C4F91B56E47400D07B2C /* Globals.h */,
+				965BC3F71B60118D0054CCEF /* JSONPacker.cpp */,
+				965BC3F81B60118D0054CCEF /* JSONPacker.h */,
 				96424DCF1B5E126200BF3DA5 /* LevelInfo.cpp */,
 				96424DD01B5E126200BF3DA5 /* LevelInfo.h */,
 				46880B8619C43A87006E1F66 /* MainScene.cpp */,
 				46880B8719C43A87006E1F66 /* MainScene.h */,
-				96424DD61B5E179100BF3DA5 /* PatternList.cpp */,
-				96424DD71B5E179100BF3DA5 /* PatternList.h */,
-				965BC3E31B5F027E0054CCEF /* JSONPacker.cpp */,
-				965BC3E41B5F027E0054CCEF /* JSONPacker.h */,
+				965BC3F11B60113D0054CCEF /* PatternRate.cpp */,
+				965BC3F21B60113D0054CCEF /* PatternRate.h */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -504,15 +504,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				96C8C5001B56E57300D07B2C /* CharacterReader.cpp in Sources */,
+				965BC3F91B60118D0054CCEF /* JSONPacker.cpp in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
+				965BC3F31B60113D0054CCEF /* PatternRate.cpp in Sources */,
 				96424DD11B5E126200BF3DA5 /* LevelInfo.cpp in Sources */,
 				46880B8A19C43A87006E1F66 /* MainScene.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				96C8C4FC1B56E50200D07B2C /* Character.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
-				965BC3E51B5F027E0054CCEF /* JSONPacker.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
-				96424DD81B5E179100BF3DA5 /* PatternList.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,12 +522,12 @@
 			files = (
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
-				96424DD91B5E179100BF3DA5 /* PatternList.cpp in Sources */,
+				965BC3FA1B60118D0054CCEF /* JSONPacker.cpp in Sources */,
 				46880B8B19C43A87006E1F66 /* MainScene.cpp in Sources */,
+				965BC3F41B60113D0054CCEF /* PatternRate.cpp in Sources */,
 				96C8C5011B56E57300D07B2C /* CharacterReader.cpp in Sources */,
 				96424DD21B5E126200BF3DA5 /* LevelInfo.cpp in Sources */,
 				96C8C4FD1B56E50200D07B2C /* Character.cpp in Sources */,
-				965BC3E61B5F027E0054CCEF /* JSONPacker.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

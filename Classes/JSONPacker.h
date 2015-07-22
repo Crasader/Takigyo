@@ -9,24 +9,24 @@
 #ifndef __Takigyo__JSONPacker__
 #define __Takigyo__JSONPacker__
 
+#include "cocos2d.h"
+#include "PatternRate.h"
+#include "Globals.h"
+
 namespace JSONPacker{
-    //    struct GameState {
-    //        std::string name;
-    //        bool gameOver;
-    //        int score;
-    //        std::vector<std::vector<cocos2d::Color3B>> board;
-    //    };
-    
-    struct LevelInfo {
+    struct UnpackedLevelInfo {
         int level;
-        float tempo;
-        std::vector<int> patternRate;
+        double tempo;
+        std::vector<PatternRate> patternRate;
     };
     
-    LevelInfo unpackLevelInfoJSON(std::string json, int round);
-    //    GameState unpackGameStateJSON(std::string json);
-    //    std::string packGameState(const GameState data);
+    struct UnpackedPatternList {
+        float duration;
+        std::vector<Pattern> patternList;
+    };
     
+    UnpackedLevelInfo unpackLevelInfoJSON(std::string json, int round);
+    UnpackedPatternList unpackPatternListJSON(std::string json, int patternId);
 }
 
 #endif /* defined(__Takigyo__JSONPacker__) */

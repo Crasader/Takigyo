@@ -16,15 +16,15 @@ enum class Nen
     None
 };
 
-enum class ObjectType {
+enum class ObstacleType {
     Rock,
-    Heart,
-    None
+    Heart
 };
 
-class Object {
+class Pattern {
+public:
     float timing;
-    ObjectType type;
+    ObstacleType type;
 };
 
 static const float PRESENT_OUTPUT_POTENTIAL = 10.0f;

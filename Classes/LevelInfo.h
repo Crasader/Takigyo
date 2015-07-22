@@ -10,23 +10,28 @@
 #define __Takigyo__LevelInfo__
 
 #include <cocos2d.h>
+#include "PatternRate.h"
+#include "Globals.h"
 
-class Pattern;
-
-class LevelInfo {
-//    struct Pattern {
-//        float tempo;
-//        //std::vector<float> probability;
-//        std::vector<Pattern> pattern;
-//    };
-    // 1lv 1pattern
-//    int levelUpStage;
-//    int levelUpStage2;
+class LevelInfo : cocos2d::Node {
 public:
-    int getPatternId(int round);
+    static LevelInfo* createPatternWithRound(int round);
+    
+    int getCurrentLevel();
+    double getCurrentTempo();
+    float getCurrentDuration();
+    std::vector<Pattern> getCurrentPattern();
     
 private:
-
+    int level;
+    float duration;
+    int patternId;
+    double tempo;
+    std::vector<PatternRate> patternRate;
+    std::vector<Pattern> pattern;
+    
+    bool initWithRound(int round);
+    int choosePatternId(std::vector<PatternRate>);
 //    Pattern getRandomPattern(int level);
     
 //    float getLevelTempo;

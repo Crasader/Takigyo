@@ -6,6 +6,8 @@
 #include "Character.h"
 #include "CharacterReader.h"
 #include "SimpleAudioEngine.h"
+#include "LevelInfo.h"
+#include "PatternList.h"
 
 USING_NS_TIMELINE
 
@@ -75,6 +77,9 @@ void MainScene::onEnter() {
     this->setupTouchHandling();
     
     this->playWeather();
+    
+    //test
+    //this->startNewRound();
 }
 
 #pragma mark -
@@ -82,10 +87,14 @@ void MainScene::onEnter() {
 
 // パターンを開始する
 void MainScene::startNewRound() {
-    // auto pattern = _levelInfo->getPattern();
+    LevelInfo* levelInfo = LevelInfo::createPatternWithRound(3);
     
-    // TODO: パターン通りに岩を降らす処理
+    std::vector<Pattern> currentPattern = levelInfo->getCurrentPattern();
+    int currentLevel = levelInfo->getCurrentLevel();
+    float currentDuration = levelInfo->getCurrentDuration();
+    double currentTempo = levelInfo->getCurrentTempo();
     
+    // TODO: パターン通りに岩を降らす処理 
     
     // パターンが終わったタイミングで次のパターンを開始する
 //    float duration = pattern->duration;
@@ -119,7 +128,6 @@ void MainScene::update(float dt)
     
         if (this->countDown > COUNT_DOWN_TIME) {
             this->gameState = GameState::Playing;
-            this->startNewRound();
             
             // load and run the title animation
             ActionTimeline* titleTimeline = CSLoader::createTimeline("MainScene.csb");

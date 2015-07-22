@@ -3,7 +3,7 @@
         "duration": 1.0,
         "pattern" : [
         {
-            "type": "rock",
+            "type": 0,
             "time": 0.1
         }
         ]
@@ -12,11 +12,11 @@
         "duration": 1.0,
         "pattern" : [
         {
-            "type": "rock",
+            "type": 0,
             "time": 0.1
         },
         {
-            "type": "rock",
+            "type": 0,
             "time": 0.4
         }
         ]
@@ -25,11 +25,11 @@
         "duration": 1.0,
         "pattern" : [
         {
-            "type": "rock",
+            "type": 0,
             "time": 0.2
         },
         {
-            "type": "rock",
+            "type": 0,
             "time": 0.4
         }
         ]
@@ -38,19 +38,19 @@
         "duration": 2.0,
         "pattern" : [
         {
-            "type": "rock",
+            "type": 0,
             "time": 0.2
         },
         {
-            "type": "rock",
+            "type": 0,
             "time": 0.4
         },
         {
-            "type": "rock",
+            "type": 0,
             "time": 0.6
         },
         {
-            "type": "rock",
+            "type": 0,
             "time": 0.8
         }
         ]
@@ -59,11 +59,11 @@
         "duration": 1.0,
         "pattern" : [
         {
-            "type": "rock",
+            "type": 0,
             "time": 0.1
         },
         {
-            "type": "rock",
+            "type": 0,
             "time": 0.15
         }
         ]
@@ -72,11 +72,11 @@
         "duration": 2.0,
         "pattern" : [
         {
-            "type": "rock",
+            "type": 0,
             "time": 0.2
         },
         {
-            "type": "rock",
+            "type": 0,
             "time": 0.4
         }
         ]
@@ -85,16 +85,17 @@
         "duration": 1.0,
         "pattern" : [
         {
-            "type": "rock",
+            "type": 0,
             "time": 0.2
         },
         {
-            "type": "heart",
+            "type": 1,
             "time": 0.3
         },
         {
-            "type": "rock",
+            "type": 0,
             "time": 0.4
         }
         ]
-    },
+    }
+}

@@ -9,10 +9,10 @@
 #ifndef __Takigyo__PatternList__
 #define __Takigyo__PatternList__
 
-enum class ObjectType {
-    Rock,
-    Hart,
-};
+//enum class ObjectType {
+//    Rock,
+//    Hart,
+//};
 
 class PatternList {
 public:
