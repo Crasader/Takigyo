@@ -2,7 +2,6 @@
 #include "ui/CocosGUI.h"
 
 #include "MainScene.h"
-#include "Globals.h"
 #include "Character.h"
 #include "CharacterReader.h"
 #include "SimpleAudioEngine.h"
@@ -181,13 +180,13 @@ void MainScene::dropObstacles() {
     
     // default obstacle
     Sprite* obstacle = Sprite::create("FallenRock.png");
-    Obstacle obstacleType = Obstacle::Rock;
+    ObstacleType obstacleType = ObstacleType::Rock;
     
     // sometimes recovery item
     int randomNum = rand() % 10;
     if (randomNum <= 1) {
         obstacle = Sprite::create("heart.png");
-        obstacleType = Obstacle::Heart;
+        obstacleType = ObstacleType::Heart;
     }
     
     obstacle->setScale(0.5f);
@@ -226,20 +225,20 @@ void MainScene::dropObstacles() {
                                                             if (this->gameState == GameState::Playing) {
                                                                 // While not touching the screen
                                                                 if (this->character->getNen() == Nen::Ten) {
-                                                                    if (obstacleType == Obstacle::Rock) {
+                                                                    if (obstacleType == ObstacleType::Rock) {
                                                                         this->gotHit();
-                                                                    } else if (obstacleType == Obstacle::Heart) {
+                                                                    } else if (obstacleType == ObstacleType::Heart) {
                                                                         float remainingAura = this->auraLeft + RECOVERY;
                                                                         this->setRemainingAura(remainingAura);
                                                                         denshion->playEffect("heart.wav");
                                                                     }
                                                                 // While "TOUCHING" the screen
                                                                 } else if (this->character->getNen() == Nen::Ken) {
-                                                                    if (obstacleType == Obstacle::Rock) {
+                                                                    if (obstacleType == ObstacleType::Rock) {
                                                                         denshion->playEffect("break.wav");
                                                                         int combo = this->comboCount++;
                                                                         this->setComboCount(combo);
-                                                                    } else if (obstacleType == Obstacle::Heart) {
+                                                                    } else if (obstacleType == ObstacleType::Heart) {
                                                                         denshion->playEffect("break.wav");
                                                                     }
                                                                 }

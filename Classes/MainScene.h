@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "CocosGUI.h"
+#include "Globals.h"
 
 enum class GameState
 {
@@ -10,13 +11,6 @@ enum class GameState
     Ready,
     Playing,
     GameOver
-};
-
-enum class Obstacle
-{
-    Rock,
-    Heart,
-    None
 };
 
 class Character;
@@ -78,7 +72,7 @@ private:
     cocos2d::Node* cloudsNode;
     
     GameState gameState;
-    Obstacle obstacleType;
+    ObstacleType obstacleType;
 };
 
 #endif // __MainScene_SCENE_H__
