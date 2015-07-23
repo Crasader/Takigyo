@@ -35,7 +35,8 @@ protected:
 private:
     cocos2d::Node* rootNode;
     cocos2d::Sprite* auraBar;
-    cocos2d::ui::Text* scoreLabel;
+    cocos2d::ui::Text* comboLabel;
+    cocos2d::ui::Text* levelLabel;
     cocos2d::ui::Text* countDownLabel;
     
     void onEnter() override;
@@ -45,7 +46,7 @@ private:
     void triggerTitle();
     void triggerReady();
     void triggerGameOver();
-    void dropObstacles();
+    void dropObstacles(ObstacleType obstacle);
     void resetGameState();
     void setKen();
     void setTen();
@@ -53,21 +54,35 @@ private:
     void setRemainingAura(float auraLeft);
     void playWeather();
     void setComboCount(int combo);
+    void setLevelCount();
     void onEnterTransitionDidFinish() override;
     void gotHit();
-    void startNewRound();
+    void setGameActive(bool active);
     
     float countDown;
     float auraLeft;
     float gettingHitCount;
+    float playingTime;
     
     bool gettingHit;
+    bool active;
+    bool playingPattern;
+    bool loadNext;
     
     int timeLeft;
     int playCount;
     int comboCount;
     int maxComboCount;
     int soundId;
+    int gameRound;
+    
+    std::vector<Pattern> currentPattern;
+    int currentLevel;
+    int beforeLevel;
+    float currentDuration;
+    double currentTempo;
+    std::vector<float> timingList;
+    std::vector<ObstacleType> obstacleList;
     
     cocos2d::Node* cloudsNode;
     

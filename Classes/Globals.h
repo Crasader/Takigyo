@@ -8,6 +8,7 @@
 
 #ifndef Takigyo_Globals_h
 #define Takigyo_Globals_h
+#include "Globals.h"
 
 enum class Nen
 {

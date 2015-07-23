@@ -32,6 +32,8 @@
             <Image Name="title.png" />
             <Image Name="waterfall.png" />
             <Image Name="waterfall2.png" />
+            <Image Name="eveningBackground.png" />
+            <Image Name="eveningMask.png" />
           </Folder>
           <Folder Name="resources-2x">
             <Image Name="BottomRock@2x.png" />
@@ -73,6 +75,7 @@
           </Folder>
           <Folder Name="resources-4x" />
         </Folder>
+        <TTF Name="kenpixel_blocks.ttf" />
       </RootFolder>
     </Group>
   </SolutionFolder>

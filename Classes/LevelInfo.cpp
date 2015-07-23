@@ -42,7 +42,7 @@ bool LevelInfo::initWithRound(int round) {
     std::string patternListJson = FileUtils::getInstance()->fullPathForFilename("patternlist.json");
     std::string patternListJsonString = FileUtils::getInstance()->getStringFromFile(patternListJson);
     
-    JSONPacker::UnpackedPatternList patternList = JSONPacker::unpackPatternListJSON(patternListJsonString, round);
+    JSONPacker::UnpackedPatternList patternList = JSONPacker::unpackPatternListJSON(patternListJsonString, this->patternId);
     this->duration = patternList.duration;
     this->pattern  = patternList.patternList;
     

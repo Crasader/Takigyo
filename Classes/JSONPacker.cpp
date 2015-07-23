@@ -66,6 +66,7 @@ namespace JSONPacker {
         for (rapidjson::SizeType j = 0; j < patternDoc.Size(); ++j) {
             rapidjson::Value& pattern = patternDoc[j];
             ObstacleType type = (ObstacleType)pattern["type"].GetInt();
+            
             float timing = (float)pattern["time"].GetDouble();
             Pattern patternStructure = Pattern();
             patternStructure.timing = timing;

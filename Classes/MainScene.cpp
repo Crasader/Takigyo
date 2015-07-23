@@ -50,7 +50,8 @@ bool MainScene::init()
     auto lifeBG = rootNode->getChildByName("lifeBG");
     this->auraBar = lifeBG->getChildByName<Sprite*>("lifeBar");
     this->countDownLabel = rootNode->getChildByName<cocos2d::ui::Text*>("countDownLabel");
-    this->scoreLabel     = rootNode->getChildByName<cocos2d::ui::Text*>("scoreLabel");
+    this->comboLabel     = rootNode->getChildByName<cocos2d::ui::Text*>("comboLabel");
+    this->levelLabel     = rootNode->getChildByName<cocos2d::ui::Text*>("levelLabel");
     this->cloudsNode = rootNode->getChildByName("clouds");
     this->countDown = 0.0f;
     this->playCount = 0;
@@ -78,22 +79,25 @@ void MainScene::onEnter() {
     this->playWeather();
     
     //test
-    //this->startNewRound();
+    //this->setGameActive();
 }
 
 #pragma mark -
 #pragma mark Game Loop
 
 // パターンを開始する
-void MainScene::startNewRound() {
-    LevelInfo* levelInfo = LevelInfo::createPatternWithRound(3);
+void MainScene::setGameActive(bool active) {
+    this->active = active;
     
-    std::vector<Pattern> currentPattern = levelInfo->getCurrentPattern();
-    int currentLevel = levelInfo->getCurrentLevel();
-    float currentDuration = levelInfo->getCurrentDuration();
-    double currentTempo = levelInfo->getCurrentTempo();
+//    if (this->active) {
+//        this->schedule(CC_SCHEDULE_SELECTOR(MainScene::step), this->stepInterval);
+//        this->scheduleUpdate();
+//    } else {
+//        this->unschedule(CC_SCHEDULE_SELECTOR(MainScene::step));
+//        this->unscheduleUpdate();
+//    }
     
-    // TODO: パターン通りに岩を降らす処理 
+    // TODO: パターン通りに岩を降らす処理
     
     // パターンが終わったタイミングで次のパターンを開始する
 //    float duration = pattern->duration;
@@ -135,9 +139,45 @@ void MainScene::update(float dt)
         }
     }
     if (this->gameState == GameState::Playing) {
-        int random = rand() % 60;
-        if (random == 0) {
-            this->dropObstacles();
+        this->playingTime += dt;
+        if (this->loadNext == true) {
+            LevelInfo* levelInfo = LevelInfo::createPatternWithRound(this->gameRound);
+            this->currentPattern = levelInfo->getCurrentPattern();
+            this->currentLevel = levelInfo->getCurrentLevel();
+            this->currentDuration = levelInfo->getCurrentDuration();
+            this->currentTempo = levelInfo->getCurrentTempo();
+            
+            CCLOG("ROUND:%d", this->gameRound);
+            CCLOG("currentLevel:%d", this->currentLevel);
+            CCLOG("currentDuration:%f", this->currentDuration);
+            
+            if (this->beforeLevel < this->currentLevel) {
+                this->setLevelCount();
+                this->beforeLevel = this->currentLevel;
+            }
+            
+            this->loadNext = false;
+            this->playingTime = 0.0f;
+            for (auto newObstacle : currentPattern) {
+                this->timingList.push_back(newObstacle.timing);
+                this->obstacleList.push_back(newObstacle.type);
+            }
+        } else if (loadNext == false) {
+            if (!timingList.empty()) {
+                float nextTiming = this->timingList.front();
+                if (nextTiming <= playingTime) {
+                    ObstacleType nextObstacle = this->obstacleList.front();
+                    this->timingList.erase(this->timingList.begin());
+                    this->obstacleList.erase(this->obstacleList.begin());
+                    CCLOG("timing:%f", nextTiming);
+                    this->dropObstacles(nextObstacle);
+                }
+            }
+            if (timingList.empty() && playingTime >= this->currentDuration) {
+                CCLOG("FINISH PATTERN");
+                loadNext = true;
+                this->gameRound++;
+            }
         }
         
         this->countDown += dt;
@@ -175,18 +215,26 @@ void MainScene::setCountDown(int timeLeft)
     this->countDownLabel->setString(std::to_string(this->timeLeft));
 }
 
-void MainScene::dropObstacles() {
+void MainScene::dropObstacles(ObstacleType obstacleType) {
     Size visibleSize = Director::getInstance()->getVisibleSize();
     
     // default obstacle
-    Sprite* obstacle = Sprite::create("FallenRock.png");
-    ObstacleType obstacleType = ObstacleType::Rock;
-    
-    // sometimes recovery item
-    int randomNum = rand() % 10;
-    if (randomNum <= 1) {
-        obstacle = Sprite::create("heart.png");
-        obstacleType = ObstacleType::Heart;
+    Sprite* obstacle;
+    switch (obstacleType) {
+        case ObstacleType::Rock:
+        {
+            obstacle = Sprite::create("rock.png");
+            CCLOG("obstacle:%s", "rock");
+            break;
+        }
+        case ObstacleType::Heart:
+        {
+            obstacle = Sprite::create("heart.png");
+            CCLOG("obstacle:%s", "heart");
+            break;
+        }
+        default:
+            break;
     }
     
     obstacle->setScale(0.5f);
@@ -194,10 +242,10 @@ void MainScene::dropObstacles() {
     obstacle->setPosition(Vec2(visibleSize.width * 0.5f, visibleSize.height * 1.2f));
     
     auto waterfall = rootNode->getChildByName("waterfall");
-    auto intoWater          = MoveTo::create(1.0f, waterfall->getPosition() - Vec2(0, 100));
-    auto getCloser          = ScaleTo::create(0.0f, 1.0);
+    auto intoWater          = MoveTo::create(0.5f, waterfall->getPosition() - Vec2(0, 100));
+    auto getCloser          = ScaleTo::create(0.0f, 1.0f);
     auto upAboveWater       = MoveTo::create(0.5f, waterfall->getPosition() - Vec2(0, 30));
-    auto downToCharacter    = MoveBy::create(0.8f, Vec2(0, -530));
+    auto downToCharacter    = MoveBy::create(0.5f, Vec2(0, -530));
     auto easeInDown         = EaseIn::create(downToCharacter, 4);
     
     auto denshion = CocosDenshion::SimpleAudioEngine::getInstance();
@@ -273,11 +321,20 @@ void MainScene::setComboCount(int combo) {
         this->maxComboCount = combo;
     }
     // update the score label
-    this->scoreLabel->setString(std::to_string(combo));
+    this->comboLabel->setString(std::to_string(combo));
     
     ActionTimeline* titleTimeline = CSLoader::createTimeline("MainScene.csb");
     this->runAction(titleTimeline);
-    titleTimeline->play("playing", false);
+    titleTimeline->play("combo", false);
+}
+
+void MainScene::setLevelCount() {
+    // update the level label
+    this->levelLabel->setString(std::to_string(this->currentLevel));
+    
+    ActionTimeline* titleTimeline = CSLoader::createTimeline("MainScene.csb");
+    this->runAction(titleTimeline);
+    titleTimeline->play("levelUp", false);
 }
 
 #pragma mark -
@@ -303,8 +360,11 @@ void MainScene::resetGameState()
     this->auraBar->setScaleX(1.0f);
     if (this->playCount > 0) {
         this->character->setNen(Nen::Ten);
-        this->playWeather();
     }
+    this->playWeather();
+    this->loadNext = true;
+    this->gameRound = 1;
+    this->beforeLevel = 0;
 }
 
 void MainScene::triggerTitle()
@@ -392,9 +452,14 @@ void MainScene::singlePlayerPressed(Ref *pSender, ui::Widget::TouchEventType eEv
 }
 
 void MainScene::playWeather() {
-    ActionTimeline* cloudsTimeline = CSLoader::createTimeline("Clouds.csb");
-    this->runAction(cloudsTimeline);
-    cloudsTimeline->play("icloud", true);
+    ActionTimeline* Timeline = CSLoader::createTimeline("Clouds.csb");
+    this->runAction(Timeline);
+    Timeline->play("icloud", true);
+    
+    int random = rand() % 3;
+    if (random == 0) {
+    } else {
+    }
 }
 
 void MainScene::onEnterTransitionDidFinish() {
