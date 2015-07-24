@@ -55,13 +55,14 @@ bool MainScene::init()
     this->cloudsNode = rootNode->getChildByName("clouds");
     this->countDown = 0.0f;
     this->playCount = 0;
+    this->isEvening = false;
     
     ui::Button* playButton = this->rootNode->getChildByName<ui::Button*>("PlayButton");
     playButton->addTouchEventListener(CC_CALLBACK_2(MainScene::singlePlayerPressed, this));
     
-    addChild(this->rootNode);
-    
     this->resetGameState();
+    
+    addChild(this->rootNode);
     
     return true;
 }
@@ -77,7 +78,6 @@ void MainScene::onEnter() {
     this->setupTouchHandling();
     
     this->playWeather();
-    
     //test
     //this->setGameActive();
 }
@@ -241,7 +241,7 @@ void MainScene::dropObstacles(ObstacleType obstacleType) {
     obstacle->setZOrder(-1);
     obstacle->setPosition(Vec2(visibleSize.width * 0.5f, visibleSize.height * 1.2f));
     
-    auto waterfall = rootNode->getChildByName("waterfall");
+    auto waterfall          = this->rootNode->getChildByName("waterfall");
     auto intoWater          = MoveTo::create(0.5f, waterfall->getPosition() - Vec2(0, 100));
     auto getCloser          = ScaleTo::create(0.0f, 1.0f);
     auto upAboveWater       = MoveTo::create(0.5f, waterfall->getPosition() - Vec2(0, 30));
@@ -361,10 +361,11 @@ void MainScene::resetGameState()
     if (this->playCount > 0) {
         this->character->setNen(Nen::Ten);
     }
-    this->playWeather();
     this->loadNext = true;
     this->gameRound = 1;
     this->beforeLevel = 0;
+    this->timingList = {};
+    this->currentPattern = {};
 }
 
 void MainScene::triggerTitle()
@@ -375,7 +376,6 @@ void MainScene::triggerTitle()
     ActionTimeline* titleTimeline = CSLoader::createTimeline("MainScene.csb");
     this->runAction(titleTimeline);
     titleTimeline->play("title", false);
-    
 }
 
 void MainScene::triggerReady() {
@@ -388,7 +388,16 @@ void MainScene::triggerReady() {
     this->runAction(readyTimeline);
     readyTimeline->play("ready", false);
     
-    auto background = this->rootNode->getChildByName("background");
+    auto background     = this->rootNode->getChildByName<Sprite*>("background");
+    
+    int random = rand() % 2;
+    if (random == 0) {
+        this->isEvening = true;
+        background->setTexture("eveningBackground.png");
+    } else {
+        this->isEvening = false;
+        background->setTexture("sky.png");
+    }
     background->setZOrder(-1);
 }
 
@@ -398,9 +407,9 @@ void MainScene::triggerGameOver()
     
     this->gameState = GameState::GameOver;
     
-    this->triggerTitle();
-    
     this->resetGameState();
+    
+    this->triggerTitle();
 }
 
 void MainScene::setupTouchHandling() {
@@ -455,11 +464,6 @@ void MainScene::playWeather() {
     ActionTimeline* Timeline = CSLoader::createTimeline("Clouds.csb");
     this->runAction(Timeline);
     Timeline->play("icloud", true);
-    
-    int random = rand() % 3;
-    if (random == 0) {
-    } else {
-    }
 }
 
 void MainScene::onEnterTransitionDidFinish() {

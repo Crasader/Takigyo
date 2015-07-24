@@ -68,6 +68,7 @@ private:
     bool active;
     bool playingPattern;
     bool loadNext;
+    bool isEvening;
     
     int timeLeft;
     int playCount;
