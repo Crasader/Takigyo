@@ -24,5 +24,15 @@
         <EnableHTML5Advanced Value="False" />
       </Value>
     </Item>
+    <Item Key="TabsParamsKey">
+      <Value ctype="TabsInfo">
+        <OpenedDocuments>
+          <FilePathData Path="MainScene.csd" />
+          <FilePathData Path="Character.csd" />
+          <FilePathData Path="Timing.csd" />
+        </OpenedDocuments>
+        <ActiveDocument Path="Timing.csd" />
+      </Value>
+    </Item>
   </Properties>
 </UserData>

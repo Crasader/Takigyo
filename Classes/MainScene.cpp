@@ -53,9 +53,9 @@ bool MainScene::init()
     this->comboLabel     = rootNode->getChildByName<cocos2d::ui::Text*>("comboLabel");
     this->levelLabel     = rootNode->getChildByName<cocos2d::ui::Text*>("levelLabel");
     this->cloudsNode = rootNode->getChildByName("clouds");
-    this->countDown = 0.0f;
     this->playCount = 0;
     this->isEvening = false;
+    this->isIntro = false;
     
     ui::Button* playButton = this->rootNode->getChildByName<ui::Button*>("PlayButton");
     playButton->addTouchEventListener(CC_CALLBACK_2(MainScene::singlePlayerPressed, this));
@@ -125,21 +125,11 @@ void MainScene::update(float dt)
     }
     
     if (this->gameState == GameState::Ready) {
-        this->countDown += dt;
-        
-        this->setCountDown(COUNT_DOWN_TIME - this->countDown + 1);
-    
-        if (this->countDown > COUNT_DOWN_TIME) {
-            this->gameState = GameState::Playing;
-            
-            // load and run the title animation
-            ActionTimeline* titleTimeline = CSLoader::createTimeline("MainScene.csb");
-            this->runAction(titleTimeline);
-            titleTimeline->play("countDown", false);
-        }
+        this->isIntro = true;
     }
-    if (this->gameState == GameState::Playing) {
+    if (this->gameState == GameState::Playing && this->isIntro == false) {
         this->playingTime += dt;
+        this->patternPlayTime += dt;
         if (this->loadNext == true) {
             LevelInfo* levelInfo = LevelInfo::createPatternWithRound(this->gameRound);
             this->currentPattern = levelInfo->getCurrentPattern();
@@ -149,15 +139,18 @@ void MainScene::update(float dt)
             
             CCLOG("ROUND:%d", this->gameRound);
             CCLOG("currentLevel:%d", this->currentLevel);
-            CCLOG("currentDuration:%f", this->currentDuration);
+//            CCLOG("currentDuration:%f", this->currentDuration);
+//            CCLOG("currentTempo:%f", this->currentTempo);
             
             if (this->beforeLevel < this->currentLevel) {
+//                CCLOG("BEFORE:%d", this->beforeLevel);
+//                CCLOG("CURRENT:%d", this->currentLevel);
                 this->setLevelCount();
                 this->beforeLevel = this->currentLevel;
             }
             
             this->loadNext = false;
-            this->playingTime = 0.0f;
+            this->patternPlayTime = 0.0f;
             for (auto newObstacle : currentPattern) {
                 this->timingList.push_back(newObstacle.timing);
                 this->obstacleList.push_back(newObstacle.type);
@@ -165,28 +158,28 @@ void MainScene::update(float dt)
         } else if (loadNext == false) {
             if (!timingList.empty()) {
                 float nextTiming = this->timingList.front();
-                if (nextTiming <= playingTime) {
+                if (nextTiming <= patternPlayTime) {
                     ObstacleType nextObstacle = this->obstacleList.front();
                     this->timingList.erase(this->timingList.begin());
                     this->obstacleList.erase(this->obstacleList.begin());
-                    CCLOG("timing:%f", nextTiming);
-                    this->dropObstacles(nextObstacle);
+//                    CCLOG("timing:%f", nextTiming);
+                    this->dropObstacles(nextObstacle, this->currentTempo);
                 }
             }
-            if (timingList.empty() && playingTime >= this->currentDuration) {
-                CCLOG("FINISH PATTERN");
+            if (timingList.empty() && patternPlayTime >= this->currentDuration) {
+//                CCLOG("FINISH PATTERN");
                 loadNext = true;
                 this->gameRound++;
             }
         }
         
-        this->countDown += dt;
         if (this->character->getNen() == Nen::Ken) {
+            this->touchingTime += dt;
             setRemainingAura(auraLeft - dt);
         }
         if (this->gettingHit == true) {
             this->gettingHitCount += dt;
-            if (this->gettingHitCount >= 1.0f) {
+            if (this->gettingHitCount >= RECOVERY) {
                 this->gettingHit = false;
                 this->gettingHitCount = 0.0f;
             }
@@ -194,11 +187,9 @@ void MainScene::update(float dt)
         // if the timer is less than or equal to 0, the game is over
         if (this->auraLeft <= 0.0f)
         {
-            CCLOG("f:%f", this->countDown);
-            CCLOG("i:%d", (int)this->countDown);
             CCLOG("MAX:%d", this->maxComboCount);
-            std::string scoreString = StringUtils::toString((int)this->countDown - 3 + this->maxComboCount);
-            std::string messageContent = "Your earned " + scoreString + " Meditation Points!   (Seconds + MaxCombo)";
+            std::string scoreString = StringUtils::toString(this->playingTime);
+            std::string messageContent = "Your earned " + scoreString + " Meditation Points! (Time)";
             MessageBox(messageContent.c_str(), "Game Over");
             
             this->triggerGameOver();
@@ -206,16 +197,7 @@ void MainScene::update(float dt)
     }
 }
 
-void MainScene::setCountDown(int timeLeft)
-{
-    // update the score instance variable
-    this->timeLeft = timeLeft;
-    
-    // update the score label
-    this->countDownLabel->setString(std::to_string(this->timeLeft));
-}
-
-void MainScene::dropObstacles(ObstacleType obstacleType) {
+void MainScene::dropObstacles(ObstacleType obstacleType, float tempo) {
     Size visibleSize = Director::getInstance()->getVisibleSize();
     
     // default obstacle
@@ -224,13 +206,13 @@ void MainScene::dropObstacles(ObstacleType obstacleType) {
         case ObstacleType::Rock:
         {
             obstacle = Sprite::create("rock.png");
-            CCLOG("obstacle:%s", "rock");
+//            CCLOG("obstacle:%s", "rock");
             break;
         }
         case ObstacleType::Heart:
         {
             obstacle = Sprite::create("heart.png");
-            CCLOG("obstacle:%s", "heart");
+//            CCLOG("obstacle:%s", "heart");
             break;
         }
         default:
@@ -241,11 +223,13 @@ void MainScene::dropObstacles(ObstacleType obstacleType) {
     obstacle->setZOrder(-1);
     obstacle->setPosition(Vec2(visibleSize.width * 0.5f, visibleSize.height * 1.2f));
     
+    auto defaultSpeed       = 1.0f;
+    auto fallSpeed          = defaultSpeed * tempo;
     auto waterfall          = this->rootNode->getChildByName("waterfall");
-    auto intoWater          = MoveTo::create(0.5f, waterfall->getPosition() - Vec2(0, 100));
+    auto intoWater          = MoveTo::create(fallSpeed, waterfall->getPosition() - Vec2(0, 100));
     auto getCloser          = ScaleTo::create(0.0f, 1.0f);
-    auto upAboveWater       = MoveTo::create(0.5f, waterfall->getPosition() - Vec2(0, 30));
-    auto downToCharacter    = MoveBy::create(0.5f, Vec2(0, -530));
+    auto upAboveWater       = MoveTo::create(fallSpeed, waterfall->getPosition() - Vec2(0, 30));
+    auto downToCharacter    = MoveBy::create(fallSpeed, Vec2(0, -530));
     auto easeInDown         = EaseIn::create(downToCharacter, 4);
     
     auto denshion = CocosDenshion::SimpleAudioEngine::getInstance();
@@ -286,6 +270,9 @@ void MainScene::dropObstacles(ObstacleType obstacleType) {
                                                                         denshion->playEffect("break.wav");
                                                                         int combo = this->comboCount++;
                                                                         this->setComboCount(combo);
+                                                                        if (this->touchingTime > 0) {
+                                                                            this->touchingCount++;
+                                                                        }
                                                                     } else if (obstacleType == ObstacleType::Heart) {
                                                                         denshion->playEffect("break.wav");
                                                                     }
@@ -302,13 +289,9 @@ void MainScene::dropObstacles(ObstacleType obstacleType) {
 void MainScene::gotHit() {
     if (this->gettingHit == false) {
         this->gettingHit = true;
-        auto yoko = ScaleBy::create(0.1f, 4, 0.25);
-        auto tate = ScaleBy::create(0.1f, 0.25, 4.0);
-        auto yoko2 = ScaleBy::create(0.15f, 2, 0.5);
-        auto tate2 = ScaleBy::create(0.15f, 0.5, 2);
-        auto yoko3 = ScaleBy::create(0.2f, 2, 0.5);
-        auto tate3 = CCEaseBackIn::create(ScaleBy::create(0.3f, 0.5, 2));
-        this->character->runAction(Sequence::create(yoko,tate,yoko2,tate2,yoko3,tate3,NULL));
+        auto yoko = ScaleBy::create(0.2f, 2, 0.5);
+        auto tate = CCEaseBackIn::create(ScaleBy::create(0.3f, 0.5, 2));
+        this->character->runAction(Sequence::create(yoko,tate,NULL));
     }
     float remainingAura = this->auraLeft - HIT_DAMAGE;
     this->setRemainingAura(remainingAura);
@@ -335,6 +318,8 @@ void MainScene::setLevelCount() {
     ActionTimeline* titleTimeline = CSLoader::createTimeline("MainScene.csb");
     this->runAction(titleTimeline);
     titleTimeline->play("levelUp", false);
+    
+//    CCLOG("LEVELUP");
 }
 
 #pragma mark -
@@ -352,7 +337,6 @@ void MainScene::resetGameState()
 {
     // these variables must be reset every new game
     this->auraLeft = PRESENT_OUTPUT_POTENTIAL;
-    this->countDown = 0.0f;
     this->comboCount = 1;
     this->maxComboCount = 0;
     this->gettingHit = false;
@@ -361,9 +345,12 @@ void MainScene::resetGameState()
     if (this->playCount > 0) {
         this->character->setNen(Nen::Ten);
     }
+    this->isIntro = false;
     this->loadNext = true;
     this->gameRound = 1;
     this->beforeLevel = 0;
+    this->touchingTime = 0.0;
+    this->touchingCount = 0;
     this->timingList = {};
     this->currentPattern = {};
 }
@@ -390,7 +377,7 @@ void MainScene::triggerReady() {
     
     auto background     = this->rootNode->getChildByName<Sprite*>("background");
     
-    int random = rand() % 2;
+    int random = rand() % 5;
     if (random == 0) {
         this->isEvening = true;
         background->setTexture("eveningBackground.png");
@@ -399,6 +386,29 @@ void MainScene::triggerReady() {
         background->setTexture("sky.png");
     }
     background->setZOrder(-1);
+    
+    this->runAction(Sequence::create(
+                                     CallFunc::create(
+                                                      [this]() {
+                                                          // load and run the title animation
+                                                          ActionTimeline* titleTimeline = CSLoader::createTimeline("MainScene.csb");
+                                                          this->runAction(titleTimeline);
+                                                          titleTimeline->play("intro", false);
+                                                      }
+                                                      ),
+                                     DelayTime::create(1.0f),
+                                     CallFunc::create(
+                                                      [this]() {
+                                                          auto introLeftRaft = this->rootNode->getChildByName<Sprite*>("introLeftRaft");
+                                                          auto introRightRaft = this->rootNode->getChildByName<Sprite*>("introRightRaft");
+                                                          auto introLeft          = ScaleTo::create(0.5f, 2.0f);
+                                                          auto introRight         = ScaleTo::create(0.5f, 2.0f);
+                                                          introLeftRaft->runAction(introLeft);
+                                                          introRightRaft->runAction(introRight);
+                                                      }
+                                                      ), NULL
+                                     )
+                    );
 }
 
 void MainScene::triggerGameOver()
@@ -427,7 +437,9 @@ void MainScene::setupTouchHandling() {
             case GameState::Title:
                 break;
             case GameState::Ready:
+            {
                 break;
+            }
             case GameState::Playing:
                 if (this->gettingHit == false) {
                     this->character->setNen(Nen::Ken);
@@ -444,6 +456,62 @@ void MainScene::setupTouchHandling() {
     };
     touchListener->onTouchEnded = [&](Touch* touch, Event* event) {
         this->character->setNen(Nen::Ten);
+        if (touchingCount > 0) {
+            ActionTimeline* timingTimeline = CSLoader::createTimeline("Timing.csb");
+            this->runAction(timingTimeline);
+            if (this->touchingTime < 0.1) {
+                timingTimeline->play("perfect", false);
+            } else if (this->touchingTime < 0.3) {
+                timingTimeline->play("great", false);
+            } else if (this->touchingTime < 0.5) {
+                timingTimeline->play("good", false);
+            } else {
+                CCLOG("Hmm...");
+            }
+            this->touchingCount = 0;
+        }
+        this->touchingTime = 0;
+        if (this->gameState == GameState::Ready) {
+            // load and run the title animation
+            this->runAction(Sequence::create(
+                                             CallFunc::create(
+                                                              [this]() {
+                                                                  auto introLeftRaft = this->rootNode->getChildByName<Sprite*>("introLeftRaft");
+                                                                  auto introRightRaft = this->rootNode->getChildByName<Sprite*>("introRightRaft");
+                                                                  auto introLeft          = ScaleTo::create(0.5f, 1.0f);
+                                                                  auto introRight         = ScaleTo::create(0.5f, 1.0f);
+                                                                  introLeftRaft->runAction(introLeft);
+                                                                  introRightRaft->runAction(introRight);
+                                                              }
+                                                              ),
+                                             DelayTime::create(0.5f),
+                                             CallFunc::create(
+                                                              [this]() {
+                                                                  this->character->setNen(Nen::Ken);
+                                                                  this->soundId = CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("ken.wav", true);
+                                                                  ActionTimeline* titleTimeline = CSLoader::createTimeline("MainScene.csb");
+                                                                  this->runAction(titleTimeline);
+                                                                  titleTimeline->play("endIntro", false);
+                                                              }
+                                                              ),
+                                             DelayTime::create(0.3f),
+                                             CallFunc::create(
+                                                              [this]() {
+                                                                  CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("break.wav");
+                                                              }
+                                                              ),
+                                             DelayTime::create(0.7f),
+                                             CallFunc::create(
+                                                              [this]() {
+                                                                  this->character->setNen(Nen::Ten);
+                                                                  this->isIntro = false;
+                                                                  this->gameState = GameState::Playing;
+                                                                  CocosDenshion::SimpleAudioEngine::getInstance()->stopEffect(soundId);
+                                                              }
+                                                              ), NULL
+                                             )
+                            );
+        }
         CocosDenshion::SimpleAudioEngine::getInstance()->stopEffect(soundId);
     };
     touchListener->onTouchCancelled = [&](Touch* touch, Event* event) {

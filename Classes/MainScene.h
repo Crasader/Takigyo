@@ -46,7 +46,7 @@ private:
     void triggerTitle();
     void triggerReady();
     void triggerGameOver();
-    void dropObstacles(ObstacleType obstacle);
+    void dropObstacles(ObstacleType obstacle, float tempo);
     void resetGameState();
     void setKen();
     void setTen();
@@ -59,16 +59,18 @@ private:
     void gotHit();
     void setGameActive(bool active);
     
-    float countDown;
+    float playingTime;
     float auraLeft;
     float gettingHitCount;
-    float playingTime;
+    float patternPlayTime;
+    float touchingTime;
     
     bool gettingHit;
     bool active;
     bool playingPattern;
     bool loadNext;
     bool isEvening;
+    bool isIntro;
     
     int timeLeft;
     int playCount;
@@ -76,6 +78,7 @@ private:
     int maxComboCount;
     int soundId;
     int gameRound;
+    int touchingCount;
     
     std::vector<Pattern> currentPattern;
     int currentLevel;

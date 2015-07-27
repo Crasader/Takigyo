@@ -34,6 +34,9 @@
             <Image Name="waterfall2.png" />
             <Image Name="eveningBackground.png" />
             <Image Name="eveningMask.png" />
+            <Image Name="introLeftRaft.png" />
+            <Image Name="introRightRaft.png" />
+            <Image Name="perfect.png" />
           </Folder>
           <Folder Name="resources-2x">
             <Image Name="BottomRock@2x.png" />
@@ -76,6 +79,10 @@
           <Folder Name="resources-4x" />
         </Folder>
         <TTF Name="kenpixel_blocks.ttf" />
+        <Project Name="Intro.csd" Type="Node" />
+        <Project Name="Timing.csd" Type="Node" />
+        <Image Name="good.png" />
+        <Image Name="great.png" />
       </RootFolder>
     </Group>
   </SolutionFolder>
