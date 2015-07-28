@@ -1,5 +1,5 @@
 <Solution>
-  <PropertyGroup Name="Takigyo" Version="2.3.0.1" Type="CocosStudio" />
+  <PropertyGroup Name="Takigyo" Version="2.3.1.1" Type="CocosStudio" />
   <SolutionFolder>
     <Group ctype="ResourceGroup">
       <RootFolder Name=".">
@@ -37,6 +37,8 @@
             <Image Name="introLeftRaft.png" />
             <Image Name="introRightRaft.png" />
             <Image Name="perfect.png" />
+            <Image Name="good.png" />
+            <Image Name="great.png" />
           </Folder>
           <Folder Name="resources-2x">
             <Image Name="BottomRock@2x.png" />
@@ -80,9 +82,12 @@
         </Folder>
         <TTF Name="kenpixel_blocks.ttf" />
         <Project Name="Intro.csd" Type="Node" />
-        <Project Name="Timing.csd" Type="Node" />
-        <Image Name="good.png" />
-        <Image Name="great.png" />
+        <Folder Name="Timing">
+          <Project Name="TimingPerfect.csd" Type="Node" />
+          <Project Name="TimingGreat.csd" Type="Node" />
+          <Project Name="TimingGood.csd" Type="Node" />
+        </Folder>
+        <Project Name="LevelNode.csd" Type="Node" />
       </RootFolder>
     </Group>
   </SolutionFolder>

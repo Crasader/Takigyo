@@ -1,5 +1,5 @@
 <GameProjectFile>
-  <PropertyGroup Type="Node" Name="Clouds" ID="45beea94-69d9-4d6e-be71-1efd2df1fe83" Version="2.3.0.1" />
+  <PropertyGroup Type="Node" Name="Clouds" ID="45beea94-69d9-4d6e-be71-1efd2df1fe83" Version="2.3.1.1" />
   <Content ctype="GameProjectContent">
     <Content>
       <Animation Duration="500" Speed="1.0000" ActivedAnimationName="icloud">
@@ -58,7 +58,7 @@
         </AnimationInfo>
       </AnimationList>
       <ObjectData Name="Node" Tag="169" ctype="GameNodeObjectData">
-        <Size />
+        <Size X="0.0000" Y="0.0000" />
         <Children>
           <AbstractNodeData Name="cloud" ActionTag="611320670" Tag="41" IconVisible="False" LeftMargin="-51.0000" RightMargin="-49.0000" TopMargin="-31.5000" BottomMargin="-31.5000" ctype="SpriteObjectData">
             <Size X="100.0000" Y="63.0000" />
@@ -67,7 +67,7 @@
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
-            <PreSize />
+            <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="Normal" Path="Images/resources-1x/cloud.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
@@ -78,7 +78,7 @@
             <Scale ScaleX="1.1771" ScaleY="1.2108" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
-            <PreSize />
+            <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="Normal" Path="Images/resources-1x/cloud.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
@@ -89,7 +89,7 @@
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
-            <PreSize />
+            <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="Normal" Path="Images/resources-1x/cloud.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>

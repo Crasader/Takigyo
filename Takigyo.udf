@@ -1,4 +1,4 @@
-<UserData>
+<UserData Version="2.3.1.1">
   <Properties>
     <Item Key="CocosRecentOperation">
       <Value ctype="CocosRecentOperation">
@@ -18,20 +18,11 @@
         <iOS_Target Value="Takigyo iOS" />
         <iOS_BundleID Value="iPhone Developer: Shota Oiyama (AY76Q872SX)" />
         <Platform Value="None" />
+        <RunPlatform Value="None" />
         <FrameworkVersion Value="cocos2d-x-3.6" />
         <IsDebugKeystore Value="True" />
         <EnableSourceMap Value="False" />
         <EnableHTML5Advanced Value="False" />
-      </Value>
-    </Item>
-    <Item Key="TabsParamsKey">
-      <Value ctype="TabsInfo">
-        <OpenedDocuments>
-          <FilePathData Path="MainScene.csd" />
-          <FilePathData Path="Character.csd" />
-          <FilePathData Path="Timing.csd" />
-        </OpenedDocuments>
-        <ActiveDocument Path="Timing.csd" />
       </Value>
     </Item>
   </Properties>

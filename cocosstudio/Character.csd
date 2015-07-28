@@ -1,5 +1,5 @@
 <GameProjectFile>
-  <PropertyGroup Type="Node" Name="Character" ID="a58d6a62-cfa3-442f-8b50-e485becd7713" Version="2.3.0.1" />
+  <PropertyGroup Type="Node" Name="Character" ID="a58d6a62-cfa3-442f-8b50-e485becd7713" Version="2.3.1.1" />
   <Content ctype="GameProjectContent">
     <Content>
       <Animation Duration="50" Speed="1.0000" ActivedAnimationName="Ten">
@@ -30,7 +30,7 @@
         </AnimationInfo>
       </AnimationList>
       <ObjectData Name="Node" Tag="10" ctype="GameNodeObjectData">
-        <Size />
+        <Size X="0.0000" Y="0.0000" />
         <Children>
           <AbstractNodeData Name="CharacterShadow" ActionTag="-1607379718" Tag="73" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="-106.5000" RightMargin="-106.5000" TopMargin="-229.0000" ctype="SpriteObjectData">
             <Size X="213.0000" Y="229.0000" />
@@ -39,29 +39,29 @@
             <Scale ScaleX="0.5000" ScaleY="0.5000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
-            <PreSize />
+            <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="Normal" Path="Images/resources-1x/CharacterShadow.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="Ten" ActionTag="-990567327" Tag="65" VisibleForFrame="False" IconVisible="True" TopMargin="-50.0000" BottomMargin="50.0000" ctype="ParticleObjectData">
-            <Size />
+            <Size X="0.0000" Y="0.0000" />
             <AnchorPoint />
             <Position Y="50.0000" />
             <Scale ScaleX="0.5000" ScaleY="0.5000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
-            <PreSize />
+            <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="Normal" Path="ten.plist" Plist="" />
             <BlendFunc Src="770" Dst="1" />
           </AbstractNodeData>
           <AbstractNodeData Name="Ken" ActionTag="-616467882" Tag="66" VisibleForFrame="False" IconVisible="True" TopMargin="-100.0000" BottomMargin="100.0000" ctype="ParticleObjectData">
-            <Size />
+            <Size X="0.0000" Y="0.0000" />
             <AnchorPoint />
             <Position Y="100.0000" />
             <Scale ScaleX="0.2000" ScaleY="0.2000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
-            <PreSize />
+            <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="Normal" Path="ten.plist" Plist="" />
             <BlendFunc Src="770" Dst="1" />
           </AbstractNodeData>
@@ -72,7 +72,7 @@
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
-            <PreSize />
+            <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="Normal" Path="Images/resources-1x/Ten.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
@@ -83,7 +83,7 @@
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
-            <PreSize />
+            <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="Normal" Path="Images/resources-1x/Ken.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>

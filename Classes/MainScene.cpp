@@ -10,6 +10,35 @@
 
 USING_NS_TIMELINE
 
+void _printNodeRecursive(Node* node, int count, std::function<void (Node*)> func)
+{
+    for (int i = 0; i < count; i++) {
+        printf(" ");
+    }
+    if (count != 0) {
+        printf("┣");
+    }
+    printf("name = %s, class = %s, ", node->getName().c_str(), typeid(*node).name());
+    if (func) {
+        func(node);
+    }
+    printf("\n");
+    
+    for (auto child : node->getChildren()) {
+        _printNodeRecursive(child, count + 1, func);
+    }
+}
+
+void printNode(Node* node)
+{
+    _printNodeRecursive(node, 0, NULL);
+}
+
+void printNode(Node* node, std::function<void (Node* node)> func)
+{
+    _printNodeRecursive(node, 0, func);
+}
+
 Scene* MainScene::createScene()
 {
     // 'scene' is an autorelease object
@@ -44,15 +73,15 @@ bool MainScene::init()
     ui::Helper::doLayout(this->rootNode);
     
     this->rootNode->setContentSize(size);
-    auto waterfall = rootNode->getChildByName("waterfall");
-    auto bottomRock = waterfall->getChildByName("bottomRock");
-    this->character = bottomRock->getChildByName<Character*>("Character");
-    auto lifeBG = rootNode->getChildByName("lifeBG");
-    this->auraBar = lifeBG->getChildByName<Sprite*>("lifeBar");
+    auto waterfall      = rootNode->getChildByName("waterfall");
+    auto bottomRock     = waterfall->getChildByName("bottomRock");
+    this->character     = bottomRock->getChildByName<Character*>("Character");
+    this->levelNode     = waterfall->getChildByName("level");
+    auto lifeBG         = rootNode->getChildByName("lifeBG");
+    this->auraBar       = lifeBG->getChildByName<Sprite*>("lifeBar");
     this->countDownLabel = rootNode->getChildByName<cocos2d::ui::Text*>("countDownLabel");
     this->comboLabel     = rootNode->getChildByName<cocos2d::ui::Text*>("comboLabel");
-    this->levelLabel     = rootNode->getChildByName<cocos2d::ui::Text*>("levelLabel");
-    this->cloudsNode = rootNode->getChildByName("clouds");
+    this->cloudsNode    = rootNode->getChildByName("clouds");
     this->playCount = 0;
     this->isEvening = false;
     this->isIntro = false;
@@ -101,7 +130,7 @@ void MainScene::setGameActive(bool active) {
     
     // パターンが終わったタイミングで次のパターンを開始する
 //    float duration = pattern->duration;
-//    this->runAction(Sequense::create(
+//    this->rootNode->runAction(Sequense::create(
 //                                     DelayTime::create(duration),
 //                                     CallFunc::create([this](){
 //                                        this->startNewRound();
@@ -124,9 +153,6 @@ void MainScene::update(float dt)
         denshion->playEffect("bird.wav");
     }
     
-    if (this->gameState == GameState::Ready) {
-        this->isIntro = true;
-    }
     if (this->gameState == GameState::Playing && this->isIntro == false) {
         this->playingTime += dt;
         this->patternPlayTime += dt;
@@ -273,6 +299,7 @@ void MainScene::dropObstacles(ObstacleType obstacleType, float tempo) {
                                                                         if (this->touchingTime > 0) {
                                                                             this->touchingCount++;
                                                                         }
+                                                                        this->playTimingAnimation();
                                                                     } else if (obstacleType == ObstacleType::Heart) {
                                                                         denshion->playEffect("break.wav");
                                                                     }
@@ -284,6 +311,48 @@ void MainScene::dropObstacles(ObstacleType obstacleType, float tempo) {
                                      NULL));
     
     this->rootNode->addChild(obstacle);
+}
+
+void MainScene::playTimingAnimation() {
+    if (touchingCount > 0) {
+        auto perfectLabel = this->comboLabel->getChildByName("perfect");
+        perfectLabel->stopAllActions();
+            auto goodLabel = this->comboLabel->getChildByName("good");
+        goodLabel->stopAllActions();
+            auto greatLabel = this->comboLabel->getChildByName("great");
+        greatLabel->stopAllActions();
+        
+        
+        if (this->touchingTime < 0.1) {
+            auto perfectLabel = this->comboLabel->getChildByName("perfect");
+            ActionTimeline* perfect = CSLoader::createTimeline("Timing/TimingPerfect.csb");
+            perfectLabel->runAction(perfect);
+            perfect->play("playPerfect", false);
+            CCLOG("PERFECT");
+            CCLOG("PERFECT");
+            CCLOG("PERFECT");
+        } else if (this->touchingTime < 0.3) {
+            auto greatLabel = this->comboLabel->getChildByName("great");
+            ActionTimeline* great = CSLoader::createTimeline("Timing/TimingGreat.csb");
+            greatLabel->runAction(great);
+            great->play("playGreat", false);
+            CCLOG("GREAT");
+            CCLOG("GREAT");
+            CCLOG("GREAT");
+        } else if (this->touchingTime < 0.5) {
+            auto goodLabel = this->comboLabel->getChildByName("good");
+            ActionTimeline* good = CSLoader::createTimeline("Timing/TimingGood.csb");
+            goodLabel->runAction(good);
+            good->play("playGood", false);
+            CCLOG("GOOD");
+            CCLOG("GOOD");
+            CCLOG("GOOD");
+        } else {
+            CCLOG("Hmm...");
+            CCLOG("Hmm...");
+            CCLOG("Hmm...");
+        }
+    }
 }
 
 void MainScene::gotHit() {
@@ -307,19 +376,17 @@ void MainScene::setComboCount(int combo) {
     this->comboLabel->setString(std::to_string(combo));
     
     ActionTimeline* titleTimeline = CSLoader::createTimeline("MainScene.csb");
-    this->runAction(titleTimeline);
+    this->rootNode->runAction(titleTimeline);
     titleTimeline->play("combo", false);
 }
 
 void MainScene::setLevelCount() {
-    // update the level label
-    this->levelLabel->setString(std::to_string(this->currentLevel));
+    auto level = this->levelNode->getChildByName<cocos2d::ui::Text*>("Level");
+    level->setString(std::to_string(this->currentLevel));
     
-    ActionTimeline* titleTimeline = CSLoader::createTimeline("MainScene.csb");
-    this->runAction(titleTimeline);
-    titleTimeline->play("levelUp", false);
-    
-//    CCLOG("LEVELUP");
+    ActionTimeline* levelTimeline = CSLoader::createTimeline("LevelNode.csb");
+    this->levelNode->runAction(levelTimeline);
+    levelTimeline->play("levelUp", false);
 }
 
 #pragma mark -
@@ -333,6 +400,7 @@ void MainScene::setRemainingAura(float auraLeft)
     // update the UI to reflect the correct time left
     this->auraBar->setScaleX(this->auraLeft / PRESENT_OUTPUT_POTENTIAL);
 }
+
 void MainScene::resetGameState()
 {
     // these variables must be reset every new game
@@ -361,18 +429,18 @@ void MainScene::triggerTitle()
     
     // load and run the title animation
     ActionTimeline* titleTimeline = CSLoader::createTimeline("MainScene.csb");
-    this->runAction(titleTimeline);
+    this->rootNode->runAction(titleTimeline);
     titleTimeline->play("title", false);
 }
 
 void MainScene::triggerReady() {
     // set the game state to Ready
-    this->gameState = GameState::Ready;
+    this->gameState = GameState::Playing;
     this->character->setNen(Nen::Ten);
     
     // load and run the ready animations
     ActionTimeline* readyTimeline = CSLoader::createTimeline("MainScene.csb");
-    this->runAction(readyTimeline);
+    this->rootNode->runAction(readyTimeline);
     readyTimeline->play("ready", false);
     
     auto background     = this->rootNode->getChildByName<Sprite*>("background");
@@ -387,28 +455,6 @@ void MainScene::triggerReady() {
     }
     background->setZOrder(-1);
     
-    this->runAction(Sequence::create(
-                                     CallFunc::create(
-                                                      [this]() {
-                                                          // load and run the title animation
-                                                          ActionTimeline* titleTimeline = CSLoader::createTimeline("MainScene.csb");
-                                                          this->runAction(titleTimeline);
-                                                          titleTimeline->play("intro", false);
-                                                      }
-                                                      ),
-                                     DelayTime::create(1.0f),
-                                     CallFunc::create(
-                                                      [this]() {
-                                                          auto introLeftRaft = this->rootNode->getChildByName<Sprite*>("introLeftRaft");
-                                                          auto introRightRaft = this->rootNode->getChildByName<Sprite*>("introRightRaft");
-                                                          auto introLeft          = ScaleTo::create(0.5f, 2.0f);
-                                                          auto introRight         = ScaleTo::create(0.5f, 2.0f);
-                                                          introLeftRaft->runAction(introLeft);
-                                                          introRightRaft->runAction(introRight);
-                                                      }
-                                                      ), NULL
-                                     )
-                    );
 }
 
 void MainScene::triggerGameOver()
@@ -456,66 +502,14 @@ void MainScene::setupTouchHandling() {
     };
     touchListener->onTouchEnded = [&](Touch* touch, Event* event) {
         this->character->setNen(Nen::Ten);
-        if (touchingCount > 0) {
-            ActionTimeline* timingTimeline = CSLoader::createTimeline("Timing.csb");
-            this->runAction(timingTimeline);
-            if (this->touchingTime < 0.1) {
-                timingTimeline->play("perfect", false);
-            } else if (this->touchingTime < 0.3) {
-                timingTimeline->play("great", false);
-            } else if (this->touchingTime < 0.5) {
-                timingTimeline->play("good", false);
-            } else {
-                CCLOG("Hmm...");
-            }
-            this->touchingCount = 0;
-        }
-        this->touchingTime = 0;
-        if (this->gameState == GameState::Ready) {
-            // load and run the title animation
-            this->runAction(Sequence::create(
-                                             CallFunc::create(
-                                                              [this]() {
-                                                                  auto introLeftRaft = this->rootNode->getChildByName<Sprite*>("introLeftRaft");
-                                                                  auto introRightRaft = this->rootNode->getChildByName<Sprite*>("introRightRaft");
-                                                                  auto introLeft          = ScaleTo::create(0.5f, 1.0f);
-                                                                  auto introRight         = ScaleTo::create(0.5f, 1.0f);
-                                                                  introLeftRaft->runAction(introLeft);
-                                                                  introRightRaft->runAction(introRight);
-                                                              }
-                                                              ),
-                                             DelayTime::create(0.5f),
-                                             CallFunc::create(
-                                                              [this]() {
-                                                                  this->character->setNen(Nen::Ken);
-                                                                  this->soundId = CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("ken.wav", true);
-                                                                  ActionTimeline* titleTimeline = CSLoader::createTimeline("MainScene.csb");
-                                                                  this->runAction(titleTimeline);
-                                                                  titleTimeline->play("endIntro", false);
-                                                              }
-                                                              ),
-                                             DelayTime::create(0.3f),
-                                             CallFunc::create(
-                                                              [this]() {
-                                                                  CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("break.wav");
-                                                              }
-                                                              ),
-                                             DelayTime::create(0.7f),
-                                             CallFunc::create(
-                                                              [this]() {
-                                                                  this->character->setNen(Nen::Ten);
-                                                                  this->isIntro = false;
-                                                                  this->gameState = GameState::Playing;
-                                                                  CocosDenshion::SimpleAudioEngine::getInstance()->stopEffect(soundId);
-                                                              }
-                                                              ), NULL
-                                             )
-                            );
-        }
+        this->touchingCount = 0;
+        this->touchingTime = 0.0f;
         CocosDenshion::SimpleAudioEngine::getInstance()->stopEffect(soundId);
     };
     touchListener->onTouchCancelled = [&](Touch* touch, Event* event) {
         this->character->setNen(Nen::Ten);
+        this->touchingCount = 0;
+        this->touchingTime = 0.0f;
         CocosDenshion::SimpleAudioEngine::getInstance()->stopEffect(soundId);
     };
     
@@ -530,7 +524,7 @@ void MainScene::singlePlayerPressed(Ref *pSender, ui::Widget::TouchEventType eEv
 
 void MainScene::playWeather() {
     ActionTimeline* Timeline = CSLoader::createTimeline("Clouds.csb");
-    this->runAction(Timeline);
+    this->rootNode->runAction(Timeline);
     Timeline->play("icloud", true);
 }
 
@@ -539,3 +533,73 @@ void MainScene::onEnterTransitionDidFinish() {
     backgroundMusic->playBackgroundMusic("waterfall.wav", true);
     backgroundMusic->setBackgroundMusicVolume(0.5f);
 }
+
+
+//            this->rootNode->runAction(Sequence::create(
+//                                             CallFunc::create(
+//                                                              [this]() {
+//                                                                  auto introLeftRaft = this->rootNode->getChildByName<Sprite*>("introLeftRaft");
+//                                                                  auto introRightRaft = this->rootNode->getChildByName<Sprite*>("introRightRaft");
+//                                                                  auto introLeft          = ScaleTo::create(0.5f, 1.0f);
+//                                                                  auto introRight         = ScaleTo::create(0.5f, 1.0f);
+//                                                                  introLeftRaft->runAction(introLeft);
+//                                                                  introRightRaft->runAction(introRight);
+//                                                              }
+//                                                              ),
+//                                             DelayTime::create(0.5f),
+//                                             CallFunc::create(
+//                                                              [this]() {
+//                                                                  this->character->setNen(Nen::Ken);
+//                                                                  this->soundId = CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("ken.wav", true);
+//                                                                  ActionTimeline* titleTimeline = CSLoader::createTimeline("MainScene.csb");
+//                                                                  this->rootNode->runAction(titleTimeline);
+//                                                                  titleTimeline->play("endIntro", false);
+//                                                              }
+//                                                              ),
+//                                             DelayTime::create(0.3f),
+//                                             CallFunc::create(
+//                                                              [this]() {
+//                                                                  CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("break.wav");
+//                                                              }
+//                                                              ),
+//                                             DelayTime::create(0.7f),
+//                                             CallFunc::create(
+//                                                              [this]() {
+//                                                                  this->character->setNen(Nen::Ten);
+//                                                                  this->isIntro = false;
+//                                                                  this->gameState = GameState::Playing;
+//                                                                  CocosDenshion::SimpleAudioEngine::getInstance()->stopEffect(soundId);
+//                                                              }
+//                                                              ), NULL
+//                                             )
+//                            );
+
+
+
+
+
+
+
+
+//    this->rootNode->runAction(Sequence::create(
+//                                     CallFunc::create(
+//                                                      [this]() {
+//                                                          // load and run the title animation
+//                                                          ActionTimeline* titleTimeline = CSLoader::createTimeline("MainScene.csb");
+//                                                          this->rootNode->runAction(titleTimeline);
+//                                                          titleTimeline->play("intro", false);
+//                                                      }
+//                                                      ),
+//                                     DelayTime::create(1.0f),
+//                                     CallFunc::create(
+//                                                      [this]() {
+//                                                          auto introLeftRaft = this->rootNode->getChildByName<Sprite*>("introLeftRaft");
+//                                                          auto introRightRaft = this->rootNode->getChildByName<Sprite*>("introRightRaft");
+//                                                          auto introLeft          = ScaleTo::create(0.5f, 2.0f);
+//                                                          auto introRight         = ScaleTo::create(0.5f, 2.0f);
+//                                                          introLeftRaft->runAction(introLeft);
+//                                                          introRightRaft->runAction(introRight);
+//                                                      }
+//                                                      ), NULL
+//                                     )
+//                    );
