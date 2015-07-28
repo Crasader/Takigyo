@@ -77,6 +77,8 @@
             <Image Name="title@3x.png" />
             <Image Name="waterfall@3x.png" />
             <Image Name="waterfall2@3x.png" />
+            <Image Name="leftRaft@3x.png" />
+            <Image Name="rightRaft@3x.png" />
           </Folder>
           <Folder Name="resources-4x" />
         </Folder>
@@ -88,6 +90,7 @@
           <Project Name="TimingGood.csd" Type="Node" />
         </Folder>
         <Project Name="LevelNode.csd" Type="Node" />
+        <TTF Name="Game of Three.ttf" />
       </RootFolder>
     </Group>
   </SolutionFolder>

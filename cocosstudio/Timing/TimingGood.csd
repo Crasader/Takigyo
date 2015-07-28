@@ -8,10 +8,18 @@
           <BoolFrame FrameIndex="1" Tween="False" Value="True" />
           <BoolFrame FrameIndex="20" Tween="False" Value="False" />
         </Timeline>
+        <Timeline ActionTag="1389860647" Property="Scale">
+          <ScaleFrame FrameIndex="1" X="2.0000" Y="2.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+          <ScaleFrame FrameIndex="20" X="1.0000" Y="1.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+        </Timeline>
       </Animation>
       <AnimationList>
-        <AnimationInfo Name="playGood" StartIndex="0" EndIndex="20">
-          <RenderColor A="150" R="255" G="127" B="80" />
+        <AnimationInfo Name="playGood" StartIndex="0" EndIndex="21">
+          <RenderColor A="255" R="255" G="127" B="80" />
         </AnimationInfo>
       </AnimationList>
       <ObjectData Name="Node" Tag="962" ctype="GameNodeObjectData">
@@ -21,7 +29,7 @@
             <Size X="87.0000" Y="29.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <Scale ScaleX="2.0000" ScaleY="2.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />

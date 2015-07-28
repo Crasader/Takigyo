@@ -50,6 +50,8 @@
 		52B47A471A53D09C004E4C60 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52B47A461A53D09B004E4C60 /* Security.framework */; };
 		7AB94C6A95BCF2B4CA3DF1DC /* res in Resources */ = {isa = PBXBuildFile; fileRef = FA144D09A52357282113E0F8 /* res */; };
 		8262943E1AAF051F00CB7CF7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8262943D1AAF051F00CB7CF7 /* Security.framework */; };
+		9637D44A1B68019500B832A8 /* Utility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9637D4481B68019500B832A8 /* Utility.cpp */; };
+		9637D44B1B68019500B832A8 /* Utility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9637D4481B68019500B832A8 /* Utility.cpp */; };
 		96424DD11B5E126200BF3DA5 /* LevelInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96424DCF1B5E126200BF3DA5 /* LevelInfo.cpp */; };
 		96424DD21B5E126200BF3DA5 /* LevelInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96424DCF1B5E126200BF3DA5 /* LevelInfo.cpp */; };
 		965BC3F31B60113D0054CCEF /* PatternRate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 965BC3F11B60113D0054CCEF /* PatternRate.cpp */; };
@@ -135,6 +137,8 @@
 		521A8E6319F0C34300D177D7 /* Default-736h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-736h@3x.png"; sourceTree = "<group>"; };
 		52B47A461A53D09B004E4C60 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		8262943D1AAF051F00CB7CF7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		9637D4481B68019500B832A8 /* Utility.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utility.cpp; sourceTree = "<group>"; };
+		9637D4491B68019500B832A8 /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
 		96424DCF1B5E126200BF3DA5 /* LevelInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LevelInfo.cpp; sourceTree = "<group>"; };
 		96424DD01B5E126200BF3DA5 /* LevelInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelInfo.h; sourceTree = "<group>"; };
 		965BC3F11B60113D0054CCEF /* PatternRate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PatternRate.cpp; sourceTree = "<group>"; };
@@ -291,6 +295,8 @@
 				46880B8719C43A87006E1F66 /* MainScene.h */,
 				965BC3F11B60113D0054CCEF /* PatternRate.cpp */,
 				965BC3F21B60113D0054CCEF /* PatternRate.h */,
+				9637D4481B68019500B832A8 /* Utility.cpp */,
+				9637D4491B68019500B832A8 /* Utility.h */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -510,6 +516,7 @@
 				96424DD11B5E126200BF3DA5 /* LevelInfo.cpp in Sources */,
 				46880B8A19C43A87006E1F66 /* MainScene.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
+				9637D44A1B68019500B832A8 /* Utility.cpp in Sources */,
 				96C8C4FC1B56E50200D07B2C /* Character.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
@@ -520,6 +527,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9637D44B1B68019500B832A8 /* Utility.cpp in Sources */,
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				965BC3FA1B60118D0054CCEF /* JSONPacker.cpp in Sources */,

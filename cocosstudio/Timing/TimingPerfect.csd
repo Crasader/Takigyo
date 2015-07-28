@@ -14,13 +14,12 @@
         <Timeline ActionTag="-909308877" Property="VisibleForFrame">
           <BoolFrame FrameIndex="0" Tween="False" Value="False" />
           <BoolFrame FrameIndex="1" Tween="False" Value="True" />
-          <BoolFrame FrameIndex="19" Tween="False" Value="True" />
           <BoolFrame FrameIndex="20" Tween="False" Value="False" />
         </Timeline>
       </Animation>
       <AnimationList>
-        <AnimationInfo Name="playPerfect" StartIndex="0" EndIndex="20">
-          <RenderColor A="150" R="0" G="191" B="255" />
+        <AnimationInfo Name="playPerfect" StartIndex="1" EndIndex="21">
+          <RenderColor A="255" R="0" G="191" B="255" />
         </AnimationInfo>
       </AnimationList>
       <ObjectData Name="Node" Tag="959" ctype="GameNodeObjectData">
@@ -30,7 +29,7 @@
             <Size X="152.0000" Y="28.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <Scale ScaleX="2.0000" ScaleY="2.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />

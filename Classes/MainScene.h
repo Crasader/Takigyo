@@ -51,6 +51,7 @@ private:
     void setKen();
     void setTen();
     void singlePlayerPressed(cocos2d::Ref* pSender, cocos2d::ui::Widget::TouchEventType eEventType);
+    void replayButtonPressed(cocos2d::Ref* pSender, cocos2d::ui::Widget::TouchEventType eEventType);
     void setRemainingAura(float auraLeft);
     void playWeather();
     void setComboCount(int combo);
@@ -71,7 +72,7 @@ private:
     bool playingPattern;
     bool loadNext;
     bool isEvening;
-    bool isIntro;
+    bool replayButtonPressing;
     
     int timeLeft;
     int playCount;
@@ -80,6 +81,14 @@ private:
     int soundId;
     int gameRound;
     int touchingCount;
+    
+    int totalGoodCount;
+    int totalGreatCount;
+    int totalPerfectCount;
+    int totalScore;
+    
+    int overallScore;
+    int overallGamePlayCount;
     
     std::vector<Pattern> currentPattern;
     int currentLevel;
