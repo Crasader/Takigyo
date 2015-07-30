@@ -65,26 +65,26 @@
             <FileData Type="Normal" Path="ten.plist" Plist="" />
             <BlendFunc Src="770" Dst="1" />
           </AbstractNodeData>
-          <AbstractNodeData Name="TenCyduck" ActionTag="-49954808" Tag="11" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="-51.0000" RightMargin="-51.0000" TopMargin="-117.0000" ctype="SpriteObjectData">
-            <Size X="102.0000" Y="117.0000" />
+          <AbstractNodeData Name="TenCyduck" ActionTag="-49954808" Tag="11" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="-51.0000" RightMargin="-51.0000" TopMargin="-123.0000" ctype="SpriteObjectData">
+            <Size X="102.0000" Y="123.0000" />
             <AnchorPoint ScaleX="0.5000" />
             <Position />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
-            <FileData Type="Normal" Path="Images/resources-1x/Ten.png" Plist="" />
+            <FileData Type="Normal" Path="Images/resources-1x/RubberDuckyTen.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="KenCyduck" ActionTag="1341341742" Tag="67" VisibleForFrame="False" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="-50.5000" RightMargin="-50.5000" TopMargin="-114.0000" ctype="SpriteObjectData">
-            <Size X="101.0000" Y="114.0000" />
+          <AbstractNodeData Name="KenCyduck" ActionTag="1341341742" Tag="67" VisibleForFrame="False" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="-49.0000" RightMargin="-49.0000" TopMargin="-115.0000" ctype="SpriteObjectData">
+            <Size X="98.0000" Y="115.0000" />
             <AnchorPoint ScaleX="0.5000" />
             <Position />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
-            <FileData Type="Normal" Path="Images/resources-1x/Ken.png" Plist="" />
+            <FileData Type="Normal" Path="Images/resources-1x/RubberDuckyKen.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
         </Children>

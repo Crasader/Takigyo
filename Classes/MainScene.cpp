@@ -86,6 +86,8 @@ bool MainScene::init()
     this->playCount = 0;
     this->isEvening = false;
     this->replayButtonPressing = false;
+    
+    lifeBG->setZOrder(1);
    
     ui::Button* playButton = this->rootNode->getChildByName<ui::Button*>("PlayButton");
     playButton->addTouchEventListener(CC_CALLBACK_2(MainScene::singlePlayerPressed, this));
@@ -264,16 +266,22 @@ void MainScene::dropObstacles(ObstacleType obstacleType, float tempo) {
     Size visibleSize = Director::getInstance()->getVisibleSize();
     
     // default obstacle
-    Sprite* obstacle;
+    Node* obstacle;
     switch (obstacleType) {
         case ObstacleType::Rock:
         {
-            obstacle = Sprite::create("rock.png");
+            obstacle = CSLoader::createNode("Rock.csb");
+            ActionTimeline* rockTimeline = CSLoader::createTimeline("Rock.csb");
+            obstacle->runAction(rockTimeline);
+            rockTimeline->play("fallingRock", true);
             break;
         }
         case ObstacleType::Heart:
         {
-            obstacle = Sprite::create("heart.png");
+            obstacle = CSLoader::createNode("Heart.csb");
+            ActionTimeline* heartTimeline = CSLoader::createTimeline("Heart.csb");
+            obstacle->runAction(heartTimeline);
+            heartTimeline->play("fallingHeart", true);
             break;
         }
         default:
@@ -314,16 +322,28 @@ void MainScene::dropObstacles(ObstacleType obstacleType, float tempo) {
                          ),
         // Ease In Down
         easeInDown,
-        CallFunc::create([this, denshion, obstacleType]() {
+        CallFunc::create([this, denshion, obstacleType, obstacle]() {
         if (this->gameState == GameState::Playing) {
             // While not touching the screen
             if (this->character->getNen() == Nen::Ten) {
                 if (obstacleType == ObstacleType::Rock) {
                     this->gotHit();
+                    obstacle->stopAllActions();
+                    ActionTimeline* rockTimeline = CSLoader::createTimeline("Rock.csb");
+                    obstacle->runAction(rockTimeline);
+                    rockTimeline->play("rollingRock", false);
                 } else if (obstacleType == ObstacleType::Heart) {
                     float remainingAura = this->auraLeft + RECOVERY;
                     this->setRemainingAura(remainingAura);
                     denshion->playEffect("heart.wav");
+                    obstacle->setVisible(false);
+                    
+                    // Recovery particl effect
+                    auto hitEffect = ParticleSystemQuad::create("recover.plist");
+                    hitEffect->setAutoRemoveOnFinish(true);
+                    hitEffect->setScale(0.5f);
+                    hitEffect->setPosition(obstacle->getPosition());
+                    this->rootNode->addChild(hitEffect);
                 }
                 // While "TOUCHING" the screen
             } else if (this->character->getNen() == Nen::Ken) {
@@ -335,12 +355,23 @@ void MainScene::dropObstacles(ObstacleType obstacleType, float tempo) {
                         this->touchingCount++;
                     }
                     this->playTimingAnimation();
+                    
+                    obstacle->stopAllActions();
+                    ActionTimeline* rockTimeline = CSLoader::createTimeline("Rock.csb");
+                    obstacle->runAction(rockTimeline);
+                    rockTimeline->play("breakingRock", false);
                 } else if (obstacleType == ObstacleType::Heart) {
+                    // Opps, you break your heart
                     denshion->playEffect("break.wav");
+                    obstacle->stopAllActions();
+                    ActionTimeline* heartTimeline = CSLoader::createTimeline("Heart.csb");
+                    obstacle->runAction(heartTimeline);
+                    heartTimeline->play("breakingHeart", false);
                 }
             }
         }
     }),
+    DelayTime::create(1.0f),
     // Remove from Parent
     CallFunc::create([obstacle](){obstacle->removeFromParent();}),
     NULL));
@@ -351,19 +382,19 @@ void MainScene::dropObstacles(ObstacleType obstacleType, float tempo) {
 void MainScene::playTimingAnimation() {
     if (touchingCount > 0) {
         if (this->touchingTime < 0.1) {
-            auto perfectLabel = this->comboLabel->getChildByName("perfect");
+            auto perfectLabel = this->rootNode->getChildByName("perfect");
             ActionTimeline* perfect = CSLoader::createTimeline("Timing/TimingPerfect.csb");
             perfectLabel->runAction(perfect);
             perfect->play("playPerfect", false);
             this->totalPerfectCount++;
         } else if (this->touchingTime < 0.3) {
-            auto greatLabel = this->comboLabel->getChildByName("great");
+            auto greatLabel = this->rootNode->getChildByName("great");
             ActionTimeline* great = CSLoader::createTimeline("Timing/TimingGreat.csb");
             greatLabel->runAction(great);
             great->play("playGreat", false);
             this->totalGreatCount++;
-        } else {
-            auto goodLabel = this->comboLabel->getChildByName("good");
+        } else if (this->touchingTime >= 0.3) {
+            auto goodLabel = this->rootNode->getChildByName("good");
             ActionTimeline* good = CSLoader::createTimeline("Timing/TimingGood.csb");
             goodLabel->runAction(good);
             good->play("playGood", false);

@@ -16,6 +16,14 @@
           <BoolFrame FrameIndex="1" Tween="False" Value="True" />
           <BoolFrame FrameIndex="20" Tween="False" Value="False" />
         </Timeline>
+        <Timeline ActionTag="-909308877" Property="Position">
+          <PointFrame FrameIndex="1" X="0.0000" Y="0.0000">
+            <EasingData Type="0" />
+          </PointFrame>
+          <PointFrame FrameIndex="20" X="0.0000" Y="120.0000">
+            <EasingData Type="0" />
+          </PointFrame>
+        </Timeline>
       </Animation>
       <AnimationList>
         <AnimationInfo Name="playPerfect" StartIndex="1" EndIndex="21">
@@ -25,7 +33,7 @@
       <ObjectData Name="Node" Tag="959" ctype="GameNodeObjectData">
         <Size X="0.0000" Y="0.0000" />
         <Children>
-          <AbstractNodeData Name="perfect_1" ActionTag="-909308877" Tag="960" VisibleForFrame="False" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="-76.0000" RightMargin="-76.0000" TopMargin="-14.0000" BottomMargin="-14.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="perfect_1" ActionTag="-909308877" Tag="960" IconVisible="False" LeftMargin="-76.0000" RightMargin="-76.0000" TopMargin="-14.0000" BottomMargin="-14.0000" ctype="SpriteObjectData">
             <Size X="152.0000" Y="28.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position />

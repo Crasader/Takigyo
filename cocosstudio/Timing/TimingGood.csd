@@ -16,6 +16,14 @@
             <EasingData Type="0" />
           </ScaleFrame>
         </Timeline>
+        <Timeline ActionTag="1389860647" Property="Position">
+          <PointFrame FrameIndex="1" X="0.0000" Y="0.0000">
+            <EasingData Type="0" />
+          </PointFrame>
+          <PointFrame FrameIndex="20" X="0.0000" Y="120.0000">
+            <EasingData Type="0" />
+          </PointFrame>
+        </Timeline>
       </Animation>
       <AnimationList>
         <AnimationInfo Name="playGood" StartIndex="0" EndIndex="21">
@@ -25,7 +33,7 @@
       <ObjectData Name="Node" Tag="962" ctype="GameNodeObjectData">
         <Size X="0.0000" Y="0.0000" />
         <Children>
-          <AbstractNodeData Name="good_1" ActionTag="1389860647" Tag="963" VisibleForFrame="False" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="-43.5000" RightMargin="-43.5000" TopMargin="-14.5000" BottomMargin="-14.5000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="good_1" ActionTag="1389860647" Tag="963" IconVisible="False" LeftMargin="-43.5000" RightMargin="-43.5000" TopMargin="-14.5000" BottomMargin="-14.5000" ctype="SpriteObjectData">
             <Size X="87.0000" Y="29.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position />

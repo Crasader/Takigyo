@@ -39,6 +39,20 @@
             <Image Name="perfect.png" />
             <Image Name="good.png" />
             <Image Name="great.png" />
+            <Image Name="breakingRock1.png" />
+            <Image Name="breakingRock2.png" />
+            <Image Name="breakingRock3.png" />
+            <Image Name="breakingRock4.png" />
+            <Image Name="rock1.png" />
+            <Image Name="rock2.png" />
+            <Image Name="rock3.png" />
+            <Image Name="rock4.png" />
+            <Image Name="breakingHeart1.png" />
+            <Image Name="breakingHeart2.png" />
+            <Image Name="breakingHeart3.png" />
+            <Image Name="breakingHeart4.png" />
+            <Image Name="RubberDuckyKen.png" />
+            <Image Name="RubberDuckyTen.png" />
           </Folder>
           <Folder Name="resources-2x">
             <Image Name="BottomRock@2x.png" />
@@ -91,6 +105,12 @@
         </Folder>
         <Project Name="LevelNode.csd" Type="Node" />
         <TTF Name="Game of Three.ttf" />
+        <Project Name="Rock.csd" Type="Node" />
+        <PlistParticleFile Name="nami.plist" />
+        <Image Name="heart.png" />
+        <Project Name="Heart.csd" Type="Node" />
+        <PlistParticleFile Name="recover.plist" />
+        <PlistParticleFile Name="splash2.plist" />
       </RootFolder>
     </Group>
   </SolutionFolder>

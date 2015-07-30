@@ -35,6 +35,7 @@ protected:
 private:
     cocos2d::Node* rootNode;
     cocos2d::Node* levelNode;
+    cocos2d::Node* rockNode;
     cocos2d::Sprite* auraBar;
     cocos2d::ui::Text* comboLabel;
     cocos2d::ui::Text* countDownLabel;
