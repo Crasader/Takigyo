@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 #include "CocosGUI.h"
 #include "Globals.h"
+#include "NetworkingWrapper.h"
 
 enum class GameState
 {
@@ -16,7 +17,7 @@ enum class GameState
 class Character;
 enum class Nen;
 
-class MainScene : public cocos2d::Layer
+class MainScene : public cocos2d::Layer , public NetworkingDelegate
 {
 public:
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
@@ -24,15 +25,21 @@ public:
 
     // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
     virtual bool init();
-
+    
     // implement the "static create()" method manually
     CREATE_FUNC(MainScene);
     
-    
 protected:
     Character* character;
+    
+    bool networkedSession;
 
 private:
+    void receivedData(const void* data, unsigned long length);
+    void stateChanged(ConnectionState state);
+    
+    std::unique_ptr<NetworkingWrapper> netWorkingWrapper;
+    
     cocos2d::Node* rootNode;
     cocos2d::Node* levelNode;
     cocos2d::Node* rockNode;
@@ -52,6 +59,7 @@ private:
     void setKen();
     void setTen();
     void singlePlayerPressed(cocos2d::Ref* pSender, cocos2d::ui::Widget::TouchEventType eEventType);
+    void multiPlayerPressed(cocos2d::Ref* pSender, cocos2d::ui::Widget::TouchEventType eEventType);
     void replayButtonPressed(cocos2d::Ref* pSender, cocos2d::ui::Widget::TouchEventType eEventType);
     void setRemainingAura(float auraLeft);
     void playWeather();
@@ -74,6 +82,7 @@ private:
     bool loadNext;
     bool isEvening;
     bool replayButtonPressing;
+    bool onMultiPlayerMode;
     
     int timeLeft;
     int playCount;

@@ -1,5 +1,5 @@
 <Solution>
-  <PropertyGroup Name="Takigyo" Version="2.3.1.1" Type="CocosStudio" />
+  <PropertyGroup Name="Takigyo" Version="2.3.1.2" Type="CocosStudio" />
   <SolutionFolder>
     <Group ctype="ResourceGroup">
       <RootFolder Name=".">
@@ -53,6 +53,10 @@
             <Image Name="breakingHeart4.png" />
             <Image Name="RubberDuckyKen.png" />
             <Image Name="RubberDuckyTen.png" />
+            <Image Name="VersusButtonPressed.png" />
+            <Image Name="VersusButton.png" />
+            <Image Name="VersusButton2.png" />
+            <Image Name="VersusButtonPressed2.png" />
           </Folder>
           <Folder Name="resources-2x">
             <Image Name="BottomRock@2x.png" />

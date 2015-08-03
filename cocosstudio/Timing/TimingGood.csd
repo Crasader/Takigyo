@@ -1,5 +1,5 @@
 <GameProjectFile>
-  <PropertyGroup Type="Node" Name="TimingGood" ID="23d4415a-4dcd-4cab-aa3b-b44216ea0592" Version="2.3.1.1" />
+  <PropertyGroup Type="Node" Name="TimingGood" ID="23d4415a-4dcd-4cab-aa3b-b44216ea0592" Version="2.3.1.2" />
   <Content ctype="GameProjectContent">
     <Content>
       <Animation Duration="20" Speed="1.0000" ActivedAnimationName="playGood">

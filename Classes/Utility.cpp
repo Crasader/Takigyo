@@ -10,6 +10,8 @@
 #include <sstream>
 #include <iomanip>
 #include "Utility.h"
+#include "cocostudio/CocoStudio.h"
+#include "ui/CocosGUI.h"
 
 using namespace cocos2d;
 
@@ -30,4 +32,33 @@ std::string Utility::getScoreString(int score) {
     score_out << std::setfill('0') << std::setw(7) << score;
     
     return std::string(score_out.str());
+};
+
+void Utility::_printNodeRecursive(Node* node, int count, std::function<void (Node*)> func)
+{
+    for (int i = 0; i < count; i++) {
+        printf(" ");
+    }
+    if (count != 0) {
+        printf("┣");
+    }
+    printf("name = %s, class = %s, ", node->getName().c_str(), typeid(*node).name());
+    if (func) {
+        func(node);
+    }
+    printf("\n");
+    
+    for (auto child : node->getChildren()) {
+        _printNodeRecursive(child, count + 1, func);
+    }
+};
+
+void Utility::printNode(Node* node)
+{
+    _printNodeRecursive(node, 0, NULL);
+};
+
+void Utility::printNode(Node* node, std::function<void (Node* node)> func)
+{
+    _printNodeRecursive(node, 0, func);
 };

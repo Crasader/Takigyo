@@ -1,5 +1,5 @@
 <GameProjectFile>
-  <PropertyGroup Type="Node" Name="Rock" ID="b3dc3844-dbd6-4bae-bd66-121be969071f" Version="2.3.1.1" />
+  <PropertyGroup Type="Node" Name="Rock" ID="b3dc3844-dbd6-4bae-bd66-121be969071f" Version="2.3.1.2" />
   <Content ctype="GameProjectContent">
     <Content>
       <Animation Duration="120" Speed="1.0000" ActivedAnimationName="rollingRock">

@@ -106,15 +106,15 @@
         "duration": 5.0,
         "pattern" : [
         {"type": 0,"time": 1.0},
-        {"type": 1,"time": 1.4},
-        {"type": 0,"time": 1.8}
+        {"type": 0,"time": 1.4},
+        {"type": 1,"time": 1.8}
         ]
     },
     "1002": {
         "duration": 4.0,
         "pattern" : [
-        {"type": 0,"time": 1.0},
-        {"type": 1,"time": 1.4},
+        {"type": 1,"time": 1.0},
+        {"type": 0,"time": 1.4},
         {"type": 0,"time": 1.8}
         ]
     },

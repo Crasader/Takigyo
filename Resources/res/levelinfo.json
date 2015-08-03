@@ -12,11 +12,11 @@
     {
         "level": 2,
         "round": 3,
-        "tempo": 0.9,
+        "tempo": 0.95,
         "rate": [
+        {"prob": 300, "id" : 3},
         {"prob": 300, "id" : 4},
         {"prob": 300, "id" : 5},
-        {"prob": 300, "id" : 6},
         {"prob": 300, "id" : 1000},
         {"prob": 300, "id" : 1001},
         {"prob": 300, "id" : 1002}
@@ -25,7 +25,7 @@
     {
         "level": 3,
         "round": 8,
-        "tempo": 0.85,
+        "tempo": 0.9,
         "rate": [
         {"prob": 300, "id" : 4},
         {"prob": 300, "id" : 5},
@@ -41,7 +41,7 @@
     {
         "level": 4,
         "round": 10,
-        "tempo": 0.8,
+        "tempo": 0.85,
         "rate": [
         {"prob": 300, "id" : 6},
         {"prob": 300, "id" : 7},
@@ -55,7 +55,7 @@
     {
         "level": 4,
         "round": 15,
-        "tempo": 0.75,
+        "tempo": 0.8,
         "rate": [
         {"prob": 300, "id" : 6},
         {"prob": 300, "id" : 7},

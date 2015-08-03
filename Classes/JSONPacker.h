@@ -14,6 +14,12 @@
 #include "Globals.h"
 
 namespace JSONPacker{
+    struct GameState {
+        std::string name;
+        bool gameOver;
+        int score;
+        std::vector<std::vector<cocos2d::Color3B>> board;
+    };
     struct UnpackedLevelInfo {
         int level;
         double tempo;
@@ -27,6 +33,7 @@ namespace JSONPacker{
     
     UnpackedLevelInfo unpackLevelInfoJSON(std::string json, int round);
     UnpackedPatternList unpackPatternListJSON(std::string json, int patternId);
+    GameState unpackGameStateJSON(std::string json);
 }
 
 #endif /* defined(__Takigyo__JSONPacker__) */

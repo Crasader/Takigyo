@@ -1,5 +1,5 @@
 <GameProjectFile>
-  <PropertyGroup Type="Node" Name="Heart" ID="8bc93c0e-97ff-4678-9428-1c602a891811" Version="2.3.1.1" />
+  <PropertyGroup Type="Node" Name="Heart" ID="8bc93c0e-97ff-4678-9428-1c602a891811" Version="2.3.1.2" />
   <Content ctype="GameProjectContent">
     <Content>
       <Animation Duration="71" Speed="1.0000" ActivedAnimationName="breakingHeart">

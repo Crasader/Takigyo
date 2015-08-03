@@ -52,6 +52,9 @@
 		8262943E1AAF051F00CB7CF7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8262943D1AAF051F00CB7CF7 /* Security.framework */; };
 		9637D44A1B68019500B832A8 /* Utility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9637D4481B68019500B832A8 /* Utility.cpp */; };
 		9637D44B1B68019500B832A8 /* Utility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9637D4481B68019500B832A8 /* Utility.cpp */; };
+		9637D4561B6BF57900B832A8 /* NetworkingWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9637D4521B6BF57800B832A8 /* NetworkingWrapper.mm */; };
+		9637D4571B6BF57900B832A8 /* NetworkManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9637D4541B6BF57800B832A8 /* NetworkManager.mm */; };
+		9637D45A1B6BF5C900B832A8 /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9637D4591B6BF5C900B832A8 /* MultipeerConnectivity.framework */; };
 		96424DD11B5E126200BF3DA5 /* LevelInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96424DCF1B5E126200BF3DA5 /* LevelInfo.cpp */; };
 		96424DD21B5E126200BF3DA5 /* LevelInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96424DCF1B5E126200BF3DA5 /* LevelInfo.cpp */; };
 		965BC3F31B60113D0054CCEF /* PatternRate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 965BC3F11B60113D0054CCEF /* PatternRate.cpp */; };
@@ -139,6 +142,12 @@
 		8262943D1AAF051F00CB7CF7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		9637D4481B68019500B832A8 /* Utility.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utility.cpp; sourceTree = "<group>"; };
 		9637D4491B68019500B832A8 /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
+		9637D4511B6BF57800B832A8 /* NetworkingWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkingWrapper.h; sourceTree = "<group>"; };
+		9637D4521B6BF57800B832A8 /* NetworkingWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NetworkingWrapper.mm; sourceTree = "<group>"; };
+		9637D4531B6BF57800B832A8 /* NetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
+		9637D4541B6BF57800B832A8 /* NetworkManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NetworkManager.mm; sourceTree = "<group>"; };
+		9637D4551B6BF57800B832A8 /* NetworkManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkManagerDelegate.h; sourceTree = "<group>"; };
+		9637D4591B6BF5C900B832A8 /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.4.sdk/System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = DEVELOPER_DIR; };
 		96424DCF1B5E126200BF3DA5 /* LevelInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LevelInfo.cpp; sourceTree = "<group>"; };
 		96424DD01B5E126200BF3DA5 /* LevelInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelInfo.h; sourceTree = "<group>"; };
 		965BC3F11B60113D0054CCEF /* PatternRate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PatternRate.cpp; sourceTree = "<group>"; };
@@ -167,6 +176,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9637D45A1B6BF5C900B832A8 /* MultipeerConnectivity.framework in Frameworks */,
 				96C8C50C1B5823B600D07B2C /* libcocos2d iOS.a in Frameworks */,
 				52B47A471A53D09C004E4C60 /* Security.framework in Frameworks */,
 				D6B0611B1803AB670077942B /* CoreMotion.framework in Frameworks */,
@@ -246,6 +256,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9637D4591B6BF5C900B832A8 /* MultipeerConnectivity.framework */,
 				8262943D1AAF051F00CB7CF7 /* Security.framework */,
 				52B47A461A53D09B004E4C60 /* Security.framework */,
 				D6B0611A1803AB670077942B /* CoreMotion.framework */,
@@ -293,6 +304,7 @@
 				96424DD01B5E126200BF3DA5 /* LevelInfo.h */,
 				46880B8619C43A87006E1F66 /* MainScene.cpp */,
 				46880B8719C43A87006E1F66 /* MainScene.h */,
+				9637D4581B6BF59B00B832A8 /* Networking */,
 				965BC3F11B60113D0054CCEF /* PatternRate.cpp */,
 				965BC3F21B60113D0054CCEF /* PatternRate.h */,
 				9637D4481B68019500B832A8 /* Utility.cpp */,
@@ -361,6 +373,18 @@
 			children = (
 			);
 			name = "mac-libs";
+			sourceTree = "<group>";
+		};
+		9637D4581B6BF59B00B832A8 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				9637D4511B6BF57800B832A8 /* NetworkingWrapper.h */,
+				9637D4521B6BF57800B832A8 /* NetworkingWrapper.mm */,
+				9637D4531B6BF57800B832A8 /* NetworkManager.h */,
+				9637D4541B6BF57800B832A8 /* NetworkManager.mm */,
+				9637D4551B6BF57800B832A8 /* NetworkManagerDelegate.h */,
+			);
+			name = Networking;
 			sourceTree = "<group>";
 		};
 		96C8C5041B58237800D07B2C /* Products */ = {
@@ -510,6 +534,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				96C8C5001B56E57300D07B2C /* CharacterReader.cpp in Sources */,
+				9637D4561B6BF57900B832A8 /* NetworkingWrapper.mm in Sources */,
 				965BC3F91B60118D0054CCEF /* JSONPacker.cpp in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				965BC3F31B60113D0054CCEF /* PatternRate.cpp in Sources */,
@@ -518,6 +543,7 @@
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				9637D44A1B68019500B832A8 /* Utility.cpp in Sources */,
 				96C8C4FC1B56E50200D07B2C /* Character.cpp in Sources */,
+				9637D4571B6BF57900B832A8 /* NetworkManager.mm in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 			);

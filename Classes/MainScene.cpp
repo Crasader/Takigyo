@@ -7,38 +7,11 @@
 #include "SimpleAudioEngine.h"
 #include "LevelInfo.h"
 #include "PatternList.h"
+#include "NetworkingWrapper.h"
+#include "JSONPacker.h"
 #include "Utility.h"
 
 USING_NS_TIMELINE
-
-void _printNodeRecursive(Node* node, int count, std::function<void (Node*)> func)
-{
-    for (int i = 0; i < count; i++) {
-        printf(" ");
-    }
-    if (count != 0) {
-        printf("┣");
-    }
-    printf("name = %s, class = %s, ", node->getName().c_str(), typeid(*node).name());
-    if (func) {
-        func(node);
-    }
-    printf("\n");
-    
-    for (auto child : node->getChildren()) {
-        _printNodeRecursive(child, count + 1, func);
-    }
-}
-
-void printNode(Node* node)
-{
-    _printNodeRecursive(node, 0, NULL);
-}
-
-void printNode(Node* node, std::function<void (Node* node)> func)
-{
-    _printNodeRecursive(node, 0, func);
-}
 
 Scene* MainScene::createScene()
 {
@@ -74,23 +47,30 @@ bool MainScene::init()
     ui::Helper::doLayout(this->rootNode);
     
     this->rootNode->setContentSize(size);
-    auto waterfall      = rootNode->getChildByName("waterfall");
-    auto bottomRock     = waterfall->getChildByName("bottomRock");
-    this->character     = bottomRock->getChildByName<Character*>("Character");
-    this->levelNode     = waterfall->getChildByName("level");
-    auto lifeBG         = rootNode->getChildByName("lifeBG");
-    this->auraBar       = lifeBG->getChildByName<Sprite*>("lifeBar");
+    auto waterfall       = rootNode->getChildByName("waterfall");
+    auto bottomRock      = waterfall->getChildByName("bottomRock");
+    this->character      = bottomRock->getChildByName<Character*>("Character");
+    this->levelNode      = waterfall->getChildByName("level");
+    auto lifeBG          = rootNode->getChildByName("lifeBG");
+    this->auraBar        = lifeBG->getChildByName<Sprite*>("lifeBar");
     this->countDownLabel = rootNode->getChildByName<cocos2d::ui::Text*>("countDownLabel");
     this->comboLabel     = rootNode->getChildByName<cocos2d::ui::Text*>("comboLabel");
-    this->cloudsNode    = rootNode->getChildByName("clouds");
+    this->cloudsNode     = rootNode->getChildByName("clouds");
     this->playCount = 0;
     this->isEvening = false;
     this->replayButtonPressing = false;
+    this->onMultiPlayerMode = false;
     
     lifeBG->setZOrder(1);
    
+    this->netWorkingWrapper = std::unique_ptr<NetworkingWrapper>(new NetworkingWrapper());
+    this->netWorkingWrapper->setDelegate(this);
+   
     ui::Button* playButton = this->rootNode->getChildByName<ui::Button*>("PlayButton");
     playButton->addTouchEventListener(CC_CALLBACK_2(MainScene::singlePlayerPressed, this));
+    
+    ui::Button* vsButton = this->rootNode->getChildByName<cocos2d::ui::Button*>("VersusButton");
+    vsButton->addTouchEventListener(CC_CALLBACK_2(MainScene::multiPlayerPressed, this));
     
     this->resetGameState();
     
@@ -102,17 +82,23 @@ bool MainScene::init()
 void MainScene::onEnter() {
     Layer::onEnter();
     
+    this->netWorkingWrapper->startAdvertisingAvailability();
+    
     // schedule the update method to be called every frame
     this->scheduleUpdate();
     
     this->triggerTitle();
     
-    
     this->playWeather();
-    //test
-    //this->setGameActive();
     
     this->setupTouchHandling();
+}
+
+void MainScene::onEnterTransitionDidFinish() {
+    CCLOG("onEnterTransitionDidFinish");
+    auto backgroundMusic = CocosDenshion::SimpleAudioEngine::getInstance();
+    backgroundMusic->playBackgroundMusic("waterfall.wav", true);
+    backgroundMusic->setBackgroundMusicVolume(0.5f);
 }
 
 #pragma mark -
@@ -121,26 +107,6 @@ void MainScene::onEnter() {
 // パターンを開始する
 void MainScene::setGameActive(bool active) {
     this->active = active;
-    
-//    if (this->active) {
-//        this->schedule(CC_SCHEDULE_SELECTOR(MainScene::step), this->stepInterval);
-//        this->scheduleUpdate();
-//    } else {
-//        this->unschedule(CC_SCHEDULE_SELECTOR(MainScene::step));
-//        this->unscheduleUpdate();
-//    }
-    
-    // TODO: パターン通りに岩を降らす処理
-    
-    // パターンが終わったタイミングで次のパターンを開始する
-//    float duration = pattern->duration;
-//    this->rootNode->runAction(Sequense::create(
-//                                     DelayTime::create(duration),
-//                                     CallFunc::create([this](){
-//                                        this->startNewRound();
-//                                     }),
-//                                     NULL
-//                                     ));
 }
 
 void MainScene::update(float dt)
@@ -210,7 +176,7 @@ void MainScene::update(float dt)
                 this->gettingHitCount = 0.0f;
             }
         }
-        // if the timer is less than or equal to 0, the game is over
+        
         if (this->auraLeft <= 0.0f)
         {
             int totalScoreString = (this->totalPerfectCount * 3 + this->totalGreatCount * 2 + this->totalGoodCount) + this->maxComboCount;
@@ -265,7 +231,6 @@ void MainScene::update(float dt)
 void MainScene::dropObstacles(ObstacleType obstacleType, float tempo) {
     Size visibleSize = Director::getInstance()->getVisibleSize();
     
-    // default obstacle
     Node* obstacle;
     switch (obstacleType) {
         case ObstacleType::Rock:
@@ -379,77 +344,6 @@ void MainScene::dropObstacles(ObstacleType obstacleType, float tempo) {
     this->rootNode->addChild(obstacle);
 }
 
-void MainScene::playTimingAnimation() {
-    if (touchingCount > 0) {
-        if (this->touchingTime < 0.1) {
-            auto perfectLabel = this->rootNode->getChildByName("perfect");
-            ActionTimeline* perfect = CSLoader::createTimeline("Timing/TimingPerfect.csb");
-            perfectLabel->runAction(perfect);
-            perfect->play("playPerfect", false);
-            this->totalPerfectCount++;
-        } else if (this->touchingTime < 0.3) {
-            auto greatLabel = this->rootNode->getChildByName("great");
-            ActionTimeline* great = CSLoader::createTimeline("Timing/TimingGreat.csb");
-            greatLabel->runAction(great);
-            great->play("playGreat", false);
-            this->totalGreatCount++;
-        } else if (this->touchingTime >= 0.3) {
-            auto goodLabel = this->rootNode->getChildByName("good");
-            ActionTimeline* good = CSLoader::createTimeline("Timing/TimingGood.csb");
-            goodLabel->runAction(good);
-            good->play("playGood", false);
-            this->totalGoodCount++;
-        }
-    }
-}
-
-void MainScene::gotHit() {
-    if (this->gettingHit == false) {
-        this->gettingHit = true;
-        auto yoko = ScaleBy::create(0.2f, 2, 0.5);
-        auto tate = CCEaseBackIn::create(ScaleBy::create(0.3f, 0.5, 2));
-        this->character->runAction(Sequence::create(yoko,tate,NULL));
-    }
-    float remainingAura = this->auraLeft - HIT_DAMAGE;
-    this->setRemainingAura(remainingAura);
-    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("gothit.wav");
-    this->comboCount = 1;
-}
-
-void MainScene::setComboCount(int combo) {
-    if (this->maxComboCount < combo) {
-        this->maxComboCount = combo;
-    }
-    // update the score label
-    this->comboLabel->setString(std::to_string(combo));
-    
-    ActionTimeline* titleTimeline = CSLoader::createTimeline("MainScene.csb");
-    this->rootNode->runAction(titleTimeline);
-    titleTimeline->play("combo", false);
-    
-}
-
-void MainScene::setLevelCount() {
-    auto level = this->levelNode->getChildByName<cocos2d::ui::Text*>("Level");
-    level->setString(std::to_string(this->currentLevel));
-    
-    ActionTimeline* levelTimeline = CSLoader::createTimeline("LevelNode.csb");
-    this->levelNode->runAction(levelTimeline);
-    levelTimeline->play("levelUp", false);
-}
-
-#pragma mark -
-#pragma mark Getters / Setters
-
-void MainScene::setRemainingAura(float auraLeft)
-{
-    // clamp the time left timer to between 0 and 10 seconds
-    this->auraLeft = clampf(auraLeft, 0.0f, PRESENT_OUTPUT_POTENTIAL);
-    
-    // update the UI to reflect the correct time left
-    this->auraBar->setScaleX(this->auraLeft / PRESENT_OUTPUT_POTENTIAL);
-}
-
 void MainScene::resetGameState()
 {
     // these variables must be reset every new game
@@ -514,11 +408,78 @@ void MainScene::triggerGameOver()
     this->playCount++;
     
     this->gameState = GameState::GameOver;
+}
+
+void MainScene::playTimingAnimation() {
+    if (touchingCount > 0) {
+        if (this->touchingTime < 0.1) {
+            auto perfectLabel = this->rootNode->getChildByName("perfect");
+            ActionTimeline* perfect = CSLoader::createTimeline("Timing/TimingPerfect.csb");
+            perfectLabel->runAction(perfect);
+            perfect->play("playPerfect", false);
+            this->totalPerfectCount++;
+        } else if (this->touchingTime < 0.3) {
+            auto greatLabel = this->rootNode->getChildByName("great");
+            ActionTimeline* great = CSLoader::createTimeline("Timing/TimingGreat.csb");
+            greatLabel->runAction(great);
+            great->play("playGreat", false);
+            this->totalGreatCount++;
+        } else if (this->touchingTime >= 0.3) {
+            auto goodLabel = this->rootNode->getChildByName("good");
+            ActionTimeline* good = CSLoader::createTimeline("Timing/TimingGood.csb");
+            goodLabel->runAction(good);
+            good->play("playGood", false);
+            this->totalGoodCount++;
+        }
+    }
+}
+
+void MainScene::gotHit() {
+    if (this->gettingHit == false) {
+        this->gettingHit = true;
+        auto yoko = ScaleBy::create(0.2f, 2, 0.5);
+        auto tate = CCEaseBackIn::create(ScaleBy::create(0.3f, 0.5, 2));
+        this->character->runAction(Sequence::create(yoko,tate,NULL));
+    }
+    float remainingAura = this->auraLeft - HIT_DAMAGE;
+    this->setRemainingAura(remainingAura);
+    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("gothit.wav");
+    this->comboCount = 1;
+}
+
+
+#pragma mark -
+#pragma mark Getters / Setters
+
+void MainScene::setRemainingAura(float auraLeft)
+{
+    // clamp the time left timer to between 0 and 10 seconds
+    this->auraLeft = clampf(auraLeft, 0.0f, PRESENT_OUTPUT_POTENTIAL);
     
-    this->resetGameState();
+    // update the UI to reflect the correct time left
+    this->auraBar->setScaleX(this->auraLeft / PRESENT_OUTPUT_POTENTIAL);
+}
+
+void MainScene::setComboCount(int combo) {
+    if (this->maxComboCount < combo) {
+        this->maxComboCount = combo;
+    }
+    // update the score label
+    this->comboLabel->setString(std::to_string(combo));
     
-    // Do not trigger Title when pressing the replay button
-//    this->triggerTitle();
+    ActionTimeline* titleTimeline = CSLoader::createTimeline("MainScene.csb");
+    this->rootNode->runAction(titleTimeline);
+    titleTimeline->play("combo", false);
+    
+}
+
+void MainScene::setLevelCount() {
+    auto level = this->levelNode->getChildByName<cocos2d::ui::Text*>("Level");
+    level->setString(std::to_string(this->currentLevel));
+    
+    ActionTimeline* levelTimeline = CSLoader::createTimeline("LevelNode.csb");
+    this->levelNode->runAction(levelTimeline);
+    levelTimeline->play("levelUp", false);
 }
 
 void MainScene::setupTouchHandling() {
@@ -569,9 +530,18 @@ void MainScene::setupTouchHandling() {
     this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(touchListener, this);
 }
 
+#pragma mark -
+#pragma mark ButtonPressed
+
 void MainScene::singlePlayerPressed(Ref *pSender, ui::Widget::TouchEventType eEventType) {
     if (eEventType == ui::Widget::TouchEventType::ENDED) {
         this->triggerReady();
+    }
+}
+
+void MainScene::multiPlayerPressed(Ref *pSender, ui::Widget::TouchEventType eEventType) {
+    if (eEventType == ui::Widget::TouchEventType::ENDED) {
+        this->netWorkingWrapper->showPeerList();
     }
 }
 
@@ -630,6 +600,7 @@ void MainScene::replayButtonPressed(Ref *pSender, ui::Widget::TouchEventType eEv
                                    this->gameState = GameState::Playing;
                                    CocosDenshion::SimpleAudioEngine::getInstance()->stopEffect(soundId);
                                    this->triggerReady();
+                                   this->resetGameState();
                                }
                                ),
               DelayTime::create(3.0f),
@@ -648,8 +619,35 @@ void MainScene::playWeather() {
     Timeline->play("icloud", true);
 }
 
-void MainScene::onEnterTransitionDidFinish() {
-    auto backgroundMusic = CocosDenshion::SimpleAudioEngine::getInstance();
-    backgroundMusic->playBackgroundMusic("waterfall.wav", true);
-    backgroundMusic->setBackgroundMusicVolume(0.5f);
+#pragma mark -
+#pragma mark Networking
+
+void MainScene::receivedData(const void *data, unsigned long length) {
+    const char* cstr = reinterpret_cast<const char*>(data);
+    std::string json = std::string(cstr, length);
+    
+    CCLOG("%s", cstr);
+    JSONPacker::GameState state = JSONPacker::unpackGameStateJSON(json);
+    if (state.gameOver) {
+        this->triggerGameOver();
+    }
+}
+
+void MainScene::stateChanged(ConnectionState state) {
+    switch (state) {
+        case ConnectionState::CONNECTING:
+            CCLOG("Connection...");
+            break;
+        case ConnectionState::NOT_CONNECTED:
+            CCLOG("Not Connected");
+            break;
+        case ConnectionState::CONNECTED:
+            CCLOG("Connected");
+            if (this->onMultiPlayerMode == false) {
+                this->netWorkingWrapper->stopAdvertisingAvailability();
+                this->triggerReady();
+                this->onMultiPlayerMode = true;
+            }
+            break;
+    }
 }

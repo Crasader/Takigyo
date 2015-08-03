@@ -1,5 +1,5 @@
 <GameProjectFile>
-  <PropertyGroup Type="Node" Name="TimingPerfect" ID="4cbb1349-8fb5-4689-868a-36cdc4ef384f" Version="2.3.1.1" />
+  <PropertyGroup Type="Node" Name="TimingPerfect" ID="4cbb1349-8fb5-4689-868a-36cdc4ef384f" Version="2.3.1.2" />
   <Content ctype="GameProjectContent">
     <Content>
       <Animation Duration="20" Speed="1.0000" ActivedAnimationName="playPerfect">
