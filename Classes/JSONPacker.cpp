@@ -88,9 +88,7 @@ namespace JSONPacker {
         document.Parse<0>(json.c_str());
         
         UserData userData;
-        
-        userData.state     = (GameState)document["state"].GetInt();
-        userData.name     = document["name"].GetString();
+        userData.state    = (GameState)document["state"].GetInt();
         userData.nen      = (Nen)document["nen"].GetInt();
         userData.auraLeft = (float)document["aura"].GetDouble();
         userData.playTime = (float)document["playTime"].GetDouble();
@@ -103,10 +101,34 @@ namespace JSONPacker {
         document.SetObject();
         
         document.AddMember("state", (int)userData.state, document.GetAllocator());
-        document.AddMember("name", userData.name.c_str(), document.GetAllocator());
         document.AddMember("nen", (int)userData.nen, document.GetAllocator());
         document.AddMember("aura", (double)userData.auraLeft, document.GetAllocator());
         document.AddMember("playTime", (double)userData.playTime, document.GetAllocator());
+        
+        rapidjson::StringBuffer buffer;
+        rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
+        document.Accept(writer);
+        
+        std::string returnString(buffer.GetString(), buffer.Size());
+        
+        CCLOG("%s", returnString.c_str());
+        
+        return returnString;
+    }
+    
+    int unpackUserId(std::string json) {
+        rapidjson::Document document;
+        document.Parse<0>(json.c_str());
+        
+        int opponentUserId = document["userid"].GetInt();
+       
+        return opponentUserId;
+    }
+    
+    std::string packUserId(const int userId) {
+        rapidjson::Document document;
+        document.SetObject();
+        document.AddMember("userid", userId, document.GetAllocator());
         
         rapidjson::StringBuffer buffer;
         rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);

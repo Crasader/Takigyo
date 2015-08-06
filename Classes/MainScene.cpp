@@ -12,6 +12,7 @@
 #include "NetworkingWrapper.h"
 #include "JSONPacker.h"
 #include "Utility.h"
+#include <random>
 
 USING_NS_TIMELINE
 
@@ -78,7 +79,6 @@ bool MainScene::init()
     this->rootNode->addChild(splashEffect2);
     
     this->playCount = 0;
-    this->isEvening = false;
     this->replayButtonPressing = false;
     this->onMultiPlayerMode = false;
     
@@ -144,7 +144,11 @@ void MainScene::update(float dt)
         denshion->playEffect("bird.wav");
     }
     
-    if (this->gameState == GameState::Playing) {
+    if (this->gameState == GameState::MultiPreparation) {
+        if (this->userId > 0 && this->opponentUserId > 0) {
+            this->isHost = (this->userId > this->opponentUserId) ? true : false;
+        }
+    } else if (this->gameState == GameState::Playing) {
         this->playingTime += dt;
         this->patternPlayTime += dt;
         if (this->loadNext == true) {
@@ -428,14 +432,25 @@ void MainScene::triggerReady() {
     
     int random = rand() % 5;
     if (random == 0) {
-        this->isEvening = true;
         background->setTexture("eveningBackground.png");
     } else {
-        this->isEvening = false;
         background->setTexture("sky.png");
     }
     background->setZOrder(-1);
     
+}
+
+void MainScene::triggerMultiPreparation() {
+    this->gameState = GameState::MultiPreparation;
+    // 被決定的な乱数生成器でシード生成器を生成
+    std::random_device rnd;
+    // メルセンヌ・ツイスタ 引数は初期シード値 ファンクタを渡す
+    std::mt19937 mt(rnd());
+    std::uniform_int_distribution<int> rand5(0,INT_MAX);
+    this->userId = rand5(mt);
+    
+    std::string json = JSONPacker::packUserId(this->userId);
+    netWorkingWrapper->sendData(json.c_str(), json.length());
 }
 
 void MainScene::triggerGameOver()
@@ -723,15 +738,15 @@ void MainScene::receivedData(const void *data, unsigned long length) {
     std::string json = std::string(cstr, length);
     
     CCLOG("%s", cstr);
-    JSONPacker::UserData userData = JSONPacker::unpackUserDataJSON(json);
-//    if (state.gameOver) {
-//        this->triggerGameOver();
-//    }
-
-    this->opponentGameState = userData.state;
-    this->opponentCharacter->setNen(userData.nen);
-    this->setOpponentRemainingAura(userData.auraLeft);
-//    this->playingTime = userData.playTime;
+    if (gameState == GameState::Playing) {
+        JSONPacker::UserData userData = JSONPacker::unpackUserDataJSON(json);
+        this->opponentGameState = userData.state;
+        this->opponentCharacter->setNen(userData.nen);
+        this->setOpponentRemainingAura(userData.auraLeft);
+        this->opponentPlayingTime = userData.playTime;
+    } else if (gameState == GameState::MultiPreparation) {
+        this->opponentUserId = JSONPacker::unpackUserId(json);
+    }
 }
 
 void MainScene::stateChanged(ConnectionState state) {
@@ -748,9 +763,9 @@ void MainScene::stateChanged(ConnectionState state) {
         case ConnectionState::CONNECTED:
             this->netWorkingWrapper->stopAdvertisingAvailability();
             this->onMultiPlayerMode = true;
-//            this->triggerReady();
+            this->isHost = false;
             this->setMultiPlayMode();
-            
+            this->triggerMultiPreparation();
             CCLOG("Connected");
             
             break;
@@ -761,7 +776,6 @@ void MainScene::sendDataOverNetwork() {
     if (onMultiPlayerMode) {
         JSONPacker::UserData data;
         data.state = (GameState)this->gameState;
-        data.name = NetworkingWrapper::getDeviceName();
         data.nen = this->character->getNen();
         data.auraLeft = this->auraLeft;
         data.playTime = this->playingTime;

@@ -63,6 +63,10 @@ private:
     void triggerTitle();
     void triggerReady();
     void triggerGameOver();
+    
+    void triggerMultiPreparation();
+    void triggerMultiGameOver();
+    
     void dropObstacles(ObstacleType obstacle, float tempo);
     void resetGameState();
     void setKen();
@@ -85,6 +89,7 @@ private:
     void setMultiPlayMode();
     
     float playingTime;
+    float opponentPlayingTime;
     float auraLeft;
     float auraLeft2;
     float gettingHitCount;
@@ -95,9 +100,9 @@ private:
     bool active;
     bool playingPattern;
     bool loadNext;
-    bool isEvening;
     bool replayButtonPressing;
     bool onMultiPlayerMode;
+    bool isHost;
     
     int timeLeft;
     int playCount;
@@ -114,6 +119,9 @@ private:
     
     int overallScore;
     int overallGamePlayCount;
+    
+    int userId;
+    int opponentUserId;
     
     std::vector<Pattern> currentPattern;
     int currentLevel;

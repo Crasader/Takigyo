@@ -21,7 +21,6 @@ namespace JSONPacker{
         LEUKOCYTE      = 3,
     };
     struct UserData {
-        std::string name;
         Nen nen;
         float auraLeft;
         GameState state;
@@ -45,6 +44,9 @@ namespace JSONPacker{
     UnpackedPatternList unpackPatternListJSON(std::string json, int patternId);
     UserData unpackUserDataJSON(std::string json);
     std::string packUserData(const UserData data);
+    
+    int unpackUserId(std::string json);
+    std::string packUserId(const int userId);
 }
 
 #endif /* defined(__Takigyo__JSONPacker__) */

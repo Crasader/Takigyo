@@ -24,11 +24,12 @@ enum class ObstacleType {
 enum class GameState
 {
     Title = 1,
-    Ready = 2 ,
-    COUNT_DOWN = 3,
+    Ready = 2,
+    MultiPreparation = 3,
     WAITING = 4,
-    Playing = 5,
-    GameOver = 6
+    COUNT_DOWN = 5,
+    Playing = 6,
+    GameOver = 7
 };
 
 class Pattern {
