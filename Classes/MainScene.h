@@ -6,15 +6,13 @@
 #include "Globals.h"
 #include "NetworkingWrapper.h"
 
-enum class GameState
-{
-    Title,
-    Ready,
-    Playing,
-    GameOver
+enum class Target {
+    Me,
+    Opponent
 };
 
 class Character;
+class OpponentCharacter;
 enum class Nen;
 
 class MainScene : public cocos2d::Layer , public NetworkingDelegate
@@ -31,6 +29,7 @@ public:
     
 protected:
     Character* character;
+    OpponentCharacter* opponentCharacter;
     
     bool networkedSession;
 
@@ -43,9 +42,19 @@ private:
     cocos2d::Node* rootNode;
     cocos2d::Node* levelNode;
     cocos2d::Node* rockNode;
+    cocos2d::Node* lifeBG;
+    cocos2d::Node* lifeBG2;
+    cocos2d::Node* waterfall;
     cocos2d::Sprite* auraBar;
+    cocos2d::Sprite* auraBar2;
     cocos2d::ui::Text* comboLabel;
     cocos2d::ui::Text* countDownLabel;
+    cocos2d::Node* bottomRock;
+    cocos2d::Node* bottomRock2;
+    cocos2d::ParticleSystemQuad* splashEffect;
+    cocos2d::ParticleSystemQuad* splashEffect2;
+    
+    cocos2d::Size visibleSize;
     
     void onEnter() override;
     void setupTouchHandling();
@@ -61,7 +70,9 @@ private:
     void singlePlayerPressed(cocos2d::Ref* pSender, cocos2d::ui::Widget::TouchEventType eEventType);
     void multiPlayerPressed(cocos2d::Ref* pSender, cocos2d::ui::Widget::TouchEventType eEventType);
     void replayButtonPressed(cocos2d::Ref* pSender, cocos2d::ui::Widget::TouchEventType eEventType);
+    void characterButtonPressed(cocos2d::Ref* pSender, cocos2d::ui::Widget::TouchEventType eEventType);
     void setRemainingAura(float auraLeft);
+    void setOpponentRemainingAura(float auraLeft);
     void playWeather();
     void setComboCount(int combo);
     void setLevelCount();
@@ -69,9 +80,13 @@ private:
     void gotHit();
     void setGameActive(bool active);
     void playTimingAnimation();
+    void sendDataOverNetwork();
+    void setSinglePlayMode();
+    void setMultiPlayMode();
     
     float playingTime;
     float auraLeft;
+    float auraLeft2;
     float gettingHitCount;
     float patternPlayTime;
     float touchingTime;
@@ -111,6 +126,7 @@ private:
     cocos2d::Node* cloudsNode;
     
     GameState gameState;
+    GameState opponentGameState;
     ObstacleType obstacleType;
 };
 

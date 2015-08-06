@@ -68,6 +68,10 @@
 		96C8C5011B56E57300D07B2C /* CharacterReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96C8C4FE1B56E57300D07B2C /* CharacterReader.cpp */; };
 		96C8C50C1B5823B600D07B2C /* libcocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 96C8C50B1B58237900D07B2C /* libcocos2d iOS.a */; };
 		96C8C50D1B5823C700D07B2C /* libcocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 96C8C5091B58237900D07B2C /* libcocos2d Mac.a */; };
+		96D7B1B11B7125CF00E210D3 /* OpponentCharacter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96D7B1AF1B7125CF00E210D3 /* OpponentCharacter.cpp */; };
+		96D7B1B21B7125CF00E210D3 /* OpponentCharacter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96D7B1AF1B7125CF00E210D3 /* OpponentCharacter.cpp */; };
+		96D7B1B51B7125DE00E210D3 /* OpponentCharacterReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96D7B1B31B7125DE00E210D3 /* OpponentCharacterReader.cpp */; };
+		96D7B1B61B7125DE00E210D3 /* OpponentCharacterReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96D7B1B31B7125DE00E210D3 /* OpponentCharacterReader.cpp */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
 		BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF1C47EA1293683800B63C5D /* QuartzCore.framework */; };
@@ -161,6 +165,10 @@
 		96C8C4FE1B56E57300D07B2C /* CharacterReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CharacterReader.cpp; sourceTree = "<group>"; };
 		96C8C4FF1B56E57300D07B2C /* CharacterReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterReader.h; sourceTree = "<group>"; };
 		96C8C5031B58237800D07B2C /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../cocos2d/build/cocos2d_libs.xcodeproj; sourceTree = "<group>"; };
+		96D7B1AF1B7125CF00E210D3 /* OpponentCharacter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpponentCharacter.cpp; sourceTree = "<group>"; };
+		96D7B1B01B7125CF00E210D3 /* OpponentCharacter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpponentCharacter.h; sourceTree = "<group>"; };
+		96D7B1B31B7125DE00E210D3 /* OpponentCharacterReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpponentCharacterReader.cpp; sourceTree = "<group>"; };
+		96D7B1B41B7125DE00E210D3 /* OpponentCharacterReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpponentCharacterReader.h; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BF1C47EA1293683800B63C5D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -295,6 +303,10 @@
 				46880B8519C43A87006E1F66 /* AppDelegate.h */,
 				96C8C4FA1B56E50200D07B2C /* Character.cpp */,
 				96C8C4FB1B56E50200D07B2C /* Character.h */,
+				96D7B1AF1B7125CF00E210D3 /* OpponentCharacter.cpp */,
+				96D7B1B01B7125CF00E210D3 /* OpponentCharacter.h */,
+				96D7B1B31B7125DE00E210D3 /* OpponentCharacterReader.cpp */,
+				96D7B1B41B7125DE00E210D3 /* OpponentCharacterReader.h */,
 				96C8C4FE1B56E57300D07B2C /* CharacterReader.cpp */,
 				96C8C4FF1B56E57300D07B2C /* CharacterReader.h */,
 				96C8C4F91B56E47400D07B2C /* Globals.h */,
@@ -535,6 +547,7 @@
 			files = (
 				96C8C5001B56E57300D07B2C /* CharacterReader.cpp in Sources */,
 				9637D4561B6BF57900B832A8 /* NetworkingWrapper.mm in Sources */,
+				96D7B1B11B7125CF00E210D3 /* OpponentCharacter.cpp in Sources */,
 				965BC3F91B60118D0054CCEF /* JSONPacker.cpp in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				965BC3F31B60113D0054CCEF /* PatternRate.cpp in Sources */,
@@ -545,6 +558,7 @@
 				96C8C4FC1B56E50200D07B2C /* Character.cpp in Sources */,
 				9637D4571B6BF57900B832A8 /* NetworkManager.mm in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
+				96D7B1B51B7125DE00E210D3 /* OpponentCharacterReader.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -555,12 +569,14 @@
 			files = (
 				9637D44B1B68019500B832A8 /* Utility.cpp in Sources */,
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
+				96D7B1B21B7125CF00E210D3 /* OpponentCharacter.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				965BC3FA1B60118D0054CCEF /* JSONPacker.cpp in Sources */,
 				46880B8B19C43A87006E1F66 /* MainScene.cpp in Sources */,
 				965BC3F41B60113D0054CCEF /* PatternRate.cpp in Sources */,
 				96C8C5011B56E57300D07B2C /* CharacterReader.cpp in Sources */,
 				96424DD21B5E126200BF3DA5 /* LevelInfo.cpp in Sources */,
+				96D7B1B61B7125DE00E210D3 /* OpponentCharacterReader.cpp in Sources */,
 				96C8C4FD1B56E50200D07B2C /* Character.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

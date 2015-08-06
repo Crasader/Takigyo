@@ -115,6 +115,7 @@
         <Project Name="Heart.csd" Type="Node" />
         <PlistParticleFile Name="recover.plist" />
         <PlistParticleFile Name="splash2.plist" />
+        <Project Name="OpponentCharacter.csd" Type="Node" />
       </RootFolder>
     </Group>
   </SolutionFolder>

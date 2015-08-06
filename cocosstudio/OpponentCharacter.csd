@@ -1,5 +1,5 @@
 <GameProjectFile>
-  <PropertyGroup Type="Node" Name="Character" ID="a58d6a62-cfa3-442f-8b50-e485becd7713" Version="2.3.1.2" />
+  <PropertyGroup Type="Node" Name="OpponentCharacter" ID="b7cf7753-5ca4-45be-9edd-385ea10e04f4" Version="2.3.1.2" />
   <Content ctype="GameProjectContent">
     <Content>
       <Animation Duration="50" Speed="1.0000">
@@ -29,7 +29,7 @@
           <RenderColor A="255" R="221" G="160" B="221" />
         </AnimationInfo>
       </AnimationList>
-      <ObjectData Name="Node" CustomClassName="Character" Tag="10" ctype="GameNodeObjectData">
+      <ObjectData Name="Node" CustomClassName="OpponentCharacter" Tag="10" ctype="GameNodeObjectData">
         <Size X="0.0000" Y="0.0000" />
         <Children>
           <AbstractNodeData Name="CharacterShadow" ActionTag="-1607379718" Tag="73" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="-106.5000" RightMargin="-106.5000" TopMargin="-229.0000" ctype="SpriteObjectData">

@@ -117,7 +117,7 @@ cocos2d::Node* SceneReader::createNodeWithSceneFile(const std::string &fileName,
                         {
                             pCom = createComponent(comName);
                         }
-                        CCLOG("classname = %s", comName);
+//                        CCLOG("classname = %s", comName);
                         if (pCom != nullptr)
                         {
                             data->_rData = nullptr;
@@ -277,7 +277,7 @@ Node* SceneReader::createObject(const rapidjson::Value &dict, cocos2d::Node* par
             }
             const char *comName = DICTOOL->getStringValue_json(subDict, "classname");
             Component *com = this->createComponent(comName);
-            CCLOG("classname = %s", comName);
+//            CCLOG("classname = %s", comName);
             SerData *data = new (std::nothrow) SerData();
             if (com != nullptr)
             {
@@ -391,7 +391,7 @@ cocos2d::Node* SceneReader::createObject(CocoLoader *cocoLoader, stExpCocoNode *
             {
                 pCom = createComponent(comName);
             }
-            CCLOG("classname = %s", comName);
+//            CCLOG("classname = %s", comName);
             if (pCom != nullptr)
             {
                 data->_rData = nullptr;

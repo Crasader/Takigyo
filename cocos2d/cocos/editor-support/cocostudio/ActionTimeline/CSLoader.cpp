@@ -255,7 +255,7 @@ Node* CSLoader::createNode(const std::string& filename)
     std::string path = filename;
     size_t pos = path.find_last_of('.');
     std::string suffix = path.substr(pos + 1, path.length());
-    CCLOG("suffix = %s", suffix.c_str());
+//    CCLOG("suffix = %s", suffix.c_str());
     
     CSLoader* load = CSLoader::getInstance();
     
@@ -276,7 +276,7 @@ Node* CSLoader::createNode(const std::string &filename, const ccNodeLoadCallback
     std::string path = filename;
     size_t pos = path.find_last_of('.');
     std::string suffix = path.substr(pos + 1, path.length());
-    CCLOG("suffix = %s", suffix.c_str());
+//    CCLOG("suffix = %s", suffix.c_str());
     
     CSLoader* load = CSLoader::getInstance();
     
@@ -293,7 +293,7 @@ ActionTimeline* CSLoader::createTimeline(const std::string &filename)
     std::string path = filename;
     size_t pos = path.find_last_of('.');
     std::string suffix = path.substr(pos + 1, path.length());
-    CCLOG("suffix = %s", suffix.c_str());
+//    CCLOG("suffix = %s", suffix.c_str());
     
     ActionTimelineCache* cache = ActionTimelineCache::getInstance();
     
@@ -860,7 +860,7 @@ Node* CSLoader::nodeWithFlatBuffersFile(const std::string &fileName, const ccNod
     // decode plist
     auto textures = csparsebinary->textures();
     int textureSize = csparsebinary->textures()->size();
-    CCLOG("textureSize = %d", textureSize);
+//    CCLOG("textureSize = %d", textureSize);
     for (int i = 0; i < textureSize; ++i)
     {
         SpriteFrameCache::getInstance()->addSpriteFramesWithFile(textures->Get(i)->c_str());
@@ -882,7 +882,7 @@ Node* CSLoader::nodeWithFlatBuffers(const flatbuffers::NodeTree *nodetree, const
         Node* node = nullptr;
         
         std::string classname = nodetree->classname()->c_str();
-        CCLOG("classname = %s", classname.c_str());
+//        CCLOG("classname = %s", classname.c_str());
         
         auto options = nodetree->options();
         
@@ -967,12 +967,12 @@ Node* CSLoader::nodeWithFlatBuffers(const flatbuffers::NodeTree *nodetree, const
         
         auto children = nodetree->children();
         int size = children->size();
-        CCLOG("size = %d", size);
+//        CCLOG("size = %d", size);
         for (int i = 0; i < size; ++i)
         {
             auto subNodeTree = children->Get(i);
             Node* child = nodeWithFlatBuffers(subNodeTree, callback);
-            CCLOG("child = %p", child);
+//            CCLOG("child = %p", child);
             if (child)
             {
                 PageView* pageView = dynamic_cast<PageView*>(node);
@@ -1230,7 +1230,7 @@ Node* CSLoader::nodeWithFlatBuffersForSimulator(const flatbuffers::NodeTree *nod
     Node* node = nullptr;
     
     std::string classname = nodetree->classname()->c_str();
-    CCLOG("classname = %s", classname.c_str());
+//    CCLOG("classname = %s", classname.c_str());
     
     auto options = nodetree->options();
     
@@ -1305,12 +1305,12 @@ Node* CSLoader::nodeWithFlatBuffersForSimulator(const flatbuffers::NodeTree *nod
     
     auto children = nodetree->children();
     int size = children->size();
-    CCLOG("size = %d", size);
+//    CCLOG("size = %d", size);
     for (int i = 0; i < size; ++i)
     {
         auto subNodeTree = children->Get(i);
         Node* child = nodeWithFlatBuffersForSimulator(subNodeTree);
-        CCLOG("child = %p", child);
+//        CCLOG("child = %p", child);
         if (child)
         {
             PageView* pageView = dynamic_cast<PageView*>(node);

@@ -13,13 +13,22 @@
 enum class Nen
 {
     Ten,
-    Ken,
-    None
+    Ken
 };
 
 enum class ObstacleType {
     Rock,
     Heart
+};
+
+enum class GameState
+{
+    Title = 1,
+    Ready = 2 ,
+    COUNT_DOWN = 3,
+    WAITING = 4,
+    Playing = 5,
+    GameOver = 6
 };
 
 class Pattern {

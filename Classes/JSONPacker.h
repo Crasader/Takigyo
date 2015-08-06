@@ -14,11 +14,21 @@
 #include "Globals.h"
 
 namespace JSONPacker{
-    struct GameState {
+    enum class DataType
+    {
+        GAME_STATE     = 1,
+        POSITION_CHECK = 2,
+        LEUKOCYTE      = 3,
+    };
+    struct UserData {
         std::string name;
-        bool gameOver;
-        int score;
-        std::vector<std::vector<cocos2d::Color3B>> board;
+        Nen nen;
+        float auraLeft;
+        GameState state;
+        float playTime;
+//        bool gameOver;
+//        int score;
+//        std::vector<std::vector<cocos2d::Color3B>> board;
     };
     struct UnpackedLevelInfo {
         int level;
@@ -33,7 +43,8 @@ namespace JSONPacker{
     
     UnpackedLevelInfo unpackLevelInfoJSON(std::string json, int round);
     UnpackedPatternList unpackPatternListJSON(std::string json, int patternId);
-    GameState unpackGameStateJSON(std::string json);
+    UserData unpackUserDataJSON(std::string json);
+    std::string packUserData(const UserData data);
 }
 
 #endif /* defined(__Takigyo__JSONPacker__) */

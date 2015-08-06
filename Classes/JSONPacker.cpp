@@ -83,37 +83,39 @@ namespace JSONPacker {
         return unpackedPatternList;
     }
     
-    GameState unpackGameStateJSON(std::string json) {
+    UserData unpackUserDataJSON(std::string json) {
         rapidjson::Document document;
         document.Parse<0>(json.c_str());
         
-        GameState gameState;
+        UserData userData;
         
-        gameState.score     = document["score"].GetInt();
-        gameState.name      = document["name"].GetString();
-        gameState.gameOver  = document["gameOver"].GetBool();
+        userData.state     = (GameState)document["state"].GetInt();
+        userData.name     = document["name"].GetString();
+        userData.nen      = (Nen)document["nen"].GetInt();
+        userData.auraLeft = (float)document["aura"].GetDouble();
+        userData.playTime = (float)document["playTime"].GetDouble();
+       
+        return userData;
+    }
+    
+    std::string packUserData(const UserData userData) {
+        rapidjson::Document document;
+        document.SetObject();
         
-        rapidjson::Value& columns = document["board"];
+        document.AddMember("state", (int)userData.state, document.GetAllocator());
+        document.AddMember("name", userData.name.c_str(), document.GetAllocator());
+        document.AddMember("nen", (int)userData.nen, document.GetAllocator());
+        document.AddMember("aura", (double)userData.auraLeft, document.GetAllocator());
+        document.AddMember("playTime", (double)userData.playTime, document.GetAllocator());
         
-        // convert color3b objects in the grid to JSON objects
-        for (rapidjson::SizeType column = 0; column < columns.Size(); ++column) {
-            rapidjson::Value& blocksJson = columns[column];
-            
-            std::vector<Color3B> blocks;
-            for (rapidjson::SizeType index = 0; index < blocksJson.Size(); ++index) {
-                rapidjson::Value& block = blocksJson[index];
-                int r = block["r"].GetInt();
-                int g = block["g"].GetInt();
-                int b = block["b"].GetInt();
-                
-                Color3B color = Color3B(r, g, b);
-                
-                blocks.push_back(color);
-            }
-            
-            gameState.board.push_back(blocks);
-        }
+        rapidjson::StringBuffer buffer;
+        rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
+        document.Accept(writer);
         
-        return gameState;
+        std::string returnString(buffer.GetString(), buffer.Size());
+        
+        CCLOG("%s", returnString.c_str());
+        
+        return returnString;
     }
 }
