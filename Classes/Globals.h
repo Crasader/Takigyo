@@ -30,7 +30,7 @@ enum class GameState
     COUNT_DOWN = 5,
     Playing = 6,
     GameOver = 7,
-    Result = 8
+    MultiResult = 8
 };
 
 class Pattern {
@@ -39,9 +39,9 @@ public:
     ObstacleType type;
 };
 
-static const float PRESENT_OUTPUT_POTENTIAL = 1.0f;
+static const float PRESENT_OUTPUT_POTENTIAL = 10.0f;
 
-static const float COUNT_DOWN_TIME = 3.0f;
+static const float COUNT_DOWN_TIME = 5.0f;
 
 static const float HIT_DAMAGE = 1.0f;
 static const float RECOVERY   = 0.5f;

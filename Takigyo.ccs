@@ -9,6 +9,7 @@
         <PlistParticleFile Name="shibuki.plist" />
         <Folder Name="Fonts">
           <TTF Name="Game of Three.ttf" />
+          <TTF Name="njnaruto.ttf" />
         </Folder>
         <PlistParticleFile Name="ten.plist" />
         <Project Name="Clouds.csd" Type="Node" />

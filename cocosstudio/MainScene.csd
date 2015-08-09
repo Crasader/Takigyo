@@ -2,7 +2,7 @@
   <PropertyGroup Type="Scene" Name="MainScene" ID="a2ee0952-26b5-49ae-8bf9-4f1d6279b798" Version="2.3.1.2" />
   <Content ctype="GameProjectContent">
     <Content>
-      <Animation Duration="539" Speed="1.0000" ActivedAnimationName="multiEndResult">
+      <Animation Duration="539" Speed="1.0000" ActivedAnimationName="ready">
         <Timeline ActionTag="-1880258662" Property="VisibleForFrame">
           <BoolFrame FrameIndex="141" Tween="False" Value="True" />
           <BoolFrame FrameIndex="150" Tween="False" Value="True" />
@@ -18,6 +18,11 @@
           <IntFrame FrameIndex="440" Value="255">
             <EasingData Type="0" />
           </IntFrame>
+        </Timeline>
+        <Timeline ActionTag="-1880258662" Property="Scale">
+          <ScaleFrame FrameIndex="315" X="1.0500" Y="1.1882">
+            <EasingData Type="0" />
+          </ScaleFrame>
         </Timeline>
         <Timeline ActionTag="-302421540" Property="Position">
           <PointFrame FrameIndex="0" X="87.5000" Y="64.9000">
@@ -41,6 +46,18 @@
             <EasingData Type="0" />
           </PointFrame>
           <PointFrame FrameIndex="210" X="386.5000" Y="258.4400">
+            <EasingData Type="0" />
+          </PointFrame>
+          <PointFrame FrameIndex="340" X="386.5000" Y="258.4400">
+            <EasingData Type="0" />
+          </PointFrame>
+          <PointFrame FrameIndex="399" X="386.5000" Y="258.4400">
+            <EasingData Type="0" />
+          </PointFrame>
+          <PointFrame FrameIndex="410" X="286.0100" Y="258.4400">
+            <EasingData Type="0" />
+          </PointFrame>
+          <PointFrame FrameIndex="429" X="286.0100" Y="258.4400">
             <EasingData Type="0" />
           </PointFrame>
         </Timeline>
@@ -68,6 +85,26 @@
           <PointFrame FrameIndex="210" X="1028.0900" Y="258.4400">
             <EasingData Type="0" />
           </PointFrame>
+          <PointFrame FrameIndex="261" X="1028.0900" Y="258.4400">
+            <EasingData Type="0" />
+          </PointFrame>
+          <PointFrame FrameIndex="340" X="1028.0900" Y="258.4400">
+            <EasingData Type="0" />
+          </PointFrame>
+          <PointFrame FrameIndex="399" X="1028.0900" Y="258.4400">
+            <EasingData Type="0" />
+          </PointFrame>
+          <PointFrame FrameIndex="410" X="486.9900" Y="258.4400">
+            <EasingData Type="0" />
+          </PointFrame>
+          <PointFrame FrameIndex="429" X="486.9900" Y="258.4400">
+            <EasingData Type="0" />
+          </PointFrame>
+        </Timeline>
+        <Timeline ActionTag="-1039371130" Property="Scale">
+          <ScaleFrame FrameIndex="315" X="1.0500" Y="0.9734">
+            <EasingData Type="0" />
+          </ScaleFrame>
         </Timeline>
         <Timeline ActionTag="-1086158147" Property="Position">
           <PointFrame FrameIndex="20" X="320.0000" Y="724.6080">
@@ -204,6 +241,28 @@
           <BoolFrame FrameIndex="0" Tween="False" Value="True" />
           <BoolFrame FrameIndex="150" Tween="False" Value="False" />
         </Timeline>
+        <Timeline ActionTag="1785588565" Property="Position">
+          <PointFrame FrameIndex="181" X="188.0000" Y="30.0000">
+            <EasingData Type="0" />
+          </PointFrame>
+        </Timeline>
+        <Timeline ActionTag="1785588565" Property="Scale">
+          <ScaleFrame FrameIndex="181" X="2.0000" Y="1.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+        </Timeline>
+        <Timeline ActionTag="1785588565" Property="VisibleForFrame">
+          <BoolFrame FrameIndex="0" Tween="False" Value="False" />
+          <BoolFrame FrameIndex="181" Tween="False" Value="True" />
+          <BoolFrame FrameIndex="269" Tween="False" Value="False" />
+          <BoolFrame FrameIndex="399" Tween="False" Value="False" />
+          <BoolFrame FrameIndex="410" Tween="False" Value="True" />
+        </Timeline>
+        <Timeline ActionTag="1785588565" Property="AnchorPoint">
+          <ScaleFrame FrameIndex="181" X="0.5000" Y="0.5000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+        </Timeline>
         <Timeline ActionTag="60709847" Property="Position">
           <PointFrame FrameIndex="151" X="320.0000" Y="-144.0000">
             <EasingData Type="8" />
@@ -220,11 +279,39 @@
           <PointFrame FrameIndex="210" X="320.0000" Y="48.0000">
             <EasingData Type="0" />
           </PointFrame>
+          <PointFrame FrameIndex="340" X="320.0000" Y="48.0000">
+            <EasingData Type="0" />
+          </PointFrame>
+          <PointFrame FrameIndex="399" X="320.0000" Y="48.0000">
+            <EasingData Type="0" />
+          </PointFrame>
+          <PointFrame FrameIndex="410" X="219.5200" Y="48.0000">
+            <EasingData Type="0" />
+          </PointFrame>
+          <PointFrame FrameIndex="429" X="219.5200" Y="62.4000">
+            <EasingData Type="0" />
+          </PointFrame>
+          <PointFrame FrameIndex="454" X="320.0000" Y="62.4000">
+            <EasingData Type="0" />
+          </PointFrame>
+          <PointFrame FrameIndex="480" X="320.0000" Y="62.4000">
+            <EasingData Type="0" />
+          </PointFrame>
+          <PointFrame FrameIndex="500" X="219.5200" Y="62.4000">
+            <EasingData Type="0" />
+          </PointFrame>
+          <PointFrame FrameIndex="520" X="219.5200" Y="48.0000">
+            <EasingData Type="0" />
+          </PointFrame>
+          <PointFrame FrameIndex="539" X="219.5200" Y="-288.0000">
+            <EasingData Type="0" />
+          </PointFrame>
         </Timeline>
         <Timeline ActionTag="60709847" Property="VisibleForFrame">
           <BoolFrame FrameIndex="0" Tween="False" Value="False" />
           <BoolFrame FrameIndex="150" Tween="False" Value="True" />
           <BoolFrame FrameIndex="151" Tween="False" Value="True" />
+          <BoolFrame FrameIndex="480" Tween="False" Value="True" />
         </Timeline>
         <Timeline ActionTag="60709847" Property="RotationSkew">
           <ScaleFrame FrameIndex="0" X="0.0000" Y="0.0000">
@@ -247,11 +334,49 @@
           <ScaleFrame FrameIndex="210" X="1.0000" Y="1.0000">
             <EasingData Type="0" />
           </ScaleFrame>
+          <ScaleFrame FrameIndex="270" X="1.0000" Y="1.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+          <ScaleFrame FrameIndex="314" X="1.0000" Y="1.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+          <ScaleFrame FrameIndex="399" X="1.0000" Y="1.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+          <ScaleFrame FrameIndex="410" X="0.5000" Y="1.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+          <ScaleFrame FrameIndex="429" X="0.5000" Y="1.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+          <ScaleFrame FrameIndex="454" X="1.0000" Y="1.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+          <ScaleFrame FrameIndex="480" X="1.0000" Y="1.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+          <ScaleFrame FrameIndex="500" X="0.5000" Y="1.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
         </Timeline>
         <Timeline ActionTag="-1857335698" Property="Scale">
           <ScaleFrame FrameIndex="151" X="1.0000" Y="1.0000">
             <EasingData Type="0" />
           </ScaleFrame>
+        </Timeline>
+        <Timeline ActionTag="-1595479999" Property="Position">
+          <PointFrame FrameIndex="181" X="188.0000" Y="30.0000">
+            <EasingData Type="0" />
+          </PointFrame>
+        </Timeline>
+        <Timeline ActionTag="-1595479999" Property="Scale">
+          <ScaleFrame FrameIndex="181" X="2.0000" Y="1.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+        </Timeline>
+        <Timeline ActionTag="-1595479999" Property="VisibleForFrame">
+          <BoolFrame FrameIndex="0" Tween="False" Value="True" />
+          <BoolFrame FrameIndex="181" Tween="False" Value="True" />
         </Timeline>
         <Timeline ActionTag="-1685214329" Property="Position">
           <PointFrame FrameIndex="151" X="960.0000" Y="-144.0000">
@@ -269,11 +394,39 @@
           <PointFrame FrameIndex="210" X="960.0000" Y="48.0000">
             <EasingData Type="0" />
           </PointFrame>
+          <PointFrame FrameIndex="340" X="851.2000" Y="48.0000">
+            <EasingData Type="0" />
+          </PointFrame>
+          <PointFrame FrameIndex="399" X="851.2000" Y="48.0000">
+            <EasingData Type="0" />
+          </PointFrame>
+          <PointFrame FrameIndex="410" X="418.5600" Y="48.0000">
+            <EasingData Type="0" />
+          </PointFrame>
+          <PointFrame FrameIndex="429" X="418.5600" Y="-9.6000">
+            <EasingData Type="0" />
+          </PointFrame>
+          <PointFrame FrameIndex="454" X="320.0000" Y="-9.6000">
+            <EasingData Type="0" />
+          </PointFrame>
+          <PointFrame FrameIndex="480" X="320.0000" Y="-9.6000">
+            <EasingData Type="0" />
+          </PointFrame>
+          <PointFrame FrameIndex="500" X="418.5600" Y="-9.6000">
+            <EasingData Type="0" />
+          </PointFrame>
+          <PointFrame FrameIndex="520" X="418.5600" Y="48.0000">
+            <EasingData Type="0" />
+          </PointFrame>
+          <PointFrame FrameIndex="539" X="418.5600" Y="-288.0000">
+            <EasingData Type="0" />
+          </PointFrame>
         </Timeline>
         <Timeline ActionTag="-1685214329" Property="VisibleForFrame">
           <BoolFrame FrameIndex="0" Tween="False" Value="False" />
           <BoolFrame FrameIndex="150" Tween="False" Value="True" />
           <BoolFrame FrameIndex="151" Tween="False" Value="True" />
+          <BoolFrame FrameIndex="480" Tween="False" Value="True" />
         </Timeline>
         <Timeline ActionTag="-1685214329" Property="RotationSkew">
           <ScaleFrame FrameIndex="0" X="0.0000" Y="0.0000">
@@ -282,6 +435,21 @@
         </Timeline>
         <Timeline ActionTag="-1685214329" Property="Scale">
           <ScaleFrame FrameIndex="151" X="0.5000" Y="1.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+          <ScaleFrame FrameIndex="410" X="0.5000" Y="1.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+          <ScaleFrame FrameIndex="429" X="0.5000" Y="1.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+          <ScaleFrame FrameIndex="454" X="1.0000" Y="1.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+          <ScaleFrame FrameIndex="480" X="1.0000" Y="1.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+          <ScaleFrame FrameIndex="500" X="0.5000" Y="1.0000">
             <EasingData Type="0" />
           </ScaleFrame>
         </Timeline>
@@ -440,10 +608,16 @@
         <Timeline ActionTag="-577174576" Property="VisibleForFrame">
           <BoolFrame FrameIndex="0" Tween="False" Value="False" />
         </Timeline>
+        <Timeline ActionTag="625243168" Property="Position">
+          <PointFrame FrameIndex="480" X="68.0293" Y="208.8254">
+            <EasingData Type="0" />
+          </PointFrame>
+        </Timeline>
         <Timeline ActionTag="625243168" Property="VisibleForFrame">
           <BoolFrame FrameIndex="410" Tween="False" Value="True" />
           <BoolFrame FrameIndex="454" Tween="False" Value="True" />
           <BoolFrame FrameIndex="455" Tween="False" Value="False" />
+          <BoolFrame FrameIndex="480" Tween="False" Value="True" />
         </Timeline>
         <Timeline ActionTag="-437925686" Property="Position">
           <PointFrame FrameIndex="410" X="320.0000" Y="806.4000">
@@ -467,10 +641,10 @@
           <PointFrame FrameIndex="505" X="320.0000" Y="508.8000">
             <EasingData Type="0" />
           </PointFrame>
-          <PointFrame FrameIndex="520" X="320.0000" Y="451.2000">
+          <PointFrame FrameIndex="520" X="320.0000" Y="393.6000">
             <EasingData Type="0" />
           </PointFrame>
-          <PointFrame FrameIndex="539" X="-256.0000" Y="336.0000">
+          <PointFrame FrameIndex="539" X="0.0000" Y="1920.0000">
             <EasingData Type="0" />
           </PointFrame>
         </Timeline>
@@ -513,7 +687,7 @@
           <ScaleFrame FrameIndex="520" X="0.0000" Y="0.0000">
             <EasingData Type="0" />
           </ScaleFrame>
-          <ScaleFrame FrameIndex="539" X="-180.0000" Y="-180.0000">
+          <ScaleFrame FrameIndex="539" X="0.0000" Y="0.0000">
             <EasingData Type="0" />
           </ScaleFrame>
         </Timeline>
@@ -526,6 +700,9 @@
           <BoolFrame FrameIndex="539" Tween="False" Value="False" />
         </Timeline>
         <Timeline ActionTag="-437925686" Property="FileData">
+          <TextureFrame FrameIndex="410" Tween="False">
+            <TextureFile Type="Normal" Path="Images/resources-2x/multiLeftRaft@2x.png" Plist="" />
+          </TextureFrame>
           <TextureFrame FrameIndex="425" Tween="False">
             <TextureFile Type="Normal" Path="Images/resources-2x/multiLeftRaft@2x.png" Plist="" />
           </TextureFrame>
@@ -535,6 +712,49 @@
           <TextureFrame FrameIndex="455" Tween="False">
             <TextureFile Type="Normal" Path="Images/resources-2x/multiLeftRaft@2x.png" Plist="" />
           </TextureFrame>
+          <TextureFrame FrameIndex="480" Tween="False">
+            <TextureFile Type="Normal" Path="Images/resources-2x/multiLeftRaft@2x.png" Plist="" />
+          </TextureFrame>
+        </Timeline>
+        <Timeline ActionTag="-996490050" Property="Position">
+          <PointFrame FrameIndex="480" X="25.0000" Y="469.1800">
+            <EasingData Type="0" />
+          </PointFrame>
+        </Timeline>
+        <Timeline ActionTag="-1879967247" Property="Position">
+          <PointFrame FrameIndex="480" X="26.1718" Y="410.0680">
+            <EasingData Type="0" />
+          </PointFrame>
+        </Timeline>
+        <Timeline ActionTag="680907384" Property="Position">
+          <PointFrame FrameIndex="480" X="25.0000" Y="351.8800">
+            <EasingData Type="0" />
+          </PointFrame>
+        </Timeline>
+        <Timeline ActionTag="1878940559" Property="Position">
+          <PointFrame FrameIndex="480" X="25.0000" Y="289.9504">
+            <EasingData Type="0" />
+          </PointFrame>
+        </Timeline>
+        <Timeline ActionTag="-2028031072" Property="Position">
+          <PointFrame FrameIndex="480" X="0.0004" Y="94.0009">
+            <EasingData Type="0" />
+          </PointFrame>
+        </Timeline>
+        <Timeline ActionTag="2113996635" Property="Position">
+          <PointFrame FrameIndex="480" X="215.7010" Y="94.0005">
+            <EasingData Type="0" />
+          </PointFrame>
+        </Timeline>
+        <Timeline ActionTag="-1021078695" Property="Position">
+          <PointFrame FrameIndex="480" X="94.8195" Y="208.8970">
+            <EasingData Type="0" />
+          </PointFrame>
+        </Timeline>
+        <Timeline ActionTag="2107388862" Property="Position">
+          <PointFrame FrameIndex="480" X="151.0000" Y="584.3200">
+            <EasingData Type="0" />
+          </PointFrame>
         </Timeline>
         <Timeline ActionTag="-1776221752" Property="Position">
           <PointFrame FrameIndex="410" X="320.0000" Y="806.4000">
@@ -558,10 +778,10 @@
           <PointFrame FrameIndex="505" X="320.0000" Y="508.8000">
             <EasingData Type="0" />
           </PointFrame>
-          <PointFrame FrameIndex="520" X="320.0000" Y="451.2000">
+          <PointFrame FrameIndex="520" X="320.0000" Y="393.6000">
             <EasingData Type="0" />
           </PointFrame>
-          <PointFrame FrameIndex="539" X="896.0000" Y="336.0000">
+          <PointFrame FrameIndex="539" X="640.0000" Y="1920.0000">
             <EasingData Type="0" />
           </PointFrame>
         </Timeline>
@@ -598,7 +818,7 @@
           <ScaleFrame FrameIndex="520" X="0.0000" Y="0.0000">
             <EasingData Type="0" />
           </ScaleFrame>
-          <ScaleFrame FrameIndex="539" X="180.0000" Y="180.0000">
+          <ScaleFrame FrameIndex="539" X="0.0000" Y="0.0000">
             <EasingData Type="0" />
           </ScaleFrame>
         </Timeline>
@@ -618,6 +838,9 @@
             <TextureFile Type="Normal" Path="Images/resources-2x/multiRightRaft@2x.png" Plist="" />
           </TextureFrame>
           <TextureFrame FrameIndex="440" Tween="False">
+            <TextureFile Type="Normal" Path="Images/resources-2x/multiRightRaft@2x.png" Plist="" />
+          </TextureFrame>
+          <TextureFrame FrameIndex="480" Tween="False">
             <TextureFile Type="Normal" Path="Images/resources-2x/multiRightRaft@2x.png" Plist="" />
           </TextureFrame>
         </Timeline>
@@ -655,7 +878,7 @@
             <Size X="768.0000" Y="1136.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="320.0000" Y="480.0000" />
-            <Scale ScaleX="1.0000" ScaleY="1.1882" />
+            <Scale ScaleX="1.0500" ScaleY="1.1882" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.5000" />
             <PreSize X="0.5000" Y="0.5917" />
@@ -755,31 +978,31 @@
             </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="1.0000" />
             <Position X="320.0000" Y="815.9999" />
-            <Scale ScaleX="1.0000" ScaleY="0.9734" />
+            <Scale ScaleX="1.0500" ScaleY="0.9734" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.8500" />
             <PreSize X="1.2000" Y="0.7146" />
             <FileData Type="Normal" Path="Images/resources-1x/waterfall.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="title" ActionTag="-1086158147" Tag="38" VisibleForFrame="False" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="123.0000" RightMargin="123.0000" TopMargin="240.0000" BottomMargin="541.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="title" ActionTag="-1086158147" Tag="38" VisibleForFrame="False" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="123.0000" RightMargin="251.0000" TopMargin="304.0000" BottomMargin="541.0000" ctype="SpriteObjectData">
             <Size X="394.0000" Y="179.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="1.0000" />
-            <Position X="320.0000" Y="720.0000" />
+            <Position X="266.6667" Y="675.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.7500" />
+            <PrePosition X="0.4167" Y="0.7031" />
             <PreSize X="0.6156" Y="0.1865" />
             <FileData Type="Normal" Path="Images/resources-1x/title.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="PlayButton" ActionTag="-1033247390" Tag="39" VisibleForFrame="False" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="197.0000" RightMargin="197.0000" TopMargin="799.4000" BottomMargin="9.6000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="216" Scale9Height="129" OutlineSize="0" ShadowOffsetX="0.0000" ShadowOffsetY="0.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="PlayButton" ActionTag="-1033247390" Tag="39" VisibleForFrame="False" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="197.0000" RightMargin="325.0000" TopMargin="863.4000" BottomMargin="9.6000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="216" Scale9Height="129" OutlineSize="0" ShadowOffsetX="0.0000" ShadowOffsetY="0.0000" ctype="ButtonObjectData">
             <Size X="246.0000" Y="151.0000" />
             <AnchorPoint ScaleX="0.5000" />
-            <Position X="320.0000" Y="9.6000" />
+            <Position X="266.6667" Y="9.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.0100" />
+            <PrePosition X="0.4167" Y="0.0094" />
             <PreSize X="0.3844" Y="0.1573" />
             <TextColor A="255" R="65" G="65" B="70" />
             <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
@@ -788,35 +1011,35 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="RankingButton" ActionTag="1381406420" Tag="37" VisibleForFrame="False" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="25.6000" RightMargin="452.4000" TopMargin="800.4000" BottomMargin="9.6000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="RankingButton" ActionTag="1381406420" Tag="37" VisibleForFrame="False" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="25.6000" RightMargin="580.4000" TopMargin="864.4000" BottomMargin="9.6000" ctype="SpriteObjectData">
             <Size X="162.0000" Y="150.0000" />
             <AnchorPoint />
-            <Position X="25.6000" Y="9.6000" />
+            <Position X="21.3333" Y="9.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.0400" Y="0.0100" />
+            <PrePosition X="0.0333" Y="0.0094" />
             <PreSize X="0.2531" Y="0.1563" />
             <FileData Type="Normal" Path="Images/resources-1x/Ranking.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="CharactorButton" ActionTag="-1578834475" Tag="36" VisibleForFrame="False" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="451.4000" RightMargin="25.6000" TopMargin="799.4000" BottomMargin="9.6000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="CharactorButton" ActionTag="-1578834475" Tag="36" VisibleForFrame="False" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="451.4000" RightMargin="153.6000" TopMargin="863.4000" BottomMargin="9.6000" ctype="SpriteObjectData">
             <Size X="163.0000" Y="151.0000" />
             <AnchorPoint ScaleX="1.0000" />
-            <Position X="614.4000" Y="9.6000" />
+            <Position X="512.0000" Y="9.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.9600" Y="0.0100" />
+            <PrePosition X="0.8000" Y="0.0094" />
             <PreSize X="0.2547" Y="0.1573" />
             <FileData Type="Normal" Path="Images/resources-1x/CharactorButton.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="VersusButton" ActionTag="2031824358" Tag="394" VisibleForFrame="False" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="476.0000" RightMargin="32.0000" TopMargin="182.4000" BottomMargin="590.6000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="102" Scale9Height="165" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="VersusButton" ActionTag="2031824358" Tag="394" VisibleForFrame="False" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="476.0000" RightMargin="160.0000" TopMargin="246.4000" BottomMargin="590.6000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="102" Scale9Height="165" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="132.0000" Y="187.0000" />
             <AnchorPoint ScaleX="1.0000" ScaleY="1.0000" />
-            <Position X="608.0000" Y="777.6000" />
+            <Position X="506.6667" Y="729.0000" />
             <Scale ScaleX="0.6900" ScaleY="0.6900" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.9500" Y="0.8100" />
+            <PrePosition X="0.7917" Y="0.7594" />
             <PreSize X="0.2062" Y="0.1948" />
             <TextColor A="255" R="65" G="65" B="70" />
             <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
@@ -825,7 +1048,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="lifeBG" ActionTag="60709847" Tag="60" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="132.0000" RightMargin="132.0000" TopMargin="852.0000" BottomMargin="48.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="lifeBG" ActionTag="60709847" Tag="60" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="132.0000" RightMargin="260.0000" TopMargin="1108.0000" BottomMargin="-144.0000" ctype="SpriteObjectData">
             <Size X="376.0000" Y="60.0000" />
             <Children>
               <AbstractNodeData Name="lifeBar" ActionTag="-675434661" Tag="61" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="18.8000" RightMargin="17.2000" TopMargin="14.5000" BottomMargin="14.5000" ctype="SpriteObjectData">
@@ -839,17 +1062,29 @@
                 <FileData Type="Normal" Path="Images/resources-1x/life.png" Plist="" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
+              <AbstractNodeData Name="YouLabel" ActionTag="1785588565" Tag="1238" VisibleForFrame="False" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="170.5000" RightMargin="170.5000" TopMargin="18.5000" BottomMargin="18.5000" FontSize="20" LabelText="You" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="35.0000" Y="23.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="188.0000" Y="30.0000" />
+                <Scale ScaleX="2.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.5000" Y="0.5000" />
+                <PreSize X="0.0931" Y="0.3833" />
+                <FontResource Type="Normal" Path="Fonts/Game of Three.ttf" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5000" />
-            <Position X="320.0000" Y="48.0000" />
+            <Position X="266.6667" Y="-135.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.0500" />
+            <PrePosition X="0.4167" Y="-0.1406" />
             <PreSize X="0.5875" Y="0.0625" />
             <FileData Type="Normal" Path="Images/resources-1x/life_bg.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="lifeBG2" ActionTag="-1685214329" Tag="223" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="772.0000" RightMargin="-508.0000" TopMargin="852.0000" BottomMargin="48.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="lifeBG2" ActionTag="-1685214329" Tag="223" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="772.0000" RightMargin="-380.0000" TopMargin="1108.0000" BottomMargin="-144.0000" ctype="SpriteObjectData">
             <Size X="376.0000" Y="60.0000" />
             <Children>
               <AbstractNodeData Name="lifeBar2" ActionTag="-1857335698" Tag="224" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="18.8000" RightMargin="17.2000" TopMargin="14.5000" BottomMargin="14.5000" ctype="SpriteObjectData">
@@ -863,12 +1098,24 @@
                 <FileData Type="Normal" Path="Images/resources-1x/life.png" Plist="" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
+              <AbstractNodeData Name="OpponentLabel" ActionTag="-1595479999" Tag="1239" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="142.5000" RightMargin="142.5000" TopMargin="18.5000" BottomMargin="18.5000" FontSize="20" LabelText="Opponent" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="91.0000" Y="23.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="188.0000" Y="30.0000" />
+                <Scale ScaleX="2.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.5000" Y="0.5000" />
+                <PreSize X="0.2420" Y="0.3833" />
+                <FontResource Type="Normal" Path="Fonts/Game of Three.ttf" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5000" />
-            <Position X="960.0000" Y="48.0000" />
+            <Position X="800.0000" Y="-135.0000" />
             <Scale ScaleX="0.5000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="1.5000" Y="0.0500" />
+            <PrePosition X="1.2500" Y="-0.1406" />
             <PreSize X="0.5875" Y="0.0625" />
             <FileData Type="Normal" Path="Images/resources-1x/life_bg.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
@@ -903,7 +1150,7 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="Normal" Path="Timing/TimingGood.csd" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="leftRaft" ActionTag="1761883152" Tag="212" VisibleForFrame="False" Rotation="-180.0000" RotationSkewX="-180.0000" RotationSkewY="-180.0000" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="-712.0000" RightMargin="896.0000" TopMargin="-69.0000" BottomMargin="-357.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="leftRaft" ActionTag="1761883152" Tag="212" VisibleForFrame="False" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="-136.0000" RightMargin="448.0000" TopMargin="-475.4000" BottomMargin="113.4000" ctype="SpriteObjectData">
             <Size X="456.0000" Y="1386.0000" />
             <Children>
               <AbstractNodeData Name="rankingButton" ActionTag="864866421" Tag="144" IconVisible="False" LeftMargin="84.7072" RightMargin="209.2928" TopMargin="1158.5558" BottomMargin="77.4442" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="132" Scale9Height="128" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
@@ -923,15 +1170,15 @@
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
-            <Position X="-256.0000" Y="336.0000" />
-            <Scale ScaleX="0.3300" ScaleY="0.3300" />
+            <Position X="266.6667" Y="756.0000" />
+            <Scale ScaleX="0.3333" ScaleY="0.0010" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="-0.4000" Y="0.3500" />
+            <PrePosition X="0.4167" Y="0.7875" />
             <PreSize X="0.2375" Y="0.4812" />
             <FileData Type="Normal" Path="Images/resources-3x/leftRaft@3x.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="rightRaft" ActionTag="-425583861" Tag="213" VisibleForFrame="False" Rotation="180.0000" RotationSkewX="180.0000" RotationSkewY="180.0000" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="896.0000" RightMargin="-712.0000" TopMargin="-69.0000" BottomMargin="-357.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="rightRaft" ActionTag="-425583861" Tag="213" VisibleForFrame="False" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="320.0000" RightMargin="-8.0000" TopMargin="-475.4000" BottomMargin="113.4000" ctype="SpriteObjectData">
             <Size X="456.0000" Y="1386.0000" />
             <Children>
               <AbstractNodeData Name="perfectScoreLabel" ActionTag="-1404305814" Tag="137" IconVisible="False" LeftMargin="44.5134" RightMargin="89.4866" TopMargin="342.3893" BottomMargin="940.6107" FontSize="86" LabelText="0000000" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="3.0000" ShadowOffsetY="-3.0000" ShadowEnabled="True" ctype="TextObjectData">
@@ -1026,10 +1273,10 @@
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleY="0.5000" />
-            <Position X="896.0000" Y="336.0000" />
-            <Scale ScaleX="0.3300" ScaleY="0.3300" />
+            <Position X="266.6667" Y="756.0000" />
+            <Scale ScaleX="0.3300" ScaleY="0.0010" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="1.4000" Y="0.3500" />
+            <PrePosition X="0.4167" Y="0.7875" />
             <PreSize X="0.2375" Y="0.4812" />
             <FileData Type="Normal" Path="Images/resources-3x/rightRaft@3x.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
@@ -1045,116 +1292,89 @@
             <FileData Type="Normal" Path="splash2.plist" Plist="" />
             <BlendFunc Src="770" Dst="1" />
           </AbstractNodeData>
-          <AbstractNodeData Name="multiLeftRaft" ActionTag="-437925686" Tag="1113" VisibleForFrame="False" Rotation="-180.0000" RotationSkewX="-180.0000" RotationSkewY="-180.0000" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="-560.0000" RightMargin="896.0000" TopMargin="162.0000" BottomMargin="-126.0000" ctype="SpriteObjectData">
-            <Size X="304.0000" Y="924.0000" />
+          <AbstractNodeData Name="multiLeftRaft" ActionTag="-437925686" Tag="1113" VisibleForFrame="False" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="22.0000" RightMargin="448.0000" TopMargin="-134.4000" BottomMargin="454.4000" ctype="SpriteObjectData">
+            <Size X="298.0000" Y="704.0000" />
             <Children>
-              <AbstractNodeData Name="winScoreLabel" ActionTag="625243168" Tag="1165" VisibleForFrame="False" IconVisible="False" LeftMargin="67.1817" RightMargin="98.8183" TopMargin="620.1799" BottomMargin="200.8201" FontSize="86" LabelText="000" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="3.0000" ShadowOffsetY="-3.0000" ShadowEnabled="True" ctype="TextObjectData">
+              <AbstractNodeData Name="winScoreLabel" ActionTag="625243168" Tag="1165" IconVisible="False" LeftMargin="68.0293" RightMargin="91.9707" TopMargin="443.6746" BottomMargin="157.3254" FontSize="86" LabelText="000" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="3.0000" ShadowOffsetY="-3.0000" ShadowEnabled="True" ctype="TextObjectData">
                 <Size X="138.0000" Y="103.0000" />
                 <AnchorPoint ScaleY="0.5000" />
-                <Position X="67.1817" Y="252.3201" />
+                <Position X="68.0293" Y="208.8254" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.2210" Y="0.2731" />
+                <PrePosition X="0.2283" Y="0.2966" />
                 <PreSize X="0.0000" Y="0.0000" />
                 <FontResource Type="Normal" Path="Game of Three.ttf" Plist="" />
                 <OutlineColor A="255" R="72" G="23" B="30" />
                 <ShadowColor A="255" R="77" G="77" B="77" />
               </AbstractNodeData>
-              <AbstractNodeData Name="rankingButton" ActionTag="749701667" Tag="1114" VisibleForFrame="False" IconVisible="False" LeftMargin="9.3046" RightMargin="132.6954" TopMargin="727.0000" BottomMargin="47.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="132" Scale9Height="128" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-                <Size X="162.0000" Y="150.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="90.3046" Y="122.0000" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.2971" Y="0.1320" />
-                <PreSize X="0.2531" Y="0.1563" />
-                <TextColor A="255" R="65" G="65" B="70" />
-                <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
-                <PressedFileData Type="Default" Path="Default/Button_Press.png" Plist="" />
-                <NormalFileData Type="Normal" Path="Images/resources-1x/Ranking.png" Plist="" />
-                <OutlineColor A="255" R="255" G="0" B="0" />
-                <ShadowColor A="255" R="110" G="110" B="110" />
-              </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
-            <Position X="-256.0000" Y="336.0000" />
-            <Scale ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="266.6667" Y="756.0000" />
+            <Scale ScaleX="0.5000" ScaleY="0.0015" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="-0.4000" Y="0.3500" />
+            <PrePosition X="0.4167" Y="0.7875" />
             <PreSize X="0.2375" Y="0.4812" />
             <FileData Type="Normal" Path="Images/resources-2x/multiLeftRaft@2x.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="multiRightRaft" ActionTag="-1776221752" Tag="1115" VisibleForFrame="False" Rotation="180.0000" RotationSkewX="180.0000" RotationSkewY="180.0000" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="896.0000" RightMargin="-558.0000" TopMargin="162.0000" BottomMargin="-126.0000" ctype="SpriteObjectData">
-            <Size X="302.0000" Y="924.0000" />
+          <AbstractNodeData Name="multiRightRaft" ActionTag="-1776221752" Tag="1115" VisibleForFrame="False" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="320.0000" RightMargin="146.0000" TopMargin="-134.4000" BottomMargin="454.4000" ctype="SpriteObjectData">
+            <Size X="302.0000" Y="704.0000" />
             <Children>
-              <AbstractNodeData Name="perfectScoreLabel" ActionTag="-996490050" Tag="1116" IconVisible="False" LeftMargin="25.0001" RightMargin="-45.0001" TopMargin="211.4599" BottomMargin="609.5401" FontSize="86" LabelText="0000000" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="3.0000" ShadowOffsetY="-3.0000" ShadowEnabled="True" ctype="TextObjectData">
+              <AbstractNodeData Name="perfectScoreLabel" ActionTag="-996490050" Tag="1116" IconVisible="False" LeftMargin="25.0000" RightMargin="-45.0000" TopMargin="183.3200" BottomMargin="417.6800" FontSize="86" LabelText="0000000" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="3.0000" ShadowOffsetY="-3.0000" ShadowEnabled="True" ctype="TextObjectData">
                 <Size X="322.0000" Y="103.0000" />
                 <AnchorPoint ScaleY="0.5000" />
-                <Position X="25.0001" Y="661.0401" />
+                <Position X="25.0000" Y="469.1800" />
                 <Scale ScaleX="0.6900" ScaleY="0.6900" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.0828" Y="0.7154" />
+                <PrePosition X="0.0828" Y="0.6664" />
                 <PreSize X="0.0000" Y="0.0000" />
                 <FontResource Type="Normal" Path="Game of Three.ttf" Plist="" />
                 <OutlineColor A="255" R="72" G="23" B="30" />
                 <ShadowColor A="255" R="77" G="77" B="77" />
               </AbstractNodeData>
-              <AbstractNodeData Name="greatScoreLabel" ActionTag="-1879967247" Tag="1117" IconVisible="False" LeftMargin="25.0001" RightMargin="-45.0001" TopMargin="282.0098" BottomMargin="538.9902" FontSize="86" LabelText="0000000" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="3.0000" ShadowOffsetY="-3.0000" ShadowEnabled="True" ctype="TextObjectData">
+              <AbstractNodeData Name="greatScoreLabel" ActionTag="-1879967247" Tag="1117" IconVisible="False" LeftMargin="26.1718" RightMargin="-46.1718" TopMargin="242.4320" BottomMargin="358.5680" FontSize="86" LabelText="0000000" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="3.0000" ShadowOffsetY="-3.0000" ShadowEnabled="True" ctype="TextObjectData">
                 <Size X="322.0000" Y="103.0000" />
                 <AnchorPoint ScaleY="0.5000" />
-                <Position X="25.0001" Y="590.4902" />
+                <Position X="26.1718" Y="410.0680" />
                 <Scale ScaleX="0.6900" ScaleY="0.6900" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.0828" Y="0.6391" />
+                <PrePosition X="0.0867" Y="0.5825" />
                 <PreSize X="0.0000" Y="0.0000" />
                 <FontResource Type="Normal" Path="Game of Three.ttf" Plist="" />
                 <OutlineColor A="255" R="72" G="23" B="30" />
                 <ShadowColor A="255" R="77" G="77" B="77" />
               </AbstractNodeData>
-              <AbstractNodeData Name="goodScoreLabel" ActionTag="680907384" Tag="1118" IconVisible="False" LeftMargin="25.0001" RightMargin="-45.0001" TopMargin="361.6605" BottomMargin="459.3395" FontSize="86" LabelText="0000000" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="3.0000" ShadowOffsetY="-3.0000" ShadowEnabled="True" ctype="TextObjectData">
+              <AbstractNodeData Name="goodScoreLabel" ActionTag="680907384" Tag="1118" IconVisible="False" LeftMargin="25.0000" RightMargin="-45.0000" TopMargin="300.6200" BottomMargin="300.3800" FontSize="86" LabelText="0000000" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="3.0000" ShadowOffsetY="-3.0000" ShadowEnabled="True" ctype="TextObjectData">
                 <Size X="322.0000" Y="103.0000" />
                 <AnchorPoint ScaleY="0.5000" />
-                <Position X="25.0001" Y="510.8395" />
+                <Position X="25.0000" Y="351.8800" />
                 <Scale ScaleX="0.6900" ScaleY="0.6900" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.0828" Y="0.5529" />
+                <PrePosition X="0.0828" Y="0.4998" />
                 <PreSize X="0.0000" Y="0.0000" />
                 <FontResource Type="Normal" Path="Game of Three.ttf" Plist="" />
                 <OutlineColor A="255" R="72" G="23" B="30" />
                 <ShadowColor A="255" R="77" G="77" B="77" />
               </AbstractNodeData>
-              <AbstractNodeData Name="maxComboLabel" ActionTag="1878940559" Tag="1119" IconVisible="False" LeftMargin="25.0000" RightMargin="-45.0000" TopMargin="436.5000" BottomMargin="384.5000" FontSize="86" LabelText="0000000" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="3.0000" ShadowOffsetY="-3.0000" ShadowEnabled="True" ctype="TextObjectData">
+              <AbstractNodeData Name="maxComboLabel" ActionTag="1878940559" Tag="1119" IconVisible="False" LeftMargin="25.0000" RightMargin="-45.0000" TopMargin="362.5496" BottomMargin="238.4504" FontSize="86" LabelText="0000000" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="3.0000" ShadowOffsetY="-3.0000" ShadowEnabled="True" ctype="TextObjectData">
                 <Size X="322.0000" Y="103.0000" />
                 <AnchorPoint ScaleY="0.5000" />
-                <Position X="25.0000" Y="436.0000" />
+                <Position X="25.0000" Y="289.9504" />
                 <Scale ScaleX="0.6900" ScaleY="0.6900" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.0828" Y="0.4719" />
+                <PrePosition X="0.0828" Y="0.4119" />
                 <PreSize X="0.0000" Y="0.0000" />
                 <FontResource Type="Normal" Path="Game of Three.ttf" Plist="" />
                 <OutlineColor A="255" R="72" G="23" B="30" />
                 <ShadowColor A="255" R="77" G="77" B="77" />
               </AbstractNodeData>
-              <AbstractNodeData Name="totalScoreLabel" ActionTag="1407101320" Tag="1120" IconVisible="False" LeftMargin="23.6058" RightMargin="-43.6058" TopMargin="522.8920" BottomMargin="298.1080" FontSize="86" LabelText="0000000" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="3.0000" ShadowOffsetY="-3.0000" ShadowEnabled="True" ctype="TextObjectData">
-                <Size X="322.0000" Y="103.0000" />
-                <AnchorPoint ScaleY="0.5000" />
-                <Position X="23.6058" Y="349.6080" />
-                <Scale ScaleX="0.6900" ScaleY="0.6900" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.0782" Y="0.3784" />
-                <PreSize X="0.0000" Y="0.0000" />
-                <FontResource Type="Normal" Path="Game of Three.ttf" Plist="" />
-                <OutlineColor A="255" R="72" G="23" B="30" />
-                <ShadowColor A="255" R="77" G="77" B="77" />
-              </AbstractNodeData>
-              <AbstractNodeData Name="replayButton" ActionTag="-2028031072" Tag="1121" IconVisible="False" LeftMargin="-123.0000" RightMargin="179.0000" TopMargin="726.5000" BottomMargin="46.5000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="216" Scale9Height="129" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="replayButton" ActionTag="-2028031072" Tag="1121" IconVisible="False" LeftMargin="-122.9996" RightMargin="178.9996" TopMargin="534.4991" BottomMargin="18.5009" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="216" Scale9Height="129" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="246.0000" Y="151.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position Y="122.0000" />
+                <Position X="0.0004" Y="94.0009" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition Y="0.1320" />
+                <PrePosition X="0.0000" Y="0.1335" />
                 <PreSize X="0.3844" Y="0.1573" />
                 <TextColor A="255" R="65" G="65" B="70" />
                 <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
@@ -1163,13 +1383,13 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="characterButton" ActionTag="2113996635" Tag="1122" IconVisible="False" LeftMargin="134.2008" RightMargin="4.7992" TopMargin="726.5000" BottomMargin="46.5000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="133" Scale9Height="129" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="characterButton" ActionTag="2113996635" Tag="1122" IconVisible="False" LeftMargin="134.2010" RightMargin="4.7990" TopMargin="534.4995" BottomMargin="18.5005" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="133" Scale9Height="129" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="163.0000" Y="151.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="215.7008" Y="122.0000" />
+                <Position X="215.7010" Y="94.0005" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.7142" Y="0.1320" />
+                <PrePosition X="0.7142" Y="0.1335" />
                 <PreSize X="0.2547" Y="0.1573" />
                 <TextColor A="255" R="65" G="65" B="70" />
                 <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
@@ -1178,24 +1398,36 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="opponentWinScoreLabel" ActionTag="-1021078695" Tag="1166" IconVisible="False" LeftMargin="93.9698" RightMargin="70.0302" TopMargin="620.1080" BottomMargin="200.8920" FontSize="86" LabelText="000" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="3.0000" ShadowOffsetY="-3.0000" ShadowEnabled="True" ctype="TextObjectData">
+              <AbstractNodeData Name="opponentWinScoreLabel" ActionTag="-1021078695" Tag="1166" IconVisible="False" LeftMargin="94.8195" RightMargin="69.1805" TopMargin="443.6030" BottomMargin="157.3970" FontSize="86" LabelText="000" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="3.0000" ShadowOffsetY="-3.0000" ShadowEnabled="True" ctype="TextObjectData">
                 <Size X="138.0000" Y="103.0000" />
                 <AnchorPoint ScaleY="0.5000" />
-                <Position X="93.9698" Y="252.3920" />
+                <Position X="94.8195" Y="208.8970" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.3112" Y="0.2732" />
+                <PrePosition X="0.3140" Y="0.2967" />
                 <PreSize X="0.0000" Y="0.0000" />
                 <FontResource Type="Normal" Path="Game of Three.ttf" Plist="" />
                 <OutlineColor A="255" R="72" G="23" B="30" />
                 <ShadowColor A="255" R="77" G="77" B="77" />
               </AbstractNodeData>
+              <AbstractNodeData Name="winLoseLabel" ActionTag="2107388862" Tag="1209" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="151.0000" RightMargin="151.0000" TopMargin="119.6800" BottomMargin="584.3200" FontSize="100" LabelText="" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="10.0000" ShadowOffsetY="-10.0000" ShadowEnabled="True" ctype="TextObjectData">
+                <Size X="0.0000" Y="0.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="151.0000" Y="584.3200" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.5000" Y="0.8300" />
+                <PreSize X="0.0000" Y="0.0000" />
+                <FontResource Type="Normal" Path="Fonts/njnaruto.ttf" Plist="" />
+                <OutlineColor A="255" R="0" G="0" B="0" />
+                <ShadowColor A="255" R="114" G="92" B="53" />
+              </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleY="0.5000" />
-            <Position X="896.0000" Y="336.0000" />
-            <Scale ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="266.6667" Y="756.0000" />
+            <Scale ScaleX="0.5000" ScaleY="0.0010" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="1.4000" Y="0.3500" />
+            <PrePosition X="0.4167" Y="0.7875" />
             <PreSize X="0.2375" Y="0.4812" />
             <FileData Type="Normal" Path="Images/resources-2x/multiRightRaft@2x.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />

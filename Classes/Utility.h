@@ -11,7 +11,7 @@
 
 class Utility : public cocos2d::Layer{
 public:
-    static std::string getScoreString (int score);
+    static std::string getScoreString (int score, int numCount);
     static std::string getTimeString (int timeSec);
     static void _printNodeRecursive(Node* node, int count, std::function<void (Node*)> func);
     static void printNode(Node* node);

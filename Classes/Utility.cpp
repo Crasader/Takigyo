@@ -27,9 +27,9 @@ std::string Utility::getTimeString(int timeSec)
     return std::string(minute_out.str() + ":" + second_out.str());
 };
 
-std::string Utility::getScoreString(int score) {
+std::string Utility::getScoreString(int score, int numCount = 7) {
     std::ostringstream score_out;
-    score_out << std::setfill('0') << std::setw(7) << score;
+    score_out << std::setfill('0') << std::setw(numCount) << score;
     
     return std::string(score_out.str());
 };

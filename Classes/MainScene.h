@@ -134,6 +134,9 @@ private:
     int userId;
     int opponentUserId;
     
+    int winScore;
+    int opponentWinScore;
+    
     std::vector<Pattern> currentPattern;
     int currentLevel;
     int currentPatternId;
