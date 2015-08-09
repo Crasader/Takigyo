@@ -2,7 +2,7 @@
   <PropertyGroup Type="Scene" Name="MainScene" ID="a2ee0952-26b5-49ae-8bf9-4f1d6279b798" Version="2.3.1.2" />
   <Content ctype="GameProjectContent">
     <Content>
-      <Animation Duration="539" Speed="1.0000" ActivedAnimationName="multiResult">
+      <Animation Duration="539" Speed="1.0000" ActivedAnimationName="multiEndResult">
         <Timeline ActionTag="-1880258662" Property="VisibleForFrame">
           <BoolFrame FrameIndex="141" Tween="False" Value="True" />
           <BoolFrame FrameIndex="150" Tween="False" Value="True" />
@@ -490,13 +490,16 @@
           <ScaleFrame FrameIndex="455" X="0.6600" Y="0.6600">
             <EasingData Type="0" />
           </ScaleFrame>
-          <ScaleFrame FrameIndex="480" X="0.6600" Y="0.6600">
+          <ScaleFrame FrameIndex="480" X="1.0000" Y="1.0000">
             <EasingData Type="0" />
           </ScaleFrame>
-          <ScaleFrame FrameIndex="495" X="0.3300" Y="0.3300">
+          <ScaleFrame FrameIndex="495" X="0.5000" Y="0.5000">
             <EasingData Type="0" />
           </ScaleFrame>
-          <ScaleFrame FrameIndex="520" X="0.3300" Y="0.3300">
+          <ScaleFrame FrameIndex="505" X="0.5000" Y="0.5000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+          <ScaleFrame FrameIndex="520" X="0.5000" Y="0.5000">
             <EasingData Type="0" />
           </ScaleFrame>
         </Timeline>
@@ -578,13 +581,13 @@
           <ScaleFrame FrameIndex="455" X="0.6600" Y="0.6600">
             <EasingData Type="0" />
           </ScaleFrame>
-          <ScaleFrame FrameIndex="480" X="0.6600" Y="0.6600">
+          <ScaleFrame FrameIndex="480" X="1.0000" Y="1.0000">
             <EasingData Type="0" />
           </ScaleFrame>
-          <ScaleFrame FrameIndex="495" X="0.3300" Y="0.3300">
+          <ScaleFrame FrameIndex="495" X="0.5000" Y="0.5000">
             <EasingData Type="0" />
           </ScaleFrame>
-          <ScaleFrame FrameIndex="520" X="0.3300" Y="0.3300">
+          <ScaleFrame FrameIndex="520" X="0.5000" Y="0.5000">
             <EasingData Type="0" />
           </ScaleFrame>
         </Timeline>
@@ -1042,10 +1045,10 @@
             <FileData Type="Normal" Path="splash2.plist" Plist="" />
             <BlendFunc Src="770" Dst="1" />
           </AbstractNodeData>
-          <AbstractNodeData Name="multiLeftRaft" ActionTag="-437925686" Tag="1113" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="16.0000" RightMargin="320.0000" TopMargin="-308.4000" BottomMargin="344.4000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="multiLeftRaft" ActionTag="-437925686" Tag="1113" VisibleForFrame="False" Rotation="-180.0000" RotationSkewX="-180.0000" RotationSkewY="-180.0000" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="-560.0000" RightMargin="896.0000" TopMargin="162.0000" BottomMargin="-126.0000" ctype="SpriteObjectData">
             <Size X="304.0000" Y="924.0000" />
             <Children>
-              <AbstractNodeData Name="winScoreLabel" ActionTag="625243168" Tag="1165" IconVisible="False" LeftMargin="67.1817" RightMargin="98.8183" TopMargin="620.1799" BottomMargin="200.8201" FontSize="86" LabelText="000" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="3.0000" ShadowOffsetY="-3.0000" ShadowEnabled="True" ctype="TextObjectData">
+              <AbstractNodeData Name="winScoreLabel" ActionTag="625243168" Tag="1165" VisibleForFrame="False" IconVisible="False" LeftMargin="67.1817" RightMargin="98.8183" TopMargin="620.1799" BottomMargin="200.8201" FontSize="86" LabelText="000" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="3.0000" ShadowOffsetY="-3.0000" ShadowEnabled="True" ctype="TextObjectData">
                 <Size X="138.0000" Y="103.0000" />
                 <AnchorPoint ScaleY="0.5000" />
                 <Position X="67.1817" Y="252.3201" />
@@ -1074,15 +1077,15 @@
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
-            <Position X="320.0000" Y="806.4000" />
-            <Scale ScaleX="0.5000" ScaleY="0.0015" />
+            <Position X="-256.0000" Y="336.0000" />
+            <Scale ScaleX="0.5000" ScaleY="0.5000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.8400" />
+            <PrePosition X="-0.4000" Y="0.3500" />
             <PreSize X="0.2375" Y="0.4812" />
             <FileData Type="Normal" Path="Images/resources-2x/multiLeftRaft@2x.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="multiRightRaft" ActionTag="-1776221752" Tag="1115" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="320.0000" RightMargin="18.0000" TopMargin="-308.4000" BottomMargin="344.4000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="multiRightRaft" ActionTag="-1776221752" Tag="1115" VisibleForFrame="False" Rotation="180.0000" RotationSkewX="180.0000" RotationSkewY="180.0000" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="896.0000" RightMargin="-558.0000" TopMargin="162.0000" BottomMargin="-126.0000" ctype="SpriteObjectData">
             <Size X="302.0000" Y="924.0000" />
             <Children>
               <AbstractNodeData Name="perfectScoreLabel" ActionTag="-996490050" Tag="1116" IconVisible="False" LeftMargin="25.0001" RightMargin="-45.0001" TopMargin="211.4599" BottomMargin="609.5401" FontSize="86" LabelText="0000000" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="3.0000" ShadowOffsetY="-3.0000" ShadowEnabled="True" ctype="TextObjectData">
@@ -1189,10 +1192,10 @@
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleY="0.5000" />
-            <Position X="320.0000" Y="806.4000" />
-            <Scale ScaleX="0.5000" ScaleY="0.0010" />
+            <Position X="896.0000" Y="336.0000" />
+            <Scale ScaleX="0.5000" ScaleY="0.5000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.8400" />
+            <PrePosition X="1.4000" Y="0.3500" />
             <PreSize X="0.2375" Y="0.4812" />
             <FileData Type="Normal" Path="Images/resources-2x/multiRightRaft@2x.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
