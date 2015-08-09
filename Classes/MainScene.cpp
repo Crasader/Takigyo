@@ -63,8 +63,6 @@ bool MainScene::init()
     this->lifeBG2           = rootNode->getChildByName("lifeBG2");
     this->auraBar2          = lifeBG2->getChildByName<Sprite*>("lifeBar2");
     this->countDownLabel    = rootNode->getChildByName<cocos2d::ui::Text*>("countDownLabel");
-    auto combo              = rootNode->getChildByName("combo");
-    this->comboLabel        = combo->getChildByName<cocos2d::ui::Text*>("comboLabel");
     this->cloudsNode        = rootNode->getChildByName("clouds");
     
     // Recovery particle effect
@@ -775,12 +773,8 @@ void MainScene::replayButtonPressed(Ref *pSender, ui::Widget::TouchEventType eEv
         Sequence::create(
               CallFunc::create(
                                [this]() {
-                                   auto resultLeftRaft = this->rootNode->getChildByName<Sprite*>("leftRaft");
+//                                   auto resultLeftRaft = this->rootNode->getChildByName<Sprite*>("leftRaft");
                                    auto resultRightRaft = this->rootNode->getChildByName<Sprite*>("rightRaft");
-                                   auto resultLeft          = ScaleTo::create(0.5f, 0.33f);
-                                   auto resultRight         = ScaleTo::create(0.5f, 0.33f);
-                                   resultLeftRaft->runAction(resultLeft);
-                                   resultRightRaft->runAction(resultRight);
                                    
                                    // Byebye Button
                                    ui::Button* replayButton = resultRightRaft->getChildByName<ui::Button*>("replayButton");
@@ -799,7 +793,7 @@ void MainScene::replayButtonPressed(Ref *pSender, ui::Widget::TouchEventType eEv
                                                            );
                                }
                                ),
-              DelayTime::create(0.5f),
+              DelayTime::create(0.2f),
               CallFunc::create(
                                [this]() {
                                    this->character->setNen(Nen::Ken);

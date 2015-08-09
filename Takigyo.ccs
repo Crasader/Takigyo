@@ -78,6 +78,8 @@
             <Image Name="title@2x.png" />
             <Image Name="waterfall@2x.png" />
             <Image Name="waterfall2@2x.png" />
+            <Image Name="multiRightRaft@2x.png" />
+            <Image Name="multiLeftRaft@2x.png" />
           </Folder>
           <Folder Name="resources-3x">
             <Image Name="BottomRock@3x.png" />
