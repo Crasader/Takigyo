@@ -25,9 +25,10 @@ namespace JSONPacker{
         float auraLeft;
         GameState state;
         float playTime;
-//        bool gameOver;
-//        int score;
-//        std::vector<std::vector<cocos2d::Color3B>> board;
+        int patternId;
+        bool gameOver;
+        int userId;
+        int nextRound;
     };
     struct UnpackedLevelInfo {
         int level;
@@ -47,6 +48,8 @@ namespace JSONPacker{
     
     int unpackUserId(std::string json);
     std::string packUserId(const int userId);
+    int unpackPatternId(std::string json);
+    std::string packPatternId(const int patternId);
 }
 
 #endif /* defined(__Takigyo__JSONPacker__) */

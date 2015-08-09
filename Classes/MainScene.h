@@ -53,6 +53,7 @@ private:
     cocos2d::Node* bottomRock2;
     cocos2d::ParticleSystemQuad* splashEffect;
     cocos2d::ParticleSystemQuad* splashEffect2;
+    cocos2d::ui::Button* replayMultiButton;
     
     cocos2d::Size visibleSize;
     
@@ -66,6 +67,7 @@ private:
     
     void triggerMultiPreparation();
     void triggerMultiGameOver();
+    void triggerMultiResult();
     
     void dropObstacles(ObstacleType obstacle, float tempo);
     void resetGameState();
@@ -74,6 +76,7 @@ private:
     void singlePlayerPressed(cocos2d::Ref* pSender, cocos2d::ui::Widget::TouchEventType eEventType);
     void multiPlayerPressed(cocos2d::Ref* pSender, cocos2d::ui::Widget::TouchEventType eEventType);
     void replayButtonPressed(cocos2d::Ref* pSender, cocos2d::ui::Widget::TouchEventType eEventType);
+    void replayMultiButtonPressed(cocos2d::Ref* pSender, cocos2d::ui::Widget::TouchEventType eEventType);
     void characterButtonPressed(cocos2d::Ref* pSender, cocos2d::ui::Widget::TouchEventType eEventType);
     void setRemainingAura(float auraLeft);
     void setOpponentRemainingAura(float auraLeft);
@@ -87,6 +90,7 @@ private:
     void sendDataOverNetwork();
     void setSinglePlayMode();
     void setMultiPlayMode();
+    void unpack(std::string dataStr);
     
     float playingTime;
     float opponentPlayingTime;
@@ -95,7 +99,9 @@ private:
     float gettingHitCount;
     float patternPlayTime;
     float touchingTime;
+    float timeForMulti;
     
+    bool readyForNextPattern;
     bool gettingHit;
     bool active;
     bool playingPattern;
@@ -103,6 +109,9 @@ private:
     bool replayButtonPressing;
     bool onMultiPlayerMode;
     bool isHost;
+    bool sentPattern;
+    bool isGameOver;
+    bool isOpponentGameOver;
     
     int timeLeft;
     int playCount;
@@ -110,6 +119,8 @@ private:
     int maxComboCount;
     int soundId;
     int gameRound;
+    int nextRound;
+    int pastRound;
     int touchingCount;
     
     int totalGoodCount;
@@ -125,6 +136,9 @@ private:
     
     std::vector<Pattern> currentPattern;
     int currentLevel;
+    int currentPatternId;
+    int receivedPatternId;
+    int pastPatternId;
     int beforeLevel;
     float currentDuration;
     double currentTempo;

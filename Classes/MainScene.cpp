@@ -56,7 +56,6 @@ bool MainScene::init()
     this->bottomRock        = waterfall->getChildByName("bottomRock");
     this->bottomRock2       = waterfall->getChildByName("bottomRock2");
     this->character         = bottomRock->getChildByName<Character*>("Character");
-//    this->opponentCharacter = dynamic_cast<Character*>(CSLoader::createNode("Character.csb"));
     this->opponentCharacter = bottomRock2->getChildByName<OpponentCharacter*>("OpponentCharacter");
     this->levelNode         = waterfall->getChildByName("level");
     this->lifeBG            = rootNode->getChildByName("lifeBG");
@@ -104,10 +103,9 @@ bool MainScene::init()
 void MainScene::onEnter() {
     Layer::onEnter();
     
-    this->netWorkingWrapper->startAdvertisingAvailability();
-    
-    // schedule the update method to be called every frame
     this->scheduleUpdate();
+    
+    this->netWorkingWrapper->startAdvertisingAvailability();
     
     this->triggerTitle();
     
@@ -143,21 +141,93 @@ void MainScene::update(float dt)
         auto denshion = CocosDenshion::SimpleAudioEngine::getInstance();
         denshion->playEffect("bird.wav");
     }
+    if (onMultiPlayerMode) {
+        this->timeForMulti += dt;
+        if (this->timeForMulti > 0.2) {
+            this->timeForMulti = 0.0f;
+            this->sendDataOverNetwork();
+        }
+    }
     
     if (this->gameState == GameState::MultiPreparation) {
         if (this->userId > 0 && this->opponentUserId > 0) {
             this->isHost = (this->userId > this->opponentUserId) ? true : false;
+            this->gameState = GameState::WAITING;
+            if (isHost) {
+                CCLOG("-------------YOU ARE HOST---------------");
+            } else {
+                CCLOG("-------------YOU ARE CLIENT-------------");
+            }
+            this->sendDataOverNetwork();
         }
+    } else if (this->isHost == true && this->gameState == GameState::WAITING && this->opponentGameState == GameState::WAITING) {
+        if (this->nextRound == this->gameRound) {
+            this->nextRound = this->gameRound + 1;
+                              
+            LevelInfo* levelInfo = LevelInfo::createPatternWithRound(this->gameRound);
+            this->currentPatternId  = levelInfo->getCurrentPatternId();
+            this->currentPattern    = levelInfo->getCurrentPattern();
+            this->currentLevel      = levelInfo->getCurrentLevel();
+            this->currentDuration   = levelInfo->getCurrentDuration();
+            this->currentTempo      = levelInfo->getCurrentTempo();
+            if (this->beforeLevel < this->currentLevel) {
+                this->setLevelCount();
+                this->beforeLevel = this->currentLevel;
+            }
+            this->loadNext = false;
+            this->patternPlayTime = 0.0f;
+            for (auto newObstacle : currentPattern) {
+                this->timingList.push_back(newObstacle.timing);
+                this->obstacleList.push_back(newObstacle.type);
+            }
+            // ホストはクライアントに、新しいパターンIDを送信（WAITING状態）
+            this->sendDataOverNetwork();
+            if (this->gameRound == 1) {
+                this->triggerReady();
+                CCLOG("------------------");
+                CCLOG("HOST GAME READY!!!");
+                CCLOG("------------------");
+            } else if (this->gameRound >= 2) {
+                this->gameState = GameState::Playing;
+            }
+        }
+    // クライアント、
+    } else if (isHost == false && this->nextRound > this->gameRound && this->pastRound < this->gameRound && this->receivedPatternId > 0) {
+        LevelInfo* levelInfo = LevelInfo::createPatternWithRoundAndPatternId(this->gameRound, this->receivedPatternId);
+        this->currentPatternId  = levelInfo->getCurrentPatternId();
+        this->currentPattern    = levelInfo->getCurrentPattern();
+        this->currentLevel      = levelInfo->getCurrentLevel();
+        this->currentDuration   = levelInfo->getCurrentDuration();
+        this->currentTempo      = levelInfo->getCurrentTempo();
+        if (this->beforeLevel < this->currentLevel) {
+            this->setLevelCount();
+            this->beforeLevel = this->currentLevel;
+        }
+        this->loadNext = false;
+        this->patternPlayTime = 0.0f;
+        this->pastRound = this->gameRound;
+        for (auto newObstacle : currentPattern) {
+            this->timingList.push_back(newObstacle.timing);
+            this->obstacleList.push_back(newObstacle.type);
+        }
+        if (this->gameRound == 1) {
+            this->triggerReady();
+            CCLOG("------------------");
+            CCLOG("CLIENT GAME READY!!!");
+            CCLOG("------------------");
+        } else if (this->gameRound >= 2) {
+            this->gameState = GameState::Playing;
+        }
+        this->sendDataOverNetwork();
     } else if (this->gameState == GameState::Playing) {
         this->playingTime += dt;
         this->patternPlayTime += dt;
-        if (this->loadNext == true) {
-            LevelInfo* levelInfo = LevelInfo::createPatternWithRound(this->gameRound);
-            this->currentPattern = levelInfo->getCurrentPattern();
-            this->currentLevel = levelInfo->getCurrentLevel();
-            this->currentDuration = levelInfo->getCurrentDuration();
-            this->currentTempo = levelInfo->getCurrentTempo();
-            
+        if (this->loadNext == true && this->onMultiPlayerMode == false) {
+            LevelInfo* levelInfo    = LevelInfo::createPatternWithRound(this->gameRound);
+            this->currentPattern    = levelInfo->getCurrentPattern();
+            this->currentLevel      = levelInfo->getCurrentLevel();
+            this->currentDuration   = levelInfo->getCurrentDuration();
+            this->currentTempo      = levelInfo->getCurrentTempo();
             if (this->beforeLevel < this->currentLevel) {
                 this->setLevelCount();
                 this->beforeLevel = this->currentLevel;
@@ -179,9 +249,16 @@ void MainScene::update(float dt)
                     this->dropObstacles(nextObstacle, this->currentTempo);
                 }
             }
-            if (timingList.empty() && patternPlayTime >= this->currentDuration) {
-                loadNext = true;
-                this->gameRound++;
+            if (timingList.empty() && this->patternPlayTime >= this->currentDuration) {
+                if (onMultiPlayerMode) {
+                    loadNext = true;
+                    this->gameRound++;
+                    this->gameState = GameState::WAITING;
+                    this->sendDataOverNetwork();
+                } else {
+                    loadNext = true;
+                    this->gameRound++;
+                }
             }
         }
         
@@ -197,56 +274,24 @@ void MainScene::update(float dt)
             }
         }
         
-        if (this->auraLeft <= 0.0f)
-        {
-            int totalScoreString = (this->totalPerfectCount * 3 + this->totalGreatCount * 2 + this->totalGoodCount) + this->maxComboCount;
-            std::string playTimeString = StringUtils::toString(this->playingTime);
-            std::string totalGreatString = StringUtils::toString(this->totalGreatCount);
-            std::string totalGoodString = StringUtils::toString(this->totalGoodCount);
-            std::string maxComboString = StringUtils::toString(this->maxComboCount);
-            
-            auto resultLeftRaft         = this->rootNode->getChildByName("leftRaft");
-            auto resultRightRaft        = this->rootNode->getChildByName("rightRaft");
-            auto totalPerfectScoreLabel = resultRightRaft->getChildByName<cocos2d::ui::Text*>("perfectScoreLabel");
-            auto totalGreatScoreLabel   = resultRightRaft->getChildByName<cocos2d::ui::Text*>("greatScoreLabel");
-            auto totalGoodScoreLabel    = resultRightRaft->getChildByName<cocos2d::ui::Text*>("goodScoreLabel");
-            auto maxComboLabel          = resultRightRaft->getChildByName<cocos2d::ui::Text*>("maxComboLabel");
-            auto totalScoreLabel        = resultRightRaft->getChildByName<cocos2d::ui::Text*>("totalScoreLabel");
-            totalPerfectScoreLabel->setString(Utility::getScoreString(this->totalPerfectCount));
-            totalGreatScoreLabel->setString(Utility::getScoreString(this->totalGreatCount));
-            totalGoodScoreLabel->setString(Utility::getScoreString(this->totalGoodCount));
-            maxComboLabel->setString(Utility::getScoreString(this->maxComboCount));
-            totalScoreLabel->setString(Utility::getScoreString(totalScoreString));
-            
-            resultLeftRaft->setZOrder(1);
-            resultRightRaft->setZOrder(1);
-            
-            ui::Button* replayButton = resultRightRaft->getChildByName<ui::Button*>("replayButton");
-            replayButton->addTouchEventListener(CC_CALLBACK_2(MainScene::replayButtonPressed, this));
-            
-            ui::Button* characterButton = resultRightRaft->getChildByName<ui::Button*>("characterButton");
-            characterButton->addTouchEventListener(CC_CALLBACK_2(MainScene::characterButtonPressed, this));
-            
-            this->rootNode->runAction(Sequence::create(
-                CallFunc::create(
-                    [this]() {
-                        // load and run the title animation
-                        ActionTimeline* titleTimeline = CSLoader::createTimeline("MainScene.csb");
-                        this->rootNode->runAction(titleTimeline);
-                        titleTimeline->play("result", false);
-                    }
-                    ),
-                DelayTime::create(1.0f),
-                CallFunc::create(
-                    [replayButton]() {
-                        replayButton->setOpacity(255);
-                    }
-                    ),
-                NULL
-                )
-            );
-            this->triggerGameOver();
+        if (this->auraLeft <= 0.0f) {
+            if (onMultiPlayerMode) {
+                this->gameState = GameState::GameOver;
+            } else {
+                this->triggerGameOver();
+                this->sendDataOverNetwork();
+            }
         }
+        // 自分がプレイ中に対戦相手がゲームオーバー
+        if (this->opponentGameState == GameState::GameOver) {
+            this->gameState = GameState::GameOver;
+            this->sendDataOverNetwork();
+        }
+    } else if (this->gameState == GameState::GameOver && this->opponentGameState == GameState::GameOver) {
+        this->triggerMultiGameOver();
+    } else if (this->gameState == GameState::Result && this->opponentGameState == GameState::Result) {
+        this->resetGameState();
+        this->triggerMultiPreparation();
     }
 }
 
@@ -388,12 +433,25 @@ void MainScene::resetGameState()
     }
     this->loadNext = true;
     this->gameRound = 1;
+    this->pastRound = 0;
     this->beforeLevel = 0;
     this->touchingTime = 0.0;
     this->touchingCount = 0;
     this->timingList = {};
     this->currentPattern = {};
     this->playingTime = 0.0f;
+    this->currentPatternId = 0;
+    this->receivedPatternId = 0;
+    
+    if (this->onMultiPlayerMode) {
+        this->isOpponentGameOver = false;
+        this->opponentPlayingTime = 0.0f;
+        this->nextRound = 1;
+        this->isHost = false;
+        this->userId = 0;
+        this->opponentUserId = 0;
+        this->receivedPatternId = 0;
+    }
     
     this->totalGoodCount = 0;
     this->totalGreatCount = 0;
@@ -446,17 +504,82 @@ void MainScene::triggerMultiPreparation() {
     std::random_device rnd;
     // メルセンヌ・ツイスタ 引数は初期シード値 ファンクタを渡す
     std::mt19937 mt(rnd());
-    std::uniform_int_distribution<int> rand5(0,INT_MAX);
+    std::uniform_int_distribution<int> rand5(1,INT_MAX);
     this->userId = rand5(mt);
+    this->sendDataOverNetwork();
+}
+
+void MainScene::triggerMultiResult() {
+    this->replayMultiButton = ui::Button::create("PlayButton.png");
+    replayMultiButton->setPosition(Vec2(this->visibleSize.width * 0.5f, this->visibleSize.height * 0.5f));
+    replayMultiButton->addTouchEventListener(CC_CALLBACK_2(MainScene::replayMultiButtonPressed, this));
+    this->rootNode->addChild(replayMultiButton);
+    this->gameState = GameState::Result;
+}
+
+void MainScene::triggerMultiGameOver() {
+    this->playCount++;
     
-    std::string json = JSONPacker::packUserId(this->userId);
-    netWorkingWrapper->sendData(json.c_str(), json.length());
+    auto msg = "You: " + StringUtils::toString(this->playingTime) + "\n" + "Opponent: " + StringUtils::toString(this->opponentPlayingTime);
+    const char* cstr = msg.c_str();;
+    if (this->playingTime > this->opponentPlayingTime) {
+        MessageBox(cstr, "You Win!");
+    } else {
+        MessageBox(cstr, "You Lose!");
+    }
+    this->triggerMultiResult();
 }
 
 void MainScene::triggerGameOver()
 {
-    this->playCount++;
+    int totalScoreString = (this->totalPerfectCount * 3 + this->totalGreatCount * 2 + this->totalGoodCount) + this->maxComboCount;
+    std::string playTimeString = StringUtils::toString(this->playingTime);
+    std::string totalGreatString = StringUtils::toString(this->totalGreatCount);
+    std::string totalGoodString = StringUtils::toString(this->totalGoodCount);
+    std::string maxComboString = StringUtils::toString(this->maxComboCount);
     
+    auto resultLeftRaft         = this->rootNode->getChildByName("leftRaft");
+    auto resultRightRaft        = this->rootNode->getChildByName("rightRaft");
+    auto totalPerfectScoreLabel = resultRightRaft->getChildByName<cocos2d::ui::Text*>("perfectScoreLabel");
+    auto totalGreatScoreLabel   = resultRightRaft->getChildByName<cocos2d::ui::Text*>("greatScoreLabel");
+    auto totalGoodScoreLabel    = resultRightRaft->getChildByName<cocos2d::ui::Text*>("goodScoreLabel");
+    auto maxComboLabel          = resultRightRaft->getChildByName<cocos2d::ui::Text*>("maxComboLabel");
+    auto totalScoreLabel        = resultRightRaft->getChildByName<cocos2d::ui::Text*>("totalScoreLabel");
+    totalPerfectScoreLabel->setString(Utility::getScoreString(this->totalPerfectCount));
+    totalGreatScoreLabel->setString(Utility::getScoreString(this->totalGreatCount));
+    totalGoodScoreLabel->setString(Utility::getScoreString(this->totalGoodCount));
+    maxComboLabel->setString(Utility::getScoreString(this->maxComboCount));
+    totalScoreLabel->setString(Utility::getScoreString(totalScoreString));
+    
+    resultLeftRaft->setZOrder(1);
+    resultRightRaft->setZOrder(1);
+    
+    ui::Button* replayButton = resultRightRaft->getChildByName<ui::Button*>("replayButton");
+    replayButton->addTouchEventListener(CC_CALLBACK_2(MainScene::replayButtonPressed, this));
+    
+    ui::Button* characterButton = resultRightRaft->getChildByName<ui::Button*>("characterButton");
+    characterButton->addTouchEventListener(CC_CALLBACK_2(MainScene::characterButtonPressed, this));
+    
+    this->rootNode->runAction(
+        Sequence::create(
+            CallFunc::create(
+                [this]() {
+                    // load and run the title animation
+                    ActionTimeline* titleTimeline = CSLoader::createTimeline("MainScene.csb");
+                    this->rootNode->runAction(titleTimeline);
+                    titleTimeline->play("result", false);
+                }
+            ),
+            DelayTime::create(1.0f),
+            CallFunc::create(
+                [replayButton]() {
+                    replayButton->setOpacity(255);
+                }
+            ),
+            NULL
+        )
+    );
+    this->playCount++;
     this->gameState = GameState::GameOver;
 }
 
@@ -534,14 +657,12 @@ void MainScene::gotHit() {
 
 void MainScene::setRemainingAura(float auraLeft)
 {
-    // update the UI to reflect the correct time left
     this->auraLeft = clampf(auraLeft, 0.0f, PRESENT_OUTPUT_POTENTIAL);
     this->auraBar->setScaleX(this->auraLeft / PRESENT_OUTPUT_POTENTIAL);
 }
 
 void MainScene::setOpponentRemainingAura(float auraLeft)
 {
-    // update the UI to reflect the correct time left
     this->auraLeft2 = clampf(auraLeft, 0.0f, PRESENT_OUTPUT_POTENTIAL);
     this->auraBar2->setScaleX(this->auraLeft2 / PRESENT_OUTPUT_POTENTIAL);
 }
@@ -550,7 +671,6 @@ void MainScene::setComboCount(int combo) {
     if (this->maxComboCount < combo) {
         this->maxComboCount = combo;
     }
-    // update the score label
     
     auto comboLabel = Label::createWithTTF("0", "Game of Three.ttf", 72);
     comboLabel->setString(std::to_string(combo));
@@ -641,6 +761,13 @@ void MainScene::multiPlayerPressed(Ref *pSender, ui::Widget::TouchEventType eEve
     }
 }
 
+void MainScene::replayMultiButtonPressed(Ref *pSender, ui::Widget::TouchEventType eEventType) {
+    if (eEventType == ui::Widget::TouchEventType::ENDED) {
+        this->replayMultiButton->removeFromParent();
+        this->triggerMultiPreparation();
+    }
+}
+
 void MainScene::replayButtonPressed(Ref *pSender, ui::Widget::TouchEventType eEventType) {
     if (eEventType == ui::Widget::TouchEventType::ENDED && this->replayButtonPressing == false) {
         this->replayButtonPressing = true;
@@ -693,10 +820,16 @@ void MainScene::replayButtonPressed(Ref *pSender, ui::Widget::TouchEventType eEv
               CallFunc::create(
                                [this]() {
                                    this->character->setNen(Nen::Ten);
-                                   this->gameState = GameState::Playing;
-                                   CocosDenshion::SimpleAudioEngine::getInstance()->stopEffect(soundId);
-                                   this->triggerReady();
-                                   this->resetGameState();
+                                   if (onMultiPlayerMode) {
+                                       this->gameState = GameState::WAITING;
+                                       this->resetGameState();
+                                       CocosDenshion::SimpleAudioEngine::getInstance()->stopEffect(soundId);
+                                   } else if (onMultiPlayerMode == false) {
+                                       this->gameState = GameState::Playing;
+                                       this->triggerReady();
+                                       this->resetGameState();
+                                       CocosDenshion::SimpleAudioEngine::getInstance()->stopEffect(soundId);
+                                   }
                                }
                                ),
               DelayTime::create(3.0f),
@@ -737,16 +870,15 @@ void MainScene::receivedData(const void *data, unsigned long length) {
     const char* cstr = reinterpret_cast<const char*>(data);
     std::string json = std::string(cstr, length);
     
-    CCLOG("%s", cstr);
-    if (gameState == GameState::Playing) {
-        JSONPacker::UserData userData = JSONPacker::unpackUserDataJSON(json);
-        this->opponentGameState = userData.state;
-        this->opponentCharacter->setNen(userData.nen);
-        this->setOpponentRemainingAura(userData.auraLeft);
-        this->opponentPlayingTime = userData.playTime;
-    } else if (gameState == GameState::MultiPreparation) {
-        this->opponentUserId = JSONPacker::unpackUserId(json);
-    }
+//    CCLOG("RECEIVED_DATA:%s", cstr);
+    JSONPacker::UserData userData       = JSONPacker::unpackUserDataJSON(json);
+    this->opponentGameState             = userData.state;
+    this->opponentCharacter->setNen(userData.nen);
+    this->setOpponentRemainingAura(userData.auraLeft);
+    this->opponentPlayingTime           = userData.playTime;
+    this->nextRound                     = this->isHost ? this->nextRound : userData.nextRound;
+    this->receivedPatternId             = userData.patternId;
+    this->opponentUserId                = userData.userId;
 }
 
 void MainScene::stateChanged(ConnectionState state) {
@@ -757,31 +889,50 @@ void MainScene::stateChanged(ConnectionState state) {
         case ConnectionState::NOT_CONNECTED:
             this->onMultiPlayerMode = false;
             this->setSinglePlayMode();
+            this->triggerTitle();
+            this->netWorkingWrapper->startAdvertisingAvailability();
+            this->netWorkingWrapper->disconnect();
             MessageBox("Disconnected...", "Error");
             CCLOG("Disconnected");
             break;
         case ConnectionState::CONNECTED:
             this->netWorkingWrapper->stopAdvertisingAvailability();
             this->onMultiPlayerMode = true;
-            this->isHost = false;
+            this->resetGameState();
             this->setMultiPlayMode();
             this->triggerMultiPreparation();
             CCLOG("Connected");
-            
             break;
     }
 }
 
 void MainScene::sendDataOverNetwork() {
     if (onMultiPlayerMode) {
+//        CCLOG("\n");
+//        CCLOG("---------------");
+//        CCLOG("自分:%d", (int)this->gameState);
+//        CCLOG("自分パターン:%d", (int)this->currentPatternId);
+//        CCLOG("相手:%d", (int)this->opponentGameState);
+//        CCLOG("相手パターン:%d", (int)this->receivedPatternId);
+//        CCLOG("---------------");
+//        CCLOG("過去ラウンド:%d", (int)this->pastRound);
+//        CCLOG("現在ラウンド:%d", (int)this->gameRound);
+//        CCLOG("次のラウンド:%d", this->nextRound);
+//        CCLOG("---------------");
+//        CCLOG("\n");
+//        
         JSONPacker::UserData data;
-        data.state = (GameState)this->gameState;
-        data.nen = this->character->getNen();
-        data.auraLeft = this->auraLeft;
-        data.playTime = this->playingTime;
+        data.state      = (GameState)this->gameState;
+        data.nen        = this->character->getNen();
+        data.auraLeft   = this->auraLeft;
+        data.playTime   = this->playingTime;
+        data.patternId  = this->isHost ? this->currentPatternId : this->receivedPatternId;
+        data.userId     = this->userId;
+        data.nextRound  = this->nextRound;
         
         std::string json = JSONPacker::packUserData(data);
         netWorkingWrapper->sendData(json.c_str(), json.length());
+//        CCLOG("PACKED_DATA:%s", json.c_str());
     }
 }
 

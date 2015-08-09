@@ -187,7 +187,7 @@
 // Received data from remote peer
 - (void)session:(MCSession *)session didReceiveData:(NSData *)data fromPeer:(MCPeerID *)peerID
 {
-    NMLog(@"%@ received data from %@", [UIDevice currentDevice].name, peerID.displayName);
+//    NMLog(@"%@ received data from %@", [UIDevice currentDevice].name, peerID.displayName);
     
     dispatch_async(dispatch_get_main_queue(), ^{
         if (_delegate)

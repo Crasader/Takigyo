@@ -29,7 +29,8 @@ enum class GameState
     WAITING = 4,
     COUNT_DOWN = 5,
     Playing = 6,
-    GameOver = 7
+    GameOver = 7,
+    Result = 8
 };
 
 class Pattern {

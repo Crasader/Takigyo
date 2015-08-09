@@ -16,8 +16,10 @@
 class LevelInfo : cocos2d::Node {
 public:
     static LevelInfo* createPatternWithRound(int round);
+    static LevelInfo* createPatternWithRoundAndPatternId(int round, int patternId);
     
     int getCurrentLevel();
+    int getCurrentPatternId();
     double getCurrentTempo();
     float getCurrentDuration();
     std::vector<Pattern> getCurrentPattern();
@@ -32,6 +34,7 @@ private:
     
     bool initWithRound(int round);
     int choosePatternId(std::vector<PatternRate>);
+    bool initWithRoundAndPatternId(int round, int patternId);
 //    Pattern getRandomPattern(int level);
     
 //    float getLevelTempo;

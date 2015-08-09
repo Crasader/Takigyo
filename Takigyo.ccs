@@ -57,6 +57,8 @@
             <Image Name="VersusButton.png" />
             <Image Name="VersusButton2.png" />
             <Image Name="VersusButtonPressed2.png" />
+            <Image Name="multiLeftRaft.png" />
+            <Image Name="multiRightRaft.png" />
           </Folder>
           <Folder Name="resources-2x">
             <Image Name="BottomRock@2x.png" />
