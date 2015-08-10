@@ -58,6 +58,7 @@ bool MainScene::init()
     this->character         = bottomRock->getChildByName<Character*>("Character");
     this->opponentCharacter = bottomRock2->getChildByName<OpponentCharacter*>("OpponentCharacter");
     this->levelNode         = waterfall->getChildByName("level");
+    this->waiting           = waterfall->getChildByName("waiting");
     this->lifeBG            = rootNode->getChildByName("lifeBG");
     this->auraBar           = lifeBG->getChildByName<Sprite*>("lifeBar");
     this->lifeBG2           = rootNode->getChildByName("lifeBG2");
@@ -157,6 +158,15 @@ void MainScene::update(float dt)
                 CCLOG("-------------YOU ARE CLIENT-------------");
             }
             this->sendDataOverNetwork();
+        }
+    } else if (this->gameState == GameState::WAITING && this->opponentGameState == GameState::MultiResult) {
+        this->timeForWaiting += dt;
+        if (this->timeForWaiting > 2.0) {
+            this->timeForWaiting = 0.0f;
+            this->sendDataOverNetwork();
+            ActionTimeline* waitingTimeline = CSLoader::createTimeline("Waiting.csb");
+            this->waiting->runAction(waitingTimeline);
+            waitingTimeline->play("waiting", false);
         }
     } else if (this->isHost == true
                && this->gameState == GameState::WAITING
@@ -286,7 +296,7 @@ void MainScene::update(float dt)
         }
         
         // 自分がプレイ中に対戦相手がゲームオーバー
-        if (this->opponentGameState == GameState::GameOver) {
+        if (this->onMultiPlayerMode == true && this->opponentGameState == GameState::GameOver) {
             this->triggerMultiGameOver();
         }
         if (this->auraLeft <= 0.0f) {
@@ -448,6 +458,7 @@ void MainScene::resetGameState()
         this->opponentPlayingTime = 0.0f;
         this->nextRound = 1;
         this->receivedPatternId = 0;
+        this->timeForWaiting = 0.0f;
     }
     
     this->totalGoodCount = 0;
@@ -468,6 +479,7 @@ void MainScene::triggerTitle()
     if (this->onMultiPlayerMode) {
         this->netWorkingWrapper->disconnect();
         this->netWorkingWrapper->startAdvertisingAvailability();
+        this->resetGameState();
     }
     this->winScore = 0;
     this->opponentWinScore = 0;
@@ -991,6 +1003,7 @@ void MainScene::stateChanged(ConnectionState state) {
             this->setSinglePlayMode();
             this->triggerTitle();
             this->netWorkingWrapper->startAdvertisingAvailability();
+            this->resetGameState();
             MessageBox("Disconnected...", "Error");
             break;
         case ConnectionState::CONNECTED:

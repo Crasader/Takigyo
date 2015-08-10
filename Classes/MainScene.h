@@ -41,6 +41,7 @@ private:
     
     cocos2d::Node* rootNode;
     cocos2d::Node* levelNode;
+    cocos2d::Node* waiting;
     cocos2d::Node* rockNode;
     cocos2d::Node* lifeBG;
     cocos2d::Node* lifeBG2;
@@ -100,6 +101,7 @@ private:
     float patternPlayTime;
     float touchingTime;
     float timeForMulti;
+    float timeForWaiting;
     
     bool readyForNextPattern;
     bool gettingHit;

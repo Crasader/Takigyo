@@ -131,6 +131,7 @@
         <Project Name="OpponentCharacter.csd" Type="Node" />
         <TTF Name="AoyagiKouzanFontSousyo2.ttf" />
         <TTF Name="aoyagireisyosimo_ttf_2_01.ttf" />
+        <Project Name="Waiting.csd" Type="Node" />
       </RootFolder>
     </Group>
   </SolutionFolder>
