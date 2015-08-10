@@ -158,7 +158,9 @@ void MainScene::update(float dt)
             }
             this->sendDataOverNetwork();
         }
-    } else if (this->isHost == true && this->gameState == GameState::WAITING && this->opponentGameState == GameState::WAITING) {
+    } else if (this->isHost == true
+               && this->gameState == GameState::WAITING
+               && this->opponentGameState == GameState::WAITING) {
         if (this->nextRound == this->gameRound) {
             this->nextRound = this->gameRound + 1;
                               
@@ -177,6 +179,9 @@ void MainScene::update(float dt)
             for (auto newObstacle : currentPattern) {
                 this->timingList.push_back(newObstacle.timing);
                 this->obstacleList.push_back(newObstacle.type);
+            }
+            if (this->opponentGameState == GameState::GameOver) {
+                this->triggerMultiGameOver();
             }
             // ホストはクライアントに、新しいパターンIDを送信（WAITING状態）
             this->sendDataOverNetwork();
@@ -208,6 +213,14 @@ void MainScene::update(float dt)
             this->timingList.push_back(newObstacle.timing);
             this->obstacleList.push_back(newObstacle.type);
         }
+        // 待機中にゲームオーバー
+        if (this->opponentGameState == GameState::GameOver) {
+            this->triggerMultiGameOver();
+        }
+        if (this->auraLeft <= 0.0f) {
+            this->triggerMultiGameOver();
+        }
+        // ゲームスタート
         if (this->gameRound == 1) {
             this->triggerReady();
             CCLOG("------------------");
@@ -273,7 +286,7 @@ void MainScene::update(float dt)
         }
         
         // 自分がプレイ中に対戦相手がゲームオーバー
-        if (onMultiPlayerMode && this->opponentGameState == GameState::GameOver) {
+        if (this->opponentGameState == GameState::GameOver) {
             this->triggerMultiGameOver();
         }
         if (this->auraLeft <= 0.0f) {
@@ -416,12 +429,7 @@ void MainScene::resetGameState()
     this->gettingHit = false;
     this->gettingHitCount = 0.0f;
     this->auraBar->setScaleX(1.0f);
-    if (this->playCount > 0) {
-        this->character->setNen(Nen::Ten);
-        if (onMultiPlayerMode) {
-            this->opponentCharacter->setNen(Nen::Ten);
-        }
-    }
+    this->character->setNen(Nen::Ten);
     this->loadNext = true;
     this->gameRound = 1;
     this->pastRound = 0;
@@ -435,12 +443,10 @@ void MainScene::resetGameState()
     this->receivedPatternId = 0;
     
     if (this->onMultiPlayerMode) {
+        this->opponentCharacter->setNen(Nen::Ten);
         this->isOpponentGameOver = false;
         this->opponentPlayingTime = 0.0f;
         this->nextRound = 1;
-        this->isHost = false;
-        this->userId = 0;
-        this->opponentUserId = 0;
         this->receivedPatternId = 0;
     }
     
@@ -459,8 +465,13 @@ void MainScene::triggerTitle()
     this->rootNode->runAction(titleTimeline);
     titleTimeline->play("title", false);
     
+    if (this->onMultiPlayerMode) {
+        this->netWorkingWrapper->disconnect();
+        this->netWorkingWrapper->startAdvertisingAvailability();
+    }
     this->winScore = 0;
     this->opponentWinScore = 0;
+    this->onMultiPlayerMode = false;
 }
 
 void MainScene::triggerReady() {
@@ -500,6 +511,7 @@ void MainScene::triggerMultiPreparation() {
     std::mt19937 mt(rnd());
     std::uniform_int_distribution<int> rand5(1,INT_MAX);
     this->userId = rand5(mt);
+//    this->userId = 1;
     this->sendDataOverNetwork();
 }
 
@@ -577,6 +589,7 @@ void MainScene::triggerMultiResult() {
 
 void MainScene::triggerMultiGameOver() {
     this->gameState = GameState::GameOver;
+    this->nextRound = 1;
     this->sendDataOverNetwork();
 }
 
@@ -857,7 +870,7 @@ void MainScene::replayMultiButtonPressed(Ref *pSender, ui::Widget::TouchEventTyp
               CallFunc::create(
                                [this]() {
                                    this->resetGameState();
-                                   this->triggerMultiPreparation();
+                                   this->gameState = GameState::WAITING;
                                    CocosDenshion::SimpleAudioEngine::getInstance()->stopEffect(soundId);
                                }
                                ),
@@ -918,17 +931,10 @@ void MainScene::replayButtonPressed(Ref *pSender, ui::Widget::TouchEventType eEv
               DelayTime::create(0.7f),
               CallFunc::create(
                                [this]() {
-                                   this->character->setNen(Nen::Ten);
-                                   if (onMultiPlayerMode) {
-                                       this->gameState = GameState::WAITING;
-                                       this->resetGameState();
-                                       CocosDenshion::SimpleAudioEngine::getInstance()->stopEffect(soundId);
-                                   } else if (onMultiPlayerMode == false) {
-                                       this->gameState = GameState::Playing;
-                                       this->triggerReady();
-                                       this->resetGameState();
-                                       CocosDenshion::SimpleAudioEngine::getInstance()->stopEffect(soundId);
-                                   }
+                                   this->gameState = GameState::Playing;
+                                   this->triggerReady();
+                                   this->resetGameState();
+                                   CocosDenshion::SimpleAudioEngine::getInstance()->stopEffect(soundId);
                                }
                                ),
               DelayTime::create(3.0f),
@@ -943,16 +949,8 @@ void MainScene::replayButtonPressed(Ref *pSender, ui::Widget::TouchEventType eEv
 
 void MainScene::topButtonPressed(Ref *pSender, ui::Widget::TouchEventType eEventType) {
     if (eEventType == ui::Widget::TouchEventType::ENDED) {
-        ActionTimeline* mainSceneTimeline = CSLoader::createTimeline("MainScene.csb");
-        this->rootNode->runAction(mainSceneTimeline);
-        mainSceneTimeline->play("title", false);
-        this->gameState = GameState::Title;
-        this->resetGameState();
-        
-        if (onMultiPlayerMode) {
-            this->onMultiPlayerMode = false;
-            this->netWorkingWrapper->disconnect();
-        }
+        this->triggerTitle();
+//        this->resetGameState();
     }
 }
 
@@ -969,7 +967,7 @@ void MainScene::receivedData(const void *data, unsigned long length) {
     const char* cstr = reinterpret_cast<const char*>(data);
     std::string json = std::string(cstr, length);
     
-//    CCLOG("RECEIVED_DATA:%s", cstr);
+    CCLOG("RECEIVED_DATA:%s", cstr);
     JSONPacker::UserData userData       = JSONPacker::unpackUserDataJSON(json);
     this->opponentGameState             = userData.state;
     this->opponentCharacter->setNen(userData.nen);
@@ -987,14 +985,22 @@ void MainScene::stateChanged(ConnectionState state) {
             break;
         case ConnectionState::NOT_CONNECTED:
             this->onMultiPlayerMode = false;
+            this->userId = 0;
+            this->opponentUserId = 0;
+            this->isHost = false;
             this->setSinglePlayMode();
             this->triggerTitle();
-            this->netWorkingWrapper->disconnect();
+            this->netWorkingWrapper->startAdvertisingAvailability();
             MessageBox("Disconnected...", "Error");
-            CCLOG("Disconnected");
             break;
         case ConnectionState::CONNECTED:
             this->onMultiPlayerMode = true;
+            
+            // 以下の変数はネットワーク開始時と終了時に初期化する
+            this->userId = 0;
+            this->opponentUserId = 0;
+            this->isHost = false;
+            
             this->resetGameState();
             this->setMultiPlayMode();
             this->triggerMultiPreparation();
