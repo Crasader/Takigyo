@@ -381,9 +381,6 @@ void MainScene::dropObstacles(ObstacleType obstacleType, float tempo) {
                     denshion->playEffect("break.wav");
                     int combo = this->comboCount++;
                     this->setComboCount(combo);
-                    if (this->touchingTime > 0) {
-                        this->touchingCount++;
-                    }
                     this->playTimingAnimation();
                     
                     obstacle->stopAllActions();
@@ -639,56 +636,54 @@ void MainScene::triggerGameOver()
 }
 
 void MainScene::playTimingAnimation() {
-    if (touchingCount > 0) {
-        if (this->touchingTime < 0.1) {
-            auto perfect = Sprite::create("perfect.png");
-            perfect->setPosition(Vec2(this->visibleSize.width * 0.29f, this->visibleSize.height * 0.5f));
-            perfect->setScale(2.0f, 2.0f);
-            auto comboUp          = MoveBy::create(0.3f, Vec2(0,60));
-            auto comboFade        = FadeTo::create(0.3f, 0.0f);
-            auto comboScale       = ScaleTo::create(0.1f, 0.1f);
-            auto easeIn           = EaseIn::create(comboScale, 4);
-            perfect->runAction(Sequence::create(
-                                                comboUp,
-                                                comboFade,
-                                                easeIn,
-                                                CallFunc::create([perfect](){perfect->removeFromParent();}),
-                                                NULL));
-            this->rootNode->addChild(perfect);
-            this->totalPerfectCount++;
-        } else if (this->touchingTime < 0.3) {
-            auto great = Sprite::create("great.png");
-            great->setPosition(Vec2(this->visibleSize.width * 0.29f, this->visibleSize.height * 0.5f));
-            great->setScale(2.0f, 2.0f);
-            auto comboUp          = MoveBy::create(0.3f, Vec2(0,60));
-            auto comboFade        = FadeTo::create(0.3f, 0.0f);
-            auto comboScale       = ScaleTo::create(0.1f, 0.1f);
-            auto easeIn           = EaseIn::create(comboScale, 4);
-            great->runAction(Sequence::create(
-                                                comboUp,
-                                                comboFade,
-                                                easeIn,
-                                                CallFunc::create([great](){great->removeFromParent();}),
-                                                NULL));
-            this->rootNode->addChild(great);
-            this->totalGreatCount++;
-        } else if (this->touchingTime >= 0.3) {
-            auto good = Sprite::create("good.png");
-            good->setPosition(Vec2(this->visibleSize.width * 0.29f, this->visibleSize.height * 0.5f));
-            good->setScale(2.0f, 2.0f);
-            auto comboUp          = MoveBy::create(0.3f, Vec2(0,65));
-            auto comboFade        = FadeTo::create(0.3f, 0.0f);
-            auto comboScale       = ScaleTo::create(0.1f, 0.1f);
-            auto easeIn           = EaseIn::create(comboScale, 4);
-            good->runAction(Sequence::create(
-                                                comboUp,
-                                                comboFade,
-                                                easeIn,
-                                                CallFunc::create([good](){good->removeFromParent();}),
-                                                NULL));
-            this->rootNode->addChild(good);
-            this->totalGoodCount++;
-        }
+    if (this->touchingTime < 0.1) {
+        auto perfect = Sprite::create("perfect.png");
+        perfect->setPosition(Vec2(this->visibleSize.width * 0.29f, this->visibleSize.height * 0.5f));
+        perfect->setScale(2.0f, 2.0f);
+        auto comboUp          = MoveBy::create(0.3f, Vec2(0,60));
+        auto comboFade        = FadeTo::create(0.3f, 0.0f);
+        auto comboScale       = ScaleTo::create(0.1f, 0.1f);
+        auto easeIn           = EaseIn::create(comboScale, 4);
+        perfect->runAction(Sequence::create(
+                                            comboUp,
+                                            comboFade,
+                                            easeIn,
+                                            CallFunc::create([perfect](){perfect->removeFromParent();}),
+                                            NULL));
+        this->rootNode->addChild(perfect);
+        this->totalPerfectCount++;
+    } else if (this->touchingTime < 0.3) {
+        auto great = Sprite::create("great.png");
+        great->setPosition(Vec2(this->visibleSize.width * 0.29f, this->visibleSize.height * 0.5f));
+        great->setScale(2.0f, 2.0f);
+        auto comboUp          = MoveBy::create(0.3f, Vec2(0,60));
+        auto comboFade        = FadeTo::create(0.3f, 0.0f);
+        auto comboScale       = ScaleTo::create(0.1f, 0.1f);
+        auto easeIn           = EaseIn::create(comboScale, 4);
+        great->runAction(Sequence::create(
+                                          comboUp,
+                                          comboFade,
+                                          easeIn,
+                                          CallFunc::create([great](){great->removeFromParent();}),
+                                          NULL));
+        this->rootNode->addChild(great);
+        this->totalGreatCount++;
+    } else if (this->touchingTime >= 0.3) {
+        auto good = Sprite::create("good.png");
+        good->setPosition(Vec2(this->visibleSize.width * 0.29f, this->visibleSize.height * 0.5f));
+        good->setScale(2.0f, 2.0f);
+        auto comboUp          = MoveBy::create(0.3f, Vec2(0,65));
+        auto comboFade        = FadeTo::create(0.3f, 0.0f);
+        auto comboScale       = ScaleTo::create(0.1f, 0.1f);
+        auto easeIn           = EaseIn::create(comboScale, 4);
+        good->runAction(Sequence::create(
+                                         comboUp,
+                                         comboFade,
+                                         easeIn,
+                                         CallFunc::create([good](){good->removeFromParent();}),
+                                         NULL));
+        this->rootNode->addChild(good);
+        this->totalGoodCount++;
     }
 }
 
@@ -786,14 +781,12 @@ void MainScene::setupTouchHandling() {
     touchListener->onTouchEnded = [&](Touch* touch, Event* event) {
         this->character->setNen(Nen::Ten);
         this->sendDataOverNetwork();
-        this->touchingCount = 0;
         this->touchingTime = 0.0f;
         CocosDenshion::SimpleAudioEngine::getInstance()->stopEffect(soundId);
     };
     touchListener->onTouchCancelled = [&](Touch* touch, Event* event) {
         this->character->setNen(Nen::Ten);
         this->sendDataOverNetwork();
-        this->touchingCount = 0;
         this->touchingTime = 0.0f;
         CocosDenshion::SimpleAudioEngine::getInstance()->stopEffect(soundId);
     };
