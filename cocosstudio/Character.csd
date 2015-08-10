@@ -2,15 +2,24 @@
   <PropertyGroup Type="Node" Name="Character" ID="a58d6a62-cfa3-442f-8b50-e485becd7713" Version="2.3.1.2" />
   <Content ctype="GameProjectContent">
     <Content>
-      <Animation Duration="50" Speed="1.0000">
+      <Animation Duration="31" Speed="1.0000" ActivedAnimationName="Ken">
         <Timeline ActionTag="-990567327" Property="VisibleForFrame">
           <BoolFrame FrameIndex="0" Tween="False" Value="False" />
-          <BoolFrame FrameIndex="31" Tween="False" Value="True" />
+          <BoolFrame FrameIndex="31" Tween="False" Value="False" />
         </Timeline>
         <Timeline ActionTag="-616467882" Property="VisibleForFrame">
           <BoolFrame FrameIndex="0" Tween="False" Value="False" />
           <BoolFrame FrameIndex="31" Tween="False" Value="True" />
-          <BoolFrame FrameIndex="50" Tween="False" Value="True" />
+        </Timeline>
+        <Timeline ActionTag="-616467882" Property="Position">
+          <PointFrame FrameIndex="31" X="0.0000" Y="111.0000">
+            <EasingData Type="0" />
+          </PointFrame>
+        </Timeline>
+        <Timeline ActionTag="-616467882" Property="Scale">
+          <ScaleFrame FrameIndex="31" X="0.5000" Y="0.5000">
+            <EasingData Type="0" />
+          </ScaleFrame>
         </Timeline>
         <Timeline ActionTag="-49954808" Property="VisibleForFrame">
           <BoolFrame FrameIndex="0" Tween="False" Value="True" />
@@ -54,18 +63,18 @@
             <FileData Type="Normal" Path="ten.plist" Plist="" />
             <BlendFunc Src="770" Dst="1" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Ken" ActionTag="-616467882" Tag="66" VisibleForFrame="False" IconVisible="True" TopMargin="-100.0000" BottomMargin="100.0000" ctype="ParticleObjectData">
+          <AbstractNodeData Name="Ken" ActionTag="-616467882" Tag="66" Rotation="900.0000" RotationSkewX="900.0000" RotationSkewY="900.0000" IconVisible="True" TopMargin="-111.0000" BottomMargin="111.0000" ctype="ParticleObjectData">
             <Size X="0.0000" Y="0.0000" />
             <AnchorPoint />
-            <Position Y="100.0000" />
-            <Scale ScaleX="0.2000" ScaleY="0.2000" />
+            <Position Y="111.0000" />
+            <Scale ScaleX="0.5000" ScaleY="0.5000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="Normal" Path="ten.plist" Plist="" />
-            <BlendFunc Src="770" Dst="1" />
+            <BlendFunc Src="1000" Dst="1" />
           </AbstractNodeData>
-          <AbstractNodeData Name="TenCyduck" ActionTag="-49954808" Tag="11" IconVisible="False" LeftMargin="-51.0000" RightMargin="-51.0000" TopMargin="-123.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="TenCyduck" ActionTag="-49954808" Tag="11" VisibleForFrame="False" IconVisible="False" LeftMargin="-51.0000" RightMargin="-51.0000" TopMargin="-123.0000" ctype="SpriteObjectData">
             <Size X="102.0000" Y="123.0000" />
             <AnchorPoint ScaleX="0.5000" />
             <Position />
@@ -76,7 +85,7 @@
             <FileData Type="Normal" Path="Images/resources-1x/RubberDuckyTen.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="KenCyduck" ActionTag="1341341742" Tag="67" VisibleForFrame="False" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="-49.0000" RightMargin="-49.0000" TopMargin="-115.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="KenCyduck" ActionTag="1341341742" Tag="67" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="-49.0000" RightMargin="-49.0000" TopMargin="-115.0000" ctype="SpriteObjectData">
             <Size X="98.0000" Y="115.0000" />
             <AnchorPoint ScaleX="0.5000" />
             <Position />

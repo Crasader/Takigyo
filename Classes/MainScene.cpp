@@ -537,14 +537,14 @@ void MainScene::triggerTitle()
     this->rootNode->runAction(titleTimeline);
     titleTimeline->play("title", false);
     
+    this->winScore = 0;
+    this->opponentWinScore = 0;
+    this->onMultiPlayerMode = false;
     if (this->onMultiPlayerMode) {
         this->netWorkingWrapper->disconnect();
         this->netWorkingWrapper->startAdvertisingAvailability();
         this->resetGameState();
     }
-    this->winScore = 0;
-    this->opponentWinScore = 0;
-    this->onMultiPlayerMode = false;
 }
 
 void MainScene::triggerReady() {
@@ -885,6 +885,7 @@ void MainScene::setupTouchHandling() {
 
 void MainScene::singlePlayerPressed(Ref *pSender, ui::Widget::TouchEventType eEventType) {
     if (eEventType == ui::Widget::TouchEventType::ENDED) {
+        this->resetGameState();
         this->triggerReady();
     }
 }
@@ -1040,7 +1041,7 @@ void MainScene::receivedData(const void *data, unsigned long length) {
     const char* cstr = reinterpret_cast<const char*>(data);
     std::string json = std::string(cstr, length);
     
-    CCLOG("RECEIVED_DATA:%s", cstr);
+//    CCLOG("RECEIVED_DATA:%s", cstr);
     JSONPacker::UserData userData       = JSONPacker::unpackUserDataJSON(json);
     this->opponentGameState             = userData.state;
     this->opponentCharacter->setNen(userData.nen);
@@ -1109,7 +1110,7 @@ void MainScene::sendDataOverNetwork() {
         
         std::string json = JSONPacker::packUserData(data);
         netWorkingWrapper->sendData(json.c_str(), json.length());
-        CCLOG("PACKED_DATA:%s", json.c_str());
+//        CCLOG("PACKED_DATA:%s", json.c_str());
     }
 }
 
