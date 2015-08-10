@@ -69,11 +69,11 @@ bool MainScene::init()
     // Recovery particle effect
     this->splashEffect = ParticleSystemQuad::create("splash2.plist");
     splashEffect->setScale(0.36f);
-    splashEffect->setPosition(Vec2(this->visibleSize.width * 0.5f, bottomRock->getPositionY()+this->character->getScaleY()));
+    splashEffect->setPosition(Vec2(this->visibleSize.width * 0.5f, bottomRock->getPositionY()+this->character->getScaleY()-32));
     this->rootNode->addChild(splashEffect);
     this->splashEffect2 = ParticleSystemQuad::create("splash2.plist");
     splashEffect2->setScale(0.36f);
-    splashEffect2->setPosition(Vec2(this->visibleSize.width * 2.0f, bottomRock->getPositionY()+this->character->getScaleY()));
+    splashEffect2->setPosition(Vec2(this->visibleSize.width * 2.0f, bottomRock->getPositionY()+this->character->getScaleY()-32));
     this->rootNode->addChild(splashEffect2);
     
     this->playCount = 0;
@@ -268,6 +268,9 @@ void MainScene::update(float dt)
                     this->timingList.erase(this->timingList.begin());
                     this->obstacleList.erase(this->obstacleList.begin());
                     this->dropObstacles(nextObstacle, this->currentTempo);
+                    if (this->onMultiPlayerMode) {
+                        this->dropOpponentObstacles(nextObstacle, this->currentTempo);
+                    }
                 }
             }
             if (timingList.empty() && this->patternPlayTime >= this->currentDuration) {
@@ -425,6 +428,64 @@ void MainScene::dropObstacles(ObstacleType obstacleType, float tempo) {
     // Remove from Parent
     CallFunc::create([obstacle](){obstacle->removeFromParent();}),
     NULL));
+    
+    this->rootNode->addChild(obstacle);
+}
+
+void MainScene::dropOpponentObstacles(ObstacleType obstacleType, float tempo) {
+    Node* obstacle;
+    switch (obstacleType) {
+        case ObstacleType::Rock:
+        {
+            obstacle = CSLoader::createNode("Rock.csb");
+            ActionTimeline* rockTimeline = CSLoader::createTimeline("Rock.csb");
+            obstacle->runAction(rockTimeline);
+            rockTimeline->play("fallingRock", true);
+            break;
+        }
+        case ObstacleType::Heart:
+        {
+            obstacle = CSLoader::createNode("Heart.csb");
+            ActionTimeline* heartTimeline = CSLoader::createTimeline("Heart.csb");
+            obstacle->runAction(heartTimeline);
+            heartTimeline->play("fallingHeart", true);
+            break;
+        }
+        default:
+            break;
+    }
+    
+    obstacle->setScale(0.5f);
+    obstacle->setZOrder(-1);
+    obstacle->setPosition(Vec2(this->visibleSize.width * 0.5f, this->visibleSize.height * 1.2f));
+    
+    auto defaultSpeed       = 1.0f;
+    auto fallSpeed          = defaultSpeed * tempo;
+    auto waterfall          = this->rootNode->getChildByName("waterfall");
+    auto intoWater          = MoveTo::create(fallSpeed, waterfall->getPosition() - Vec2(0, 100));
+    auto getCloser          = ScaleTo::create(0.0f, 1.0f);
+    auto upAboveWater       = MoveTo::create(fallSpeed, waterfall->getPosition() - Vec2(-100, 30));
+    auto downToCharacter    = MoveBy::create(fallSpeed, Vec2(0, -530));
+    auto easeInDown         = EaseIn::create(downToCharacter, 4);
+    
+    obstacle->runAction(Sequence::create(
+        intoWater,
+        // Enlarge the obstacle
+        getCloser,
+        // Half above the water
+        upAboveWater,
+        // Change Z order into front
+        CallFunc::create(
+                         [obstacle,this]() {
+                             obstacle->setZOrder(0);
+                         }
+                         ),
+        // Ease In Down
+        easeInDown,
+        // Remove from Parent
+        CallFunc::create([obstacle](){obstacle->removeFromParent();}),
+        NULL
+    ));
     
     this->rootNode->addChild(obstacle);
 }
@@ -1053,15 +1114,15 @@ void MainScene::sendDataOverNetwork() {
 }
 
 void MainScene::setSinglePlayMode() {
-    splashEffect->setPosition(Vec2(this->visibleSize.width * 0.5f, bottomRock->getPositionY()+this->character->getScaleY()));
-    splashEffect2->setPosition(Vec2(this->visibleSize.width * 2.0f, bottomRock2->getPositionY()+this->character->getScaleY()));
+    splashEffect->setPosition(Vec2(this->visibleSize.width * 0.5f, bottomRock->getPositionY()+this->character->getScaleY()-32));
+    splashEffect2->setPosition(Vec2(this->visibleSize.width * 2.0f, bottomRock2->getPositionY()+this->character->getScaleY()-32));
     bottomRock->setPositionX(this->visibleSize.width * 0.6f);
     bottomRock2->setPositionX(this->visibleSize.width * 1.5f);
 }
 
 void MainScene::setMultiPlayMode() {
-    splashEffect->setPosition(Vec2(this->visibleSize.width * 0.36f, bottomRock->getPositionY()+this->character->getScaleY()));
-    splashEffect2->setPosition(Vec2(this->visibleSize.width * 0.64f, bottomRock2->getPositionY()+this->character->getScaleY()));
+    splashEffect->setPosition(Vec2(this->visibleSize.width * 0.36f, bottomRock->getPositionY()+this->character->getScaleY()-32));
+    splashEffect2->setPosition(Vec2(this->visibleSize.width * 0.64f, bottomRock2->getPositionY()+this->character->getScaleY()-32));
     bottomRock->setPositionX(this->visibleSize.width * 0.46f);
     bottomRock2->setPositionX(this->visibleSize.width * .75f);
 }

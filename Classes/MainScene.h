@@ -71,6 +71,7 @@ private:
     void triggerMultiResult();
     
     void dropObstacles(ObstacleType obstacle, float tempo);
+    void dropOpponentObstacles(ObstacleType obstacle, float tempo);
     void resetGameState();
     void setKen();
     void setTen();
