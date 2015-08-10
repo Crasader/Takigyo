@@ -10,6 +10,7 @@
         <Folder Name="Fonts">
           <TTF Name="Game of Three.ttf" />
           <TTF Name="njnaruto.ttf" />
+          <TTF Name="AoyagiKouzanFont2.ttf" />
         </Folder>
         <PlistParticleFile Name="ten.plist" />
         <Project Name="Clouds.csd" Type="Node" />
@@ -60,6 +61,11 @@
             <Image Name="VersusButtonPressed2.png" />
             <Image Name="multiLeftRaft.png" />
             <Image Name="multiRightRaft.png" />
+            <Image Name="RankingPressed.png" />
+            <Image Name="TopButton.png" />
+            <Image Name="TopButtonPressed.png" />
+            <Image Name="SettingButton.png" />
+            <Image Name="SettingButtonPressed.png" />
           </Folder>
           <Folder Name="resources-2x">
             <Image Name="BottomRock@2x.png" />
@@ -81,6 +87,8 @@
             <Image Name="waterfall2@2x.png" />
             <Image Name="multiRightRaft@2x.png" />
             <Image Name="multiLeftRaft@2x.png" />
+            <Image Name="leftRaft@2x.png" />
+            <Image Name="rightRaft@2x.png" />
           </Folder>
           <Folder Name="resources-3x">
             <Image Name="BottomRock@3x.png" />
@@ -121,6 +129,8 @@
         <PlistParticleFile Name="recover.plist" />
         <PlistParticleFile Name="splash2.plist" />
         <Project Name="OpponentCharacter.csd" Type="Node" />
+        <TTF Name="AoyagiKouzanFontSousyo2.ttf" />
+        <TTF Name="aoyagireisyosimo_ttf_2_01.ttf" />
       </RootFolder>
     </Group>
   </SolutionFolder>

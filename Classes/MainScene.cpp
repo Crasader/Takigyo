@@ -273,7 +273,7 @@ void MainScene::update(float dt)
         }
         
         // 自分がプレイ中に対戦相手がゲームオーバー
-        if (this->opponentGameState == GameState::GameOver) {
+        if (onMultiPlayerMode && this->opponentGameState == GameState::GameOver) {
             this->triggerMultiGameOver();
         }
         if (this->auraLeft <= 0.0f) {
@@ -528,10 +528,10 @@ void MainScene::triggerMultiResult() {
     auto maxComboLabel          = resultRightRaft->getChildByName<cocos2d::ui::Text*>("maxComboLabel");
     auto opponentWinScoreLabel  = resultRightRaft->getChildByName<cocos2d::ui::Text*>("opponentWinScoreLabel");
     auto winLoseLabel           = resultRightRaft->getChildByName<cocos2d::ui::Text*>("winLoseLabel");
-    totalPerfectScoreLabel->setString(Utility::getScoreString(this->totalPerfectCount, 7));
-    totalGreatScoreLabel->setString(Utility::getScoreString(this->totalGreatCount, 7));
-    totalGoodScoreLabel->setString(Utility::getScoreString(this->totalGoodCount, 7));
-    maxComboLabel->setString(Utility::getScoreString(this->maxComboCount, 7));
+    totalPerfectScoreLabel->setString(Utility::getScoreString(this->totalPerfectCount, 0));
+    totalGreatScoreLabel->setString(Utility::getScoreString(this->totalGreatCount, 0));
+    totalGoodScoreLabel->setString(Utility::getScoreString(this->totalGoodCount, 0));
+    maxComboLabel->setString(Utility::getScoreString(this->maxComboCount, 0));
     
     resultLeftRaft->setZOrder(1);
     resultRightRaft->setZOrder(1);
@@ -539,8 +539,8 @@ void MainScene::triggerMultiResult() {
     ui::Button* replayButton = resultRightRaft->getChildByName<ui::Button*>("replayButton");
     replayButton->addTouchEventListener(CC_CALLBACK_2(MainScene::replayMultiButtonPressed, this));
     
-    ui::Button* characterButton = resultRightRaft->getChildByName<ui::Button*>("characterButton");
-    characterButton->addTouchEventListener(CC_CALLBACK_2(MainScene::characterButtonPressed, this));
+    ui::Button* topButton = resultRightRaft->getChildByName<ui::Button*>("topButton");
+    topButton->addTouchEventListener(CC_CALLBACK_2(MainScene::topButtonPressed, this));
     
     this->rootNode->runAction(
         Sequence::create(
@@ -585,7 +585,7 @@ void MainScene::triggerMultiGameOver() {
 
 void MainScene::triggerGameOver()
 {
-    int totalScoreString = (this->totalPerfectCount * 3 + this->totalGreatCount * 2 + this->totalGoodCount) + this->maxComboCount;
+    int totalScoreString = (this->totalPerfectCount * 3 + this->totalGreatCount * 2 + this->totalGoodCount) + this->maxComboCount + this->currentLevel;
     std::string playTimeString = StringUtils::toString(this->playingTime);
     std::string totalGreatString = StringUtils::toString(this->totalGreatCount);
     std::string totalGoodString = StringUtils::toString(this->totalGoodCount);
@@ -597,12 +597,14 @@ void MainScene::triggerGameOver()
     auto totalGreatScoreLabel   = resultRightRaft->getChildByName<cocos2d::ui::Text*>("greatScoreLabel");
     auto totalGoodScoreLabel    = resultRightRaft->getChildByName<cocos2d::ui::Text*>("goodScoreLabel");
     auto maxComboLabel          = resultRightRaft->getChildByName<cocos2d::ui::Text*>("maxComboLabel");
+    auto maxLevelLabel          = resultRightRaft->getChildByName<cocos2d::ui::Text*>("maxLevelLabel");
     auto totalScoreLabel        = resultRightRaft->getChildByName<cocos2d::ui::Text*>("totalScoreLabel");
-    totalPerfectScoreLabel->setString(Utility::getScoreString(this->totalPerfectCount, 7));
-    totalGreatScoreLabel->setString(Utility::getScoreString(this->totalGreatCount, 7));
-    totalGoodScoreLabel->setString(Utility::getScoreString(this->totalGoodCount, 7));
-    maxComboLabel->setString(Utility::getScoreString(this->maxComboCount, 7));
-    totalScoreLabel->setString(Utility::getScoreString(totalScoreString, 7));
+    totalPerfectScoreLabel->setString(Utility::getScoreString(this->totalPerfectCount, 0));
+    totalGreatScoreLabel->setString(Utility::getScoreString(this->totalGreatCount, 0));
+    totalGoodScoreLabel->setString(Utility::getScoreString(this->totalGoodCount, 0));
+    maxComboLabel->setString(Utility::getScoreString(this->maxComboCount, 0));
+    maxLevelLabel->setString(Utility::getScoreString(this->currentLevel, 0));
+    totalScoreLabel->setString(Utility::getScoreString(totalScoreString, 0));
     
     resultLeftRaft->setZOrder(1);
     resultRightRaft->setZOrder(1);
@@ -610,8 +612,8 @@ void MainScene::triggerGameOver()
     ui::Button* replayButton = resultRightRaft->getChildByName<ui::Button*>("replayButton");
     replayButton->addTouchEventListener(CC_CALLBACK_2(MainScene::replayButtonPressed, this));
     
-    ui::Button* characterButton = resultRightRaft->getChildByName<ui::Button*>("characterButton");
-    characterButton->addTouchEventListener(CC_CALLBACK_2(MainScene::characterButtonPressed, this));
+    ui::Button* topButton = resultRightRaft->getChildByName<ui::Button*>("topButton");
+    topButton->addTouchEventListener(CC_CALLBACK_2(MainScene::topButtonPressed, this));
     
     this->rootNode->runAction(
         Sequence::create(
@@ -946,7 +948,7 @@ void MainScene::replayButtonPressed(Ref *pSender, ui::Widget::TouchEventType eEv
     }
 }
 
-void MainScene::characterButtonPressed(Ref *pSender, ui::Widget::TouchEventType eEventType) {
+void MainScene::topButtonPressed(Ref *pSender, ui::Widget::TouchEventType eEventType) {
     if (eEventType == ui::Widget::TouchEventType::ENDED) {
         ActionTimeline* mainSceneTimeline = CSLoader::createTimeline("MainScene.csb");
         this->rootNode->runAction(mainSceneTimeline);
