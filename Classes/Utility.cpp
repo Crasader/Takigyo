@@ -34,6 +34,31 @@ std::string Utility::getScoreString(int score, int numCount = 7) {
     return std::string(score_out.str());
 };
 
+std::string Utility::getFromTopString(int rank) {
+    std::ostringstream fromTop;
+    if (rank == 2 || rank == 22) {
+        fromTop << "THE " << rank << "ND FROM TOP";
+    } else if (rank == 3  || rank == 23) {
+        fromTop << "THE " << rank << "RD FROM TOP";
+    } else if (rank == 21) {
+        fromTop << "THE " << rank << "ST FROM TOP";
+    } else if (rank == 1) {
+        fromTop << "THE TOP MONK";
+    } else {
+        fromTop << "THE " << rank << "TH FROM TOP";
+    }
+    
+    return std::string(fromTop.str());
+};
+
+std::string Utility::getGaugeString(int current, int next) {
+    std::ostringstream gaugeString;
+    
+    gaugeString << current << " / " << next;
+    
+    return std::string(gaugeString.str());
+};
+
 void Utility::_printNodeRecursive(Node* node, int count, std::function<void (Node*)> func)
 {
     for (int i = 0; i < count; i++) {

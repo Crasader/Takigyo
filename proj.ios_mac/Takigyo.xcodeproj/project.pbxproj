@@ -57,6 +57,19 @@
 		9637D45A1B6BF5C900B832A8 /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9637D4591B6BF5C900B832A8 /* MultipeerConnectivity.framework */; };
 		96424DD11B5E126200BF3DA5 /* LevelInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96424DCF1B5E126200BF3DA5 /* LevelInfo.cpp */; };
 		96424DD21B5E126200BF3DA5 /* LevelInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 96424DCF1B5E126200BF3DA5 /* LevelInfo.cpp */; };
+		964349181B790769001A6FD5 /* UserDataManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 964349161B790769001A6FD5 /* UserDataManager.cpp */; };
+		964349191B790769001A6FD5 /* UserDataManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 964349161B790769001A6FD5 /* UserDataManager.cpp */; };
+		9643491D1B790F4E001A6FD5 /* GameCenterManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9643491C1B790F4E001A6FD5 /* GameCenterManager.mm */; };
+		9643491E1B790F4E001A6FD5 /* GameCenterManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9643491C1B790F4E001A6FD5 /* GameCenterManager.mm */; };
+		964349211B790F8F001A6FD5 /* GameCenterWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 964349201B790F8F001A6FD5 /* GameCenterWrapper.mm */; };
+		964349221B790F8F001A6FD5 /* GameCenterWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 964349201B790F8F001A6FD5 /* GameCenterWrapper.mm */; };
+		964349251B790FC1001A6FD5 /* LeaderBoardManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 964349241B790FC1001A6FD5 /* LeaderBoardManager.mm */; };
+		964349261B790FC1001A6FD5 /* LeaderBoardManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 964349241B790FC1001A6FD5 /* LeaderBoardManager.mm */; };
+		9643492A1B790FEC001A6FD5 /* LeaderBoardWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 964349291B790FEC001A6FD5 /* LeaderBoardWrapper.mm */; };
+		9643492B1B790FEC001A6FD5 /* LeaderBoardWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 964349291B790FEC001A6FD5 /* LeaderBoardWrapper.mm */; };
+		9643492D1B7916FE001A6FD5 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9643492C1B7916FE001A6FD5 /* GameKit.framework */; };
+		964349301B794036001A6FD5 /* RankInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9643492E1B794036001A6FD5 /* RankInfo.cpp */; };
+		964349311B794036001A6FD5 /* RankInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9643492E1B794036001A6FD5 /* RankInfo.cpp */; };
 		965BC3F31B60113D0054CCEF /* PatternRate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 965BC3F11B60113D0054CCEF /* PatternRate.cpp */; };
 		965BC3F41B60113D0054CCEF /* PatternRate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 965BC3F11B60113D0054CCEF /* PatternRate.cpp */; };
 		965BC3F91B60118D0054CCEF /* JSONPacker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 965BC3F71B60118D0054CCEF /* JSONPacker.cpp */; };
@@ -106,8 +119,8 @@
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		46880B8419C43A87006E1F66 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppDelegate.cpp; sourceTree = "<group>"; };
 		46880B8519C43A87006E1F66 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		46880B8619C43A87006E1F66 /* MainScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainScene.cpp; sourceTree = "<group>"; };
-		46880B8719C43A87006E1F66 /* MainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScene.h; sourceTree = "<group>"; };
+		46880B8619C43A87006E1F66 /* MainScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = MainScene.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		46880B8719C43A87006E1F66 /* MainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = MainScene.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		503AE0F617EB97AB00D1A890 /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
 		503AE0F717EB97AB00D1A890 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		503AE0FA17EB989F00D1A890 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppController.h; path = ios/AppController.h; sourceTree = SOURCE_ROOT; };
@@ -154,6 +167,19 @@
 		9637D4591B6BF5C900B832A8 /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.4.sdk/System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = DEVELOPER_DIR; };
 		96424DCF1B5E126200BF3DA5 /* LevelInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LevelInfo.cpp; sourceTree = "<group>"; };
 		96424DD01B5E126200BF3DA5 /* LevelInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelInfo.h; sourceTree = "<group>"; };
+		964349161B790769001A6FD5 /* UserDataManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UserDataManager.cpp; sourceTree = "<group>"; };
+		964349171B790769001A6FD5 /* UserDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataManager.h; sourceTree = "<group>"; };
+		9643491C1B790F4E001A6FD5 /* GameCenterManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameCenterManager.mm; sourceTree = "<group>"; };
+		9643491F1B790F70001A6FD5 /* GameCenterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCenterManager.h; sourceTree = "<group>"; };
+		964349201B790F8F001A6FD5 /* GameCenterWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameCenterWrapper.mm; sourceTree = "<group>"; };
+		964349231B790FA0001A6FD5 /* GameCenterWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCenterWrapper.h; sourceTree = "<group>"; };
+		964349241B790FC1001A6FD5 /* LeaderBoardManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LeaderBoardManager.mm; sourceTree = "<group>"; };
+		964349271B790FCE001A6FD5 /* LeaderBoardManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaderBoardManager.h; sourceTree = "<group>"; };
+		964349281B790FE1001A6FD5 /* LeaderBoardWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LeaderBoardWrapper.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		964349291B790FEC001A6FD5 /* LeaderBoardWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = LeaderBoardWrapper.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		9643492C1B7916FE001A6FD5 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.4.sdk/System/Library/Frameworks/GameKit.framework; sourceTree = DEVELOPER_DIR; };
+		9643492E1B794036001A6FD5 /* RankInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RankInfo.cpp; sourceTree = "<group>"; };
+		9643492F1B794036001A6FD5 /* RankInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankInfo.h; sourceTree = "<group>"; };
 		965BC3F11B60113D0054CCEF /* PatternRate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PatternRate.cpp; sourceTree = "<group>"; };
 		965BC3F21B60113D0054CCEF /* PatternRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatternRate.h; sourceTree = "<group>"; };
 		965BC3F71B60118D0054CCEF /* JSONPacker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JSONPacker.cpp; sourceTree = "<group>"; };
@@ -184,6 +210,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9643492D1B7916FE001A6FD5 /* GameKit.framework in Frameworks */,
 				9637D45A1B6BF5C900B832A8 /* MultipeerConnectivity.framework in Frameworks */,
 				96C8C50C1B5823B600D07B2C /* libcocos2d iOS.a in Frameworks */,
 				52B47A471A53D09C004E4C60 /* Security.framework in Frameworks */,
@@ -264,6 +291,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9643492C1B7916FE001A6FD5 /* GameKit.framework */,
 				9637D4591B6BF5C900B832A8 /* MultipeerConnectivity.framework */,
 				8262943D1AAF051F00CB7CF7 /* Security.framework */,
 				52B47A461A53D09B004E4C60 /* Security.framework */,
@@ -303,22 +331,34 @@
 				46880B8519C43A87006E1F66 /* AppDelegate.h */,
 				96C8C4FA1B56E50200D07B2C /* Character.cpp */,
 				96C8C4FB1B56E50200D07B2C /* Character.h */,
-				96D7B1AF1B7125CF00E210D3 /* OpponentCharacter.cpp */,
-				96D7B1B01B7125CF00E210D3 /* OpponentCharacter.h */,
-				96D7B1B31B7125DE00E210D3 /* OpponentCharacterReader.cpp */,
-				96D7B1B41B7125DE00E210D3 /* OpponentCharacterReader.h */,
 				96C8C4FE1B56E57300D07B2C /* CharacterReader.cpp */,
 				96C8C4FF1B56E57300D07B2C /* CharacterReader.h */,
+				9643491F1B790F70001A6FD5 /* GameCenterManager.h */,
+				9643491C1B790F4E001A6FD5 /* GameCenterManager.mm */,
+				964349231B790FA0001A6FD5 /* GameCenterWrapper.h */,
+				964349201B790F8F001A6FD5 /* GameCenterWrapper.mm */,
 				96C8C4F91B56E47400D07B2C /* Globals.h */,
 				965BC3F71B60118D0054CCEF /* JSONPacker.cpp */,
 				965BC3F81B60118D0054CCEF /* JSONPacker.h */,
+				964349271B790FCE001A6FD5 /* LeaderBoardManager.h */,
+				964349241B790FC1001A6FD5 /* LeaderBoardManager.mm */,
+				964349281B790FE1001A6FD5 /* LeaderBoardWrapper.h */,
+				964349291B790FEC001A6FD5 /* LeaderBoardWrapper.mm */,
 				96424DCF1B5E126200BF3DA5 /* LevelInfo.cpp */,
 				96424DD01B5E126200BF3DA5 /* LevelInfo.h */,
 				46880B8619C43A87006E1F66 /* MainScene.cpp */,
 				46880B8719C43A87006E1F66 /* MainScene.h */,
 				9637D4581B6BF59B00B832A8 /* Networking */,
+				96D7B1AF1B7125CF00E210D3 /* OpponentCharacter.cpp */,
+				96D7B1B01B7125CF00E210D3 /* OpponentCharacter.h */,
+				96D7B1B31B7125DE00E210D3 /* OpponentCharacterReader.cpp */,
+				96D7B1B41B7125DE00E210D3 /* OpponentCharacterReader.h */,
 				965BC3F11B60113D0054CCEF /* PatternRate.cpp */,
 				965BC3F21B60113D0054CCEF /* PatternRate.h */,
+				9643492E1B794036001A6FD5 /* RankInfo.cpp */,
+				9643492F1B794036001A6FD5 /* RankInfo.h */,
+				964349161B790769001A6FD5 /* UserDataManager.cpp */,
+				964349171B790769001A6FD5 /* UserDataManager.h */,
 				9637D4481B68019500B832A8 /* Utility.cpp */,
 				9637D4491B68019500B832A8 /* Utility.h */,
 			);
@@ -546,6 +586,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				96C8C5001B56E57300D07B2C /* CharacterReader.cpp in Sources */,
+				9643492A1B790FEC001A6FD5 /* LeaderBoardWrapper.mm in Sources */,
 				9637D4561B6BF57900B832A8 /* NetworkingWrapper.mm in Sources */,
 				96D7B1B11B7125CF00E210D3 /* OpponentCharacter.cpp in Sources */,
 				965BC3F91B60118D0054CCEF /* JSONPacker.cpp in Sources */,
@@ -553,13 +594,18 @@
 				965BC3F31B60113D0054CCEF /* PatternRate.cpp in Sources */,
 				96424DD11B5E126200BF3DA5 /* LevelInfo.cpp in Sources */,
 				46880B8A19C43A87006E1F66 /* MainScene.cpp in Sources */,
+				964349181B790769001A6FD5 /* UserDataManager.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				9637D44A1B68019500B832A8 /* Utility.cpp in Sources */,
 				96C8C4FC1B56E50200D07B2C /* Character.cpp in Sources */,
 				9637D4571B6BF57900B832A8 /* NetworkManager.mm in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
+				964349301B794036001A6FD5 /* RankInfo.cpp in Sources */,
+				964349211B790F8F001A6FD5 /* GameCenterWrapper.mm in Sources */,
 				96D7B1B51B7125DE00E210D3 /* OpponentCharacterReader.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
+				9643491D1B790F4E001A6FD5 /* GameCenterManager.mm in Sources */,
+				964349251B790FC1001A6FD5 /* LeaderBoardManager.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -567,13 +613,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9643491E1B790F4E001A6FD5 /* GameCenterManager.mm in Sources */,
+				964349191B790769001A6FD5 /* UserDataManager.cpp in Sources */,
 				9637D44B1B68019500B832A8 /* Utility.cpp in Sources */,
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				96D7B1B21B7125CF00E210D3 /* OpponentCharacter.cpp in Sources */,
+				9643492B1B790FEC001A6FD5 /* LeaderBoardWrapper.mm in Sources */,
+				964349311B794036001A6FD5 /* RankInfo.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				965BC3FA1B60118D0054CCEF /* JSONPacker.cpp in Sources */,
 				46880B8B19C43A87006E1F66 /* MainScene.cpp in Sources */,
+				964349221B790F8F001A6FD5 /* GameCenterWrapper.mm in Sources */,
 				965BC3F41B60113D0054CCEF /* PatternRate.cpp in Sources */,
+				964349261B790FC1001A6FD5 /* LeaderBoardManager.mm in Sources */,
 				96C8C5011B56E57300D07B2C /* CharacterReader.cpp in Sources */,
 				96424DD21B5E126200BF3DA5 /* LevelInfo.cpp in Sources */,
 				96D7B1B61B7125DE00E210D3 /* OpponentCharacterReader.cpp in Sources */,

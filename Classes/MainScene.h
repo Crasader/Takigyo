@@ -5,6 +5,8 @@
 #include "CocosGUI.h"
 #include "Globals.h"
 #include "NetworkingWrapper.h"
+#include "GameCenterWrapper.h"
+#include "LeaderBoardWrapper.h"
 
 enum class Target {
     Me,
@@ -77,10 +79,12 @@ private:
     void setTen();
     void singlePlayerPressed(cocos2d::Ref* pSender, cocos2d::ui::Widget::TouchEventType eEventType);
     void multiPlayerPressed(cocos2d::Ref* pSender, cocos2d::ui::Widget::TouchEventType eEventType);
+    void rankingButtonPressed(cocos2d::Ref* pSender, cocos2d::ui::Widget::TouchEventType eEventType);
     void replayButtonPressed(cocos2d::Ref* pSender, cocos2d::ui::Widget::TouchEventType eEventType);
     void replayMultiButtonPressed(cocos2d::Ref* pSender, cocos2d::ui::Widget::TouchEventType eEventType);
     void topButtonPressed(cocos2d::Ref* pSender, cocos2d::ui::Widget::TouchEventType eEventType);
     void setRemainingAura(float auraLeft);
+    void setExpGauge(int exp);
     void setOpponentRemainingAura(float auraLeft);
     void playWeather();
     void setComboCount(int combo);
@@ -93,6 +97,12 @@ private:
     void setSinglePlayMode();
     void setMultiPlayMode();
     void unpack(std::string dataStr);
+    
+    void login();
+    bool isLoggedIn();
+    void showLeaderBoard();
+    void reportHighScore(int score);
+    void reportTotalScore(int exp);
     
     float playingTime;
     float opponentPlayingTime;
@@ -156,6 +166,10 @@ private:
     GameState gameState;
     GameState opponentGameState;
     ObstacleType obstacleType;
+    
+    std::unique_ptr<NetworkingWrapper> networkingWrapper;
+    std::unique_ptr<GameCenterWrapper> gameCenterWrapper;
+    std::unique_ptr<LeaderBoardWrapper> leaderBoardWrapper;
 };
 
 #endif // __MainScene_SCENE_H__

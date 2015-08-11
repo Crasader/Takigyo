@@ -10,8 +10,11 @@
 #include "LevelInfo.h"
 #include "PatternList.h"
 #include "NetworkingWrapper.h"
+#include "GameCenterWrapper.h"
 #include "JSONPacker.h"
 #include "Utility.h"
+#include "UserDataManager.h"
+#include "RankInfo.h"
 #include <random>
 
 USING_NS_TIMELINE
@@ -66,6 +69,14 @@ bool MainScene::init()
     this->countDownLabel    = rootNode->getChildByName<cocos2d::ui::Text*>("countDownLabel");
     this->cloudsNode        = rootNode->getChildByName("clouds");
     
+    // NEW Label
+    auto jumpAction = CCJumpBy::create(1, Vec2(0, 0), 20, 1);
+    auto spawn = CCSpawn::create(jumpAction, NULL);
+    auto repeatForever = CCRepeatForever::create(spawn);
+    auto resultRightRaft        = this->rootNode->getChildByName("rightRaft");
+    auto newLabel               = resultRightRaft->getChildByName<Sprite*>("newLabel");
+    newLabel->runAction(repeatForever);
+    
     // Recovery particle effect
     this->splashEffect = ParticleSystemQuad::create("splash2.plist");
     splashEffect->setScale(0.36f);
@@ -92,6 +103,17 @@ bool MainScene::init()
     ui::Button* vsButton = this->rootNode->getChildByName<cocos2d::ui::Button*>("VersusButton");
     vsButton->addTouchEventListener(CC_CALLBACK_2(MainScene::multiPlayerPressed, this));
     
+    ui::Button* RankingButton = this->rootNode->getChildByName<cocos2d::ui::Button*>("RankingButton");
+    RankingButton->addTouchEventListener(CC_CALLBACK_2(MainScene::rankingButtonPressed, this));
+    
+    // GameCenter
+    networkingWrapper = std::unique_ptr<NetworkingWrapper>(new NetworkingWrapper());
+    networkingWrapper->setDelegate(this);
+    
+    gameCenterWrapper = std::unique_ptr<GameCenterWrapper>(new GameCenterWrapper());
+    
+    leaderBoardWrapper = std::unique_ptr<LeaderBoardWrapper>(new LeaderBoardWrapper());
+    
     this->resetGameState();
     
     addChild(this->rootNode);
@@ -103,6 +125,8 @@ void MainScene::onEnter() {
     Layer::onEnter();
     
     this->scheduleUpdate();
+    
+    this->login();
     
     this->netWorkingWrapper->startAdvertisingAvailability();
     
@@ -533,9 +557,9 @@ void MainScene::triggerTitle()
     this->gameState = GameState::Title;
     
     // load and run the title animation
-    ActionTimeline* titleTimeline = CSLoader::createTimeline("MainScene.csb");
-    this->rootNode->runAction(titleTimeline);
-    titleTimeline->play("title", false);
+    ActionTimeline* mainTimeline = CSLoader::createTimeline("MainScene.csb");
+    this->rootNode->runAction(mainTimeline);
+    mainTimeline->play("title", false);
     
     this->winScore = 0;
     this->opponentWinScore = 0;
@@ -556,12 +580,12 @@ void MainScene::triggerReady() {
     }
     
     // load and run the ready animations
-    ActionTimeline* readyTimeline = CSLoader::createTimeline("MainScene.csb");
-    this->rootNode->runAction(readyTimeline);
-    if (onMultiPlayerMode) {
-        readyTimeline->play("readyMulti", false);
+    ActionTimeline* mainTimeline = CSLoader::createTimeline("MainScene.csb");
+    this->rootNode->runAction(mainTimeline);
+    if (this->onMultiPlayerMode) {
+        mainTimeline->play("readyMulti", false);
     } else {
-        readyTimeline->play("ready", false);
+        mainTimeline->play("ready", false);
     }
     
     auto background     = this->rootNode->getChildByName<Sprite*>("background");
@@ -624,6 +648,9 @@ void MainScene::triggerMultiResult() {
     ui::Button* topButton = resultRightRaft->getChildByName<ui::Button*>("topButton");
     topButton->addTouchEventListener(CC_CALLBACK_2(MainScene::topButtonPressed, this));
     
+    ui::Button* RankingButton = resultLeftRaft->getChildByName<cocos2d::ui::Button*>("rankingButton");
+    RankingButton->addTouchEventListener(CC_CALLBACK_2(MainScene::rankingButtonPressed, this));
+    
     this->rootNode->runAction(
         Sequence::create(
             CallFunc::create(
@@ -668,7 +695,29 @@ void MainScene::triggerMultiGameOver() {
 
 void MainScene::triggerGameOver()
 {
-    int totalScoreString = (this->totalPerfectCount * 3 + this->totalGreatCount * 2 + this->totalGoodCount) + this->maxComboCount + this->currentLevel;
+    int totalScore = (this->totalPerfectCount * 3 + this->totalGreatCount * 2 + this->totalGoodCount) + this->maxComboCount + this->currentLevel;
+    // 遊んだ回数を加算する
+    UserDataManager* udm = UserDataManager::getInstance();
+    udm->setPlayTimes(udm->getPlayTimes() + 1);
+    
+    int overallScoreBefore  = udm->getPlayerExp();
+    int overallScoreAfter   = overallScoreBefore + totalScore;
+    udm->setPlayerExp(overallScoreAfter);
+    
+    // 新記録かどうか
+    int highScore  = udm->getPlayerHighScore();
+    bool isHighScore = false;
+    if (totalScore > highScore) {
+        udm->setPlayerHighScore(totalScore);
+        isHighScore = true;
+    }
+    
+    // GameCenterに送信
+    if (this->isLoggedIn()) {
+        this->reportHighScore(totalScore);
+        this->reportTotalScore(overallScoreAfter);
+    }
+    
     std::string playTimeString = StringUtils::toString(this->playingTime);
     std::string totalGreatString = StringUtils::toString(this->totalGreatCount);
     std::string totalGoodString = StringUtils::toString(this->totalGoodCount);
@@ -682,21 +731,52 @@ void MainScene::triggerGameOver()
     auto maxComboLabel          = resultRightRaft->getChildByName<cocos2d::ui::Text*>("maxComboLabel");
     auto maxLevelLabel          = resultRightRaft->getChildByName<cocos2d::ui::Text*>("maxLevelLabel");
     auto totalScoreLabel        = resultRightRaft->getChildByName<cocos2d::ui::Text*>("totalScoreLabel");
-    totalPerfectScoreLabel->setString(Utility::getScoreString(this->totalPerfectCount, 0));
-    totalGreatScoreLabel->setString(Utility::getScoreString(this->totalGreatCount, 0));
-    totalGoodScoreLabel->setString(Utility::getScoreString(this->totalGoodCount, 0));
-    maxComboLabel->setString(Utility::getScoreString(this->maxComboCount, 0));
-    maxLevelLabel->setString(Utility::getScoreString(this->currentLevel, 0));
-    totalScoreLabel->setString(Utility::getScoreString(totalScoreString, 0));
+    auto bestScoreLabel         = resultRightRaft->getChildByName<cocos2d::ui::Text*>("bestScoreLabel");
+    auto newLabel               = resultRightRaft->getChildByName<Sprite*>("newLabel");
+    totalPerfectScoreLabel->setString(Utility::getScoreString(this->totalPerfectCount, 6));
+    totalGreatScoreLabel->setString(Utility::getScoreString(this->totalGreatCount, 6));
+    totalGoodScoreLabel->setString(Utility::getScoreString(this->totalGoodCount, 6));
+    maxComboLabel->setString(Utility::getScoreString(this->maxComboCount, 3));
+    maxLevelLabel->setString(Utility::getScoreString(this->currentLevel, 3));
+    totalScoreLabel->setString(Utility::getScoreString(totalScore, 6));
+    bestScoreLabel->setString(Utility::getScoreString(highScore, 6));
+    if (isHighScore == true) {
+        newLabel->setVisible(true);
+    } else {
+        newLabel->setVisible(false);
+    }
     
     resultLeftRaft->setZOrder(1);
     resultRightRaft->setZOrder(1);
+    
+    RankInfo* rankInfo = RankInfo::createPatternWithExp(overallScoreAfter);
+    auto currentRankName    = rankInfo->getCurrentRankName();
+    auto currentRank      = rankInfo->getCurrentRank();
+    
+    auto rankLabel = resultRightRaft->getChildByName<cocos2d::ui::Text*>("rankLabel");
+    rankLabel->setString(currentRankName.c_str());
+    
+    auto fromTopLabel = resultRightRaft->getChildByName<cocos2d::ui::Text*>("fromTopLabel");
+    auto fromTopString = Utility::getFromTopString(currentRank);
+    fromTopLabel->setString(fromTopString);
+    
+    // 経験値ゲージ作成
+    auto expBG                  = resultLeftRaft->getChildByName("expBG");
+    auto expBar                 = expBG->getChildByName<Sprite*>("expBar");
+    auto expLeft                = clampf(rankInfo->getExpWidth(), 0.0f, rankInfo->getGaugeWidth());
+    expBar->setScaleX(expLeft / rankInfo->getGaugeWidth());
+    
+    auto expLabel               = resultLeftRaft->getChildByName<cocos2d::ui::Text*>("expLabel");
+    expLabel->setString(Utility::getGaugeString(expLeft, rankInfo->getGaugeWidth()));
     
     ui::Button* replayButton = resultRightRaft->getChildByName<ui::Button*>("replayButton");
     replayButton->addTouchEventListener(CC_CALLBACK_2(MainScene::replayButtonPressed, this));
     
     ui::Button* topButton = resultRightRaft->getChildByName<ui::Button*>("topButton");
     topButton->addTouchEventListener(CC_CALLBACK_2(MainScene::topButtonPressed, this));
+    
+    ui::Button* RankingButton = resultLeftRaft->getChildByName<cocos2d::ui::Button*>("rankingButton");
+    RankingButton->addTouchEventListener(CC_CALLBACK_2(MainScene::rankingButtonPressed, this));
     
     this->rootNode->runAction(
         Sequence::create(
@@ -717,6 +797,7 @@ void MainScene::triggerGameOver()
             NULL
         )
     );
+    
     this->playCount++;
     this->gameState = GameState::GameOver;
 }
@@ -790,7 +871,6 @@ void MainScene::gotHit() {
 
 #pragma mark -
 #pragma mark Getters / Setters
-
 void MainScene::setRemainingAura(float auraLeft)
 {
     this->auraLeft = clampf(auraLeft, 0.0f, PRESENT_OUTPUT_POTENTIAL);
@@ -893,6 +973,12 @@ void MainScene::singlePlayerPressed(Ref *pSender, ui::Widget::TouchEventType eEv
 void MainScene::multiPlayerPressed(Ref *pSender, ui::Widget::TouchEventType eEventType) {
     if (eEventType == ui::Widget::TouchEventType::ENDED) {
         this->netWorkingWrapper->showPeerList();
+    }
+}
+
+void MainScene::rankingButtonPressed(Ref *pSender, ui::Widget::TouchEventType eEventType) {
+    if (eEventType == ui::Widget::TouchEventType::ENDED) {
+        this->showLeaderBoard();
     }
 }
 
@@ -1126,4 +1212,31 @@ void MainScene::setMultiPlayMode() {
     splashEffect2->setPosition(Vec2(this->visibleSize.width * 0.64f, bottomRock2->getPositionY()+this->character->getScaleY()-32));
     bottomRock->setPositionX(this->visibleSize.width * 0.46f);
     bottomRock2->setPositionX(this->visibleSize.width * .75f);
+}
+
+#pragma mark - GameCenter Methods
+
+void MainScene::login()
+{
+    gameCenterWrapper->loginGameCenter();
+}
+
+bool MainScene::isLoggedIn()
+{
+    return gameCenterWrapper->isLoggedIn();
+}
+
+void MainScene::showLeaderBoard()
+{
+    leaderBoardWrapper->showRanking();
+}
+
+void MainScene::reportHighScore(int score)
+{
+    leaderBoardWrapper->reportHighScore(score);
+}
+
+void MainScene::reportTotalScore(int exp)
+{
+    leaderBoardWrapper->reportTotalScore(exp);
 }

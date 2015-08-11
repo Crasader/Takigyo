@@ -45,4 +45,7 @@ static const float COUNT_DOWN_TIME = 5.0f;
 
 static const float HIT_DAMAGE = 1.0f;
 static const float RECOVERY   = 0.5f;
+
+static const char* HIGHSCORE_LEADERBOARD_IDENTIFIER = "TakigyoHighScore";
+static const char* TOTALSCORE_LEADERBOARD_IDENTIFIER = "TakigyoTotalScore";
 #endif

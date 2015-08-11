@@ -23,4 +23,10 @@ public:
     virtual void stateChanged(ConnectionState state) = 0;
 };
 
+class GameCenterManagerDelegate
+{
+public:
+    virtual void startOnlineGame() = 0;
+    virtual void didLoggedIn() = 0;
+};
 #endif /* defined(__Doodler__NetworkManagerDelegate__) */

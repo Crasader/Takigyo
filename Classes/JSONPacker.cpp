@@ -15,6 +15,35 @@
 using namespace cocos2d;
 
 namespace JSONPacker {
+    UnpackedRankInfo unpackRankInfoJSON(std::string json, int exp) {
+        rapidjson::Document rankDocument;
+        rankDocument.Parse<0>(json.c_str());
+        
+        int rank;
+        std::string name;
+        int nextExp;
+        int leastExp;
+        for (rapidjson::SizeType i = 0; i < rankDocument["rank"].Size(); ++i) {
+            rapidjson::Value& rankDoc = rankDocument["rank"][i];
+            int tmpExp = rankDoc["exp"].GetInt();
+            int tmpNext = rankDoc["next"].GetInt();
+            if (tmpExp <= exp && exp < tmpNext) {
+                rank = rankDoc["rank"].GetInt();
+                name = rankDoc["name"].GetString();
+                nextExp = rankDoc["next"].GetInt();
+                leastExp = rankDoc["exp"].GetInt();
+                break;
+            }
+        }
+        UnpackedRankInfo rankInfo;
+        rankInfo.rank = rank;
+        rankInfo.name = name;
+        rankInfo.leastExp = leastExp;
+        rankInfo.nextExp = nextExp;
+        
+        return rankInfo;
+    }
+    
     UnpackedLevelInfo unpackLevelInfoJSON(std::string json, int round) {
         rapidjson::Document levelDocument;
         levelDocument.Parse<0>(json.c_str());

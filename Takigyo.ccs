@@ -66,6 +66,7 @@
             <Image Name="TopButtonPressed.png" />
             <Image Name="SettingButton.png" />
             <Image Name="SettingButtonPressed.png" />
+            <Image Name="new.png" />
           </Folder>
           <Folder Name="resources-2x">
             <Image Name="BottomRock@2x.png" />
@@ -89,6 +90,8 @@
             <Image Name="multiLeftRaft@2x.png" />
             <Image Name="leftRaft@2x.png" />
             <Image Name="rightRaft@2x.png" />
+            <Image Name="expBar@2x.png" />
+            <Image Name="expBG@2x.png" />
           </Folder>
           <Folder Name="resources-3x">
             <Image Name="BottomRock@3x.png" />
@@ -110,6 +113,9 @@
             <Image Name="waterfall2@3x.png" />
             <Image Name="leftRaft@3x.png" />
             <Image Name="rightRaft@3x.png" />
+            <Image Name="expBar@3x.png" />
+            <Image Name="expBG@3x.png" />
+            <Image Name="new@3x.png" />
           </Folder>
           <Folder Name="resources-4x" />
         </Folder>

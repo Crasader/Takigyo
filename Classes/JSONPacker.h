@@ -41,7 +41,15 @@ namespace JSONPacker{
         std::vector<Pattern> patternList;
     };
     
+    struct UnpackedRankInfo {
+        int rank;
+        std::string name;
+        int leastExp;
+        int nextExp;
+    };
+    
     UnpackedLevelInfo unpackLevelInfoJSON(std::string json, int round);
+    UnpackedRankInfo  unpackRankInfoJSON(std::string json, int exp);
     UnpackedPatternList unpackPatternListJSON(std::string json, int patternId);
     UserData unpackUserDataJSON(std::string json);
     std::string packUserData(const UserData data);
