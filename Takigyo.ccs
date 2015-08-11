@@ -121,11 +121,6 @@
         </Folder>
         <TTF Name="kenpixel_blocks.ttf" />
         <Project Name="Intro.csd" Type="Node" />
-        <Folder Name="Timing">
-          <Project Name="TimingPerfect.csd" Type="Node" />
-          <Project Name="TimingGreat.csd" Type="Node" />
-          <Project Name="TimingGood.csd" Type="Node" />
-        </Folder>
         <Project Name="LevelNode.csd" Type="Node" />
         <TTF Name="Game of Three.ttf" />
         <Project Name="Rock.csd" Type="Node" />

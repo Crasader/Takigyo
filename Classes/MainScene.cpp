@@ -100,9 +100,6 @@ bool MainScene::init()
     ui::Button* playButton = this->rootNode->getChildByName<ui::Button*>("PlayButton");
     playButton->addTouchEventListener(CC_CALLBACK_2(MainScene::singlePlayerPressed, this));
     
-    ui::Button* vsButton = this->rootNode->getChildByName<cocos2d::ui::Button*>("VersusButton");
-    vsButton->addTouchEventListener(CC_CALLBACK_2(MainScene::multiPlayerPressed, this));
-    
     ui::Button* RankingButton = this->rootNode->getChildByName<cocos2d::ui::Button*>("RankingButton");
     RankingButton->addTouchEventListener(CC_CALLBACK_2(MainScene::rankingButtonPressed, this));
     
@@ -965,8 +962,8 @@ void MainScene::setupTouchHandling() {
 
 void MainScene::singlePlayerPressed(Ref *pSender, ui::Widget::TouchEventType eEventType) {
     if (eEventType == ui::Widget::TouchEventType::ENDED) {
-        this->resetGameState();
         this->triggerReady();
+        this->resetGameState();
     }
 }
 
@@ -1091,7 +1088,6 @@ void MainScene::replayButtonPressed(Ref *pSender, ui::Widget::TouchEventType eEv
               DelayTime::create(0.7f),
               CallFunc::create(
                                [this]() {
-                                   this->gameState = GameState::Playing;
                                    this->triggerReady();
                                    this->resetGameState();
                                    CocosDenshion::SimpleAudioEngine::getInstance()->stopEffect(soundId);
