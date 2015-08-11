@@ -67,6 +67,7 @@
             <Image Name="SettingButton.png" />
             <Image Name="SettingButtonPressed.png" />
             <Image Name="new.png" />
+            <Image Name="cloud2.png" />
           </Folder>
           <Folder Name="resources-2x">
             <Image Name="BottomRock@2x.png" />
@@ -133,6 +134,8 @@
         <TTF Name="AoyagiKouzanFontSousyo2.ttf" />
         <TTF Name="aoyagireisyosimo_ttf_2_01.ttf" />
         <Project Name="Waiting.csd" Type="Node" />
+        <Image Name="waterfall@3x.png" />
+        <Project Name="Result.csd" Type="Node" />
       </RootFolder>
     </Group>
   </SolutionFolder>

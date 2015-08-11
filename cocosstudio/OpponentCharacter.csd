@@ -43,10 +43,10 @@
             <FileData Type="Normal" Path="Images/resources-1x/CharacterShadow.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Ten" ActionTag="-990567327" Tag="65" VisibleForFrame="False" IconVisible="True" TopMargin="-50.0000" BottomMargin="50.0000" ctype="ParticleObjectData">
+          <AbstractNodeData Name="Ten" ActionTag="-990567327" Tag="65" VisibleForFrame="False" IconVisible="True" TopMargin="-110.0000" BottomMargin="110.0000" ctype="ParticleObjectData">
             <Size X="0.0000" Y="0.0000" />
             <AnchorPoint />
-            <Position Y="50.0000" />
+            <Position Y="110.0000" />
             <Scale ScaleX="0.5000" ScaleY="0.5000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />

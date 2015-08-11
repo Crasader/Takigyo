@@ -69,6 +69,9 @@ bool MainScene::init()
     this->countDownLabel    = rootNode->getChildByName<cocos2d::ui::Text*>("countDownLabel");
     this->cloudsNode        = rootNode->getChildByName("clouds");
     
+    this->titleTimeline     = CSLoader::createTimeline("MainScene.csb");
+    this->rootNode->runAction(this->titleTimeline);
+    
     // NEW Label
     auto jumpAction = CCJumpBy::create(1, Vec2(0, 0), 20, 1);
     auto spawn = CCSpawn::create(jumpAction, NULL);
@@ -177,9 +180,9 @@ void MainScene::update(float dt)
             this->isHost = (this->userId > this->opponentUserId) ? true : false;
             this->gameState = GameState::WAITING;
             if (isHost) {
-                CCLOG("-------------YOU ARE HOST---------------");
+//                CCLOG("-------------YOU ARE HOST---------------");
             } else {
-                CCLOG("-------------YOU ARE CLIENT-------------");
+//                CCLOG("-------------YOU ARE CLIENT-------------");
             }
             this->sendDataOverNetwork();
         }
@@ -221,9 +224,9 @@ void MainScene::update(float dt)
             this->sendDataOverNetwork();
             if (this->gameRound == 1) {
                 this->triggerReady();
-                CCLOG("------------------");
-                CCLOG("HOST GAME READY!!!");
-                CCLOG("------------------");
+//                CCLOG("------------------");
+//                CCLOG("HOST GAME READY!!!");
+//                CCLOG("------------------");
             } else if (this->gameRound >= 2) {
                 this->gameState = GameState::Playing;
             }
@@ -257,9 +260,9 @@ void MainScene::update(float dt)
         // ゲームスタート
         if (this->gameRound == 1) {
             this->triggerReady();
-            CCLOG("------------------");
-            CCLOG("CLIENT GAME READY!!!");
-            CCLOG("------------------");
+//            CCLOG("------------------");
+//            CCLOG("CLIENT GAME READY!!!");
+//            CCLOG("------------------");
         } else if (this->gameRound >= 2) {
             this->gameState = GameState::Playing;
         }
@@ -327,13 +330,15 @@ void MainScene::update(float dt)
             this->triggerMultiGameOver();
         }
         if (this->auraLeft <= 0.0f) {
-            if (onMultiPlayerMode) {
+            if (this->onMultiPlayerMode) {
                 this->triggerMultiGameOver();
             } else {
                 this->triggerGameOver();
             }
         }
-    } else if (this->gameState == GameState::GameOver && this->opponentGameState == GameState::GameOver) {
+    } else if (this->onMultiPlayerMode == true
+               && this->gameState == GameState::GameOver
+               && (this->opponentGameState == GameState::GameOver || this->opponentGameState == GameState::MultiResult)) {
         this->triggerMultiResult();
     } else if (this->gameState == GameState::MultiResult && this->opponentGameState == GameState::MultiResult) {
     }
@@ -402,7 +407,7 @@ void MainScene::dropObstacles(ObstacleType obstacleType, float tempo) {
         // Ease In Down
         easeInDown,
         CallFunc::create([this, denshion, obstacleType, obstacle]() {
-        if (this->gameState == GameState::Playing) {
+        if (this->gameState == GameState::Playing || this->gameState == GameState::WAITING) {
             // While not touching the screen
             if (this->character->getNen() == Nen::Ten) {
                 if (obstacleType == ObstacleType::Rock) {
@@ -446,6 +451,8 @@ void MainScene::dropObstacles(ObstacleType obstacleType, float tempo) {
                     heartTimeline->play("breakingHeart", false);
                 }
             }
+        } else {
+            obstacle->removeFromParent();
         }
     }),
     DelayTime::create(1.0f),
@@ -554,21 +561,19 @@ void MainScene::resetGameState()
 
 void MainScene::triggerTitle()
 {
-    this->gameState = GameState::Title;
-    
     // load and run the title animation
-    ActionTimeline* mainTimeline = CSLoader::createTimeline("MainScene.csb");
-    this->rootNode->runAction(mainTimeline);
-    mainTimeline->play("title", false);
+    titleTimeline->play("title", false);
     
     this->winScore = 0;
     this->opponentWinScore = 0;
-    this->onMultiPlayerMode = false;
     if (this->onMultiPlayerMode) {
+        this->onMultiPlayerMode = false;
         this->netWorkingWrapper->disconnect();
         this->netWorkingWrapper->startAdvertisingAvailability();
         this->resetGameState();
+        MessageBox("Disconnected...", "Network");
     }
+    this->gameState = GameState::Title;
 }
 
 void MainScene::triggerReady() {
@@ -580,12 +585,10 @@ void MainScene::triggerReady() {
     }
     
     // load and run the ready animations
-    ActionTimeline* mainTimeline = CSLoader::createTimeline("MainScene.csb");
-    this->rootNode->runAction(mainTimeline);
     if (this->onMultiPlayerMode) {
-        mainTimeline->play("readyMulti", false);
+        titleTimeline->play("readyMulti", false);
     } else {
-        mainTimeline->play("ready", false);
+        titleTimeline->play("ready", false);
     }
     
     auto background     = this->rootNode->getChildByName<Sprite*>("background");
@@ -623,63 +626,45 @@ void MainScene::triggerMultiResult() {
     std::string totalGoodString = StringUtils::toString(this->totalGoodCount);
     std::string maxComboString = StringUtils::toString(this->maxComboCount);
     
-    auto resultLeftRaft         = this->rootNode->getChildByName("multiLeftRaft");
-    auto resultRightRaft        = this->rootNode->getChildByName("multiRightRaft");
+    auto resultMultiLeftRaft         = this->rootNode->getChildByName("multiLeftRaft");
+    auto resultMultiRightRaft        = this->rootNode->getChildByName("multiRightRaft");
     // Left Label
-    auto winScoreLabel          = resultLeftRaft->getChildByName<cocos2d::ui::Text*>("winScoreLabel");
+    auto winScoreLabel          = resultMultiLeftRaft->getChildByName<cocos2d::ui::Text*>("winScoreLabel");
     // Right Label
-    auto totalPerfectScoreLabel = resultRightRaft->getChildByName<cocos2d::ui::Text*>("perfectScoreLabel");
-    auto totalGreatScoreLabel   = resultRightRaft->getChildByName<cocos2d::ui::Text*>("greatScoreLabel");
-    auto totalGoodScoreLabel    = resultRightRaft->getChildByName<cocos2d::ui::Text*>("goodScoreLabel");
-    auto maxComboLabel          = resultRightRaft->getChildByName<cocos2d::ui::Text*>("maxComboLabel");
-    auto opponentWinScoreLabel  = resultRightRaft->getChildByName<cocos2d::ui::Text*>("opponentWinScoreLabel");
-    auto winLoseLabel           = resultRightRaft->getChildByName<cocos2d::ui::Text*>("winLoseLabel");
+    auto totalPerfectScoreLabel = resultMultiRightRaft->getChildByName<cocos2d::ui::Text*>("perfectScoreLabel");
+    auto totalGreatScoreLabel   = resultMultiRightRaft->getChildByName<cocos2d::ui::Text*>("greatScoreLabel");
+    auto totalGoodScoreLabel    = resultMultiRightRaft->getChildByName<cocos2d::ui::Text*>("goodScoreLabel");
+    auto maxComboLabel          = resultMultiRightRaft->getChildByName<cocos2d::ui::Text*>("maxComboLabel");
+    auto opponentWinScoreLabel  = resultMultiRightRaft->getChildByName<cocos2d::ui::Text*>("opponentWinScoreLabel");
+    auto winLoseLabel           = resultMultiRightRaft->getChildByName<cocos2d::ui::Text*>("winLoseLabel");
     totalPerfectScoreLabel->setString(Utility::getScoreString(this->totalPerfectCount, 0));
     totalGreatScoreLabel->setString(Utility::getScoreString(this->totalGreatCount, 0));
     totalGoodScoreLabel->setString(Utility::getScoreString(this->totalGoodCount, 0));
     maxComboLabel->setString(Utility::getScoreString(this->maxComboCount, 0));
     
-    resultLeftRaft->setZOrder(1);
-    resultRightRaft->setZOrder(1);
+    resultMultiLeftRaft->setZOrder(1);
+    resultMultiRightRaft->setZOrder(1);
     
-    ui::Button* replayButton = resultRightRaft->getChildByName<ui::Button*>("replayButton");
+    ui::Button* replayButton = resultMultiRightRaft->getChildByName<ui::Button*>("replayButton");
     replayButton->addTouchEventListener(CC_CALLBACK_2(MainScene::replayMultiButtonPressed, this));
     
-    ui::Button* topButton = resultRightRaft->getChildByName<ui::Button*>("topButton");
+    ui::Button* topButton = resultMultiRightRaft->getChildByName<ui::Button*>("topButton");
     topButton->addTouchEventListener(CC_CALLBACK_2(MainScene::topButtonPressed, this));
     
-    ui::Button* RankingButton = resultLeftRaft->getChildByName<cocos2d::ui::Button*>("rankingButton");
+    ui::Button* RankingButton = resultMultiLeftRaft->getChildByName<cocos2d::ui::Button*>("rankingButton");
     RankingButton->addTouchEventListener(CC_CALLBACK_2(MainScene::rankingButtonPressed, this));
     
-    this->rootNode->runAction(
-        Sequence::create(
-            CallFunc::create(
-                [this]() {
-                    // load and run the title animation
-                    ActionTimeline* titleTimeline = CSLoader::createTimeline("MainScene.csb");
-                    this->rootNode->runAction(titleTimeline);
-                    titleTimeline->play("multiResult", false);
-                }
-            ),
-            DelayTime::create(1.0f),
-            CallFunc::create(
-                [replayButton]() {
-                    replayButton->setOpacity(255);
-                }
-            ),
-            NULL
-        )
-    );
+    titleTimeline->play("multiResult", false);
     
     if (this->playingTime > this->opponentPlayingTime) {
         this->winScore++;
-        CCLOG("win:%d", this->winScore);
+//        CCLOG("win:%d", this->winScore);
         winScoreLabel->setString(Utility::getScoreString(this->winScore, 3));
         opponentWinScoreLabel->setString(Utility::getScoreString(this->opponentWinScore, 3));
         winLoseLabel->setString("win");
     } else {
         this->opponentWinScore++;
-        CCLOG("oppowin:%d", this->opponentWinScore);
+//        CCLOG("oppowin:%d", this->opponentWinScore);
         winScoreLabel->setString(Utility::getScoreString(this->winScore, 3));
         opponentWinScoreLabel->setString(Utility::getScoreString(this->opponentWinScore, 3));
         winLoseLabel->setString("lose");
@@ -778,25 +763,7 @@ void MainScene::triggerGameOver()
     ui::Button* RankingButton = resultLeftRaft->getChildByName<cocos2d::ui::Button*>("rankingButton");
     RankingButton->addTouchEventListener(CC_CALLBACK_2(MainScene::rankingButtonPressed, this));
     
-    this->rootNode->runAction(
-        Sequence::create(
-            CallFunc::create(
-                [this]() {
-                    // load and run the title animation
-                    ActionTimeline* titleTimeline = CSLoader::createTimeline("MainScene.csb");
-                    this->rootNode->runAction(titleTimeline);
-                    titleTimeline->play("result", false);
-                }
-            ),
-            DelayTime::create(1.0f),
-            CallFunc::create(
-                [replayButton]() {
-                    replayButton->setOpacity(255);
-                }
-            ),
-            NULL
-        )
-    );
+    titleTimeline->play("resultRaft", false);
     
     this->playCount++;
     this->gameState = GameState::GameOver;
@@ -924,6 +891,7 @@ void MainScene::setupTouchHandling() {
         switch (this->gameState)
         {
             case GameState::Title:
+                this->character->setNen(Nen::Ken);
                 break;
             case GameState::Ready:
             {
@@ -1014,8 +982,6 @@ void MainScene::replayMultiButtonPressed(Ref *pSender, ui::Widget::TouchEventTyp
                                [this]() {
                                    this->character->setNen(Nen::Ken);
                                    this->soundId = CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("ken.wav", true);
-                                   ActionTimeline* titleTimeline = CSLoader::createTimeline("MainScene.csb");
-                                   this->rootNode->runAction(titleTimeline);
                                    titleTimeline->play("multiEndResult", false);
                                    
                                }
@@ -1076,9 +1042,7 @@ void MainScene::replayButtonPressed(Ref *pSender, ui::Widget::TouchEventType eEv
                                [this]() {
                                    this->character->setNen(Nen::Ken);
                                    this->soundId = CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("ken.wav", true);
-                                   ActionTimeline* titleTimeline = CSLoader::createTimeline("MainScene.csb");
-                                   this->rootNode->runAction(titleTimeline);
-                                   titleTimeline->play("endResult", false);
+                                   titleTimeline->play("endResultRaft", false);
                                    
                                }
                                ),
@@ -1140,20 +1104,21 @@ void MainScene::receivedData(const void *data, unsigned long length) {
 void MainScene::stateChanged(ConnectionState state) {
     switch (state) {
         case ConnectionState::CONNECTING:
-            CCLOG("Connection...");
+//            CCLOG("Connection...");
             break;
         case ConnectionState::NOT_CONNECTED:
-            this->onMultiPlayerMode = false;
-            this->userId = 0;
-            this->opponentUserId = 0;
-            this->isHost = false;
-            this->setSinglePlayMode();
+//            this->userId = 0;
+//            this->opponentUserId = 0;
+//            this->isHost = false;
+//            
+//            this->setSinglePlayMode();
             this->triggerTitle();
-            this->netWorkingWrapper->startAdvertisingAvailability();
-            this->resetGameState();
-            MessageBox("Disconnected...", "Error");
             break;
         case ConnectionState::CONNECTED:
+//            CCLOG("------------");
+//            CCLOG("OISHO:CONNECTED");
+//            CCLOG("------------");
+        
             this->onMultiPlayerMode = true;
             
             // 以下の変数はネットワーク開始時と終了時に初期化する
@@ -1164,26 +1129,13 @@ void MainScene::stateChanged(ConnectionState state) {
             this->resetGameState();
             this->setMultiPlayMode();
             this->triggerMultiPreparation();
-            CCLOG("Connected");
+//            CCLOG("Connected");
             break;
     }
 }
 
 void MainScene::sendDataOverNetwork() {
     if (onMultiPlayerMode) {
-//        CCLOG("\n");
-//        CCLOG("---------------");
-//        CCLOG("自分:%d", (int)this->gameState);
-//        CCLOG("自分パターン:%d", (int)this->currentPatternId);
-//        CCLOG("相手:%d", (int)this->opponentGameState);
-//        CCLOG("相手パターン:%d", (int)this->receivedPatternId);
-//        CCLOG("---------------");
-//        CCLOG("過去ラウンド:%d", (int)this->pastRound);
-//        CCLOG("現在ラウンド:%d", (int)this->gameRound);
-//        CCLOG("次のラウンド:%d", this->nextRound);
-//        CCLOG("---------------");
-//        CCLOG("\n");
-//        
         JSONPacker::UserData data;
         data.state      = (GameState)this->gameState;
         data.nen        = this->character->getNen();

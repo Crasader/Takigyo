@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "CocosGUI.h"
+#include "cocostudio/CocoStudio.h"
 #include "Globals.h"
 #include "NetworkingWrapper.h"
 #include "GameCenterWrapper.h"
@@ -26,7 +27,6 @@ public:
     // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
     virtual bool init();
     
-    // implement the "static create()" method manually
     CREATE_FUNC(MainScene);
     
 protected:
@@ -57,6 +57,8 @@ private:
     cocos2d::ParticleSystemQuad* splashEffect;
     cocos2d::ParticleSystemQuad* splashEffect2;
     cocos2d::ui::Button* replayMultiButton;
+   
+    cocostudio::timeline::ActionTimeline* titleTimeline;
     
     cocos2d::Size visibleSize;
     
