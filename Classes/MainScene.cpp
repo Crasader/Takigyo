@@ -100,6 +100,9 @@ bool MainScene::init()
     ui::Button* playButton = this->rootNode->getChildByName<ui::Button*>("PlayButton");
     playButton->addTouchEventListener(CC_CALLBACK_2(MainScene::singlePlayerPressed, this));
     
+    ui::Button* vsButton = this->rootNode->getChildByName<cocos2d::ui::Button*>("VersusButton");
+    vsButton->addTouchEventListener(CC_CALLBACK_2(MainScene::multiPlayerPressed, this));
+    
     ui::Button* RankingButton = this->rootNode->getChildByName<cocos2d::ui::Button*>("RankingButton");
     RankingButton->addTouchEventListener(CC_CALLBACK_2(MainScene::rankingButtonPressed, this));
     
