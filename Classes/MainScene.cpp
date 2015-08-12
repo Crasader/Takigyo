@@ -47,13 +47,14 @@ bool MainScene::init()
     instance->registReaderObject("CharacterReader", (ObjectFactory::Instance) CharacterReader::getInstance);
     instance->registReaderObject("OpponentCharacterReader", (ObjectFactory::Instance) OpponentCharacterReader::getInstance);
     
-    Size size = Director::getInstance()->getVisibleSize();
-    
     this->rootNode = CSLoader::createNode("MainScene.csb");
     ui::Helper::doLayout(this->rootNode);
     
-    this->rootNode->setContentSize(size);
     this->visibleSize = Director::getInstance()->getVisibleSize();
+    setContentSize(this->visibleSize);
+    ui::Helper::doLayout(this);
+    this->rootNode->setContentSize(this->visibleSize);
+    
 
     this->waterfall         = rootNode->getChildByName("waterfall");
     this->bottomRock        = waterfall->getChildByName("bottomRock");

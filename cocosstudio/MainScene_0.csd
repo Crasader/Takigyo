@@ -894,7 +894,7 @@
         </AnimationInfo>
       </AnimationList>
       <ObjectData Name="Scene" ctype="GameNodeObjectData">
-        <Size X="640.0000" Y="960.0000" />
+        <Size X="768.0000" Y="1024.0000" />
         <Children>
           <AbstractNodeData Name="background" ActionTag="-1880258662" Tag="3" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="-64.0000" RightMargin="-64.0000" TopMargin="-88.0000" BottomMargin="-88.0000" ctype="SpriteObjectData">
             <Size X="768.0000" Y="1136.0000" />

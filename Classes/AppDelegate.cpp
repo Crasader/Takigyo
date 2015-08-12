@@ -31,8 +31,17 @@ bool AppDelegate::applicationDidFinishLaunching() {
         glview = GLViewImpl::createWithRect("Takigyo", Rect(0, 0, 640, 960));
         director->setOpenGLView(glview);
     }
-
-    glview->setDesignResolutionSize(640, 960, ResolutionPolicy::FIXED_WIDTH);
+    
+    cocos2d::Size targetSize = glview->getFrameSize();
+    
+//    CCLOG("w:%f", targetSize.width);
+//    CCLOG("h:%f", targetSize.height);
+    
+    if (targetSize.width/targetSize.height >= 0.74){
+        glview->setDesignResolutionSize(640, 960, ResolutionPolicy::EXACT_FIT);
+    } else {
+        glview->setDesignResolutionSize(640, 960, ResolutionPolicy::FIXED_WIDTH);
+    }
 
     // turn on display FPS
     director->setDisplayStats(false);
@@ -42,29 +51,6 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     FileUtils::getInstance()->addSearchPath("res");
     
-    std::vector<std::string> searchResolutionsOrder(1);
-    
-    cocos2d::Size targetSize = glview->getFrameSize();
-    
-    if (targetSize.height < 481.0f)
-    {
-        searchResolutionsOrder[0] = "resources-1x";
-    }
-    else if (targetSize.height < 1137.0f)
-    {
-        searchResolutionsOrder[0] = "resources-2x";
-    }
-    else if (targetSize.height < 2047.0f)
-    {
-        searchResolutionsOrder[0] = "resources-3x";
-    }
-    else
-    {
-        searchResolutionsOrder[0] = "resources-3x";
-    }
-    
-    FileUtils::getInstance()->setSearchResolutionsOrder(searchResolutionsOrder);
-
     // create a scene. it's an autorelease object
     auto scene = MainScene::createScene();
 
