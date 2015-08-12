@@ -893,7 +893,7 @@
           <RenderColor A="255" R="224" G="255" B="255" />
         </AnimationInfo>
       </AnimationList>
-      <ObjectData Name="Scene" ctype="GameNodeObjectData">
+      <ObjectData Name="Scene" Visible="False" ctype="GameNodeObjectData">
         <Size X="640.0000" Y="960.0000" />
         <Children>
           <AbstractNodeData Name="background" ActionTag="-1880258662" Tag="3" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="-64.0000" RightMargin="-64.0000" TopMargin="-88.0000" BottomMargin="-88.0000" ctype="SpriteObjectData">
@@ -1017,7 +1017,7 @@
             <FileData Type="Normal" Path="Images/resources-1x/waterfall.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="title" ActionTag="-1086158147" Tag="38" VisibleForFrame="False" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="123.0000" RightMargin="123.0000" TopMargin="240.0000" BottomMargin="541.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="title" ActionTag="-1086158147" Tag="38" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="123.0000" RightMargin="123.0000" TopMargin="240.0000" BottomMargin="541.0000" ctype="SpriteObjectData">
             <Size X="394.0000" Y="179.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="1.0000" />
             <Position X="320.0000" Y="720.0000" />
@@ -1028,13 +1028,13 @@
             <FileData Type="Normal" Path="Images/resources-1x/title.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="PlayButton" ActionTag="-1033247390" Tag="39" VisibleForFrame="False" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="197.0000" RightMargin="197.0000" TopMargin="1193.0000" BottomMargin="-384.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="216" Scale9Height="129" OutlineSize="0" ShadowOffsetX="0.0000" ShadowOffsetY="0.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="PlayButton" ActionTag="-1033247390" Tag="39" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="197.0000" RightMargin="197.0000" TopMargin="799.4000" BottomMargin="9.6000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="216" Scale9Height="129" OutlineSize="0" ShadowOffsetX="0.0000" ShadowOffsetY="0.0000" ctype="ButtonObjectData">
             <Size X="246.0000" Y="151.0000" />
             <AnchorPoint ScaleX="0.5000" />
-            <Position X="320.0000" Y="-384.0000" />
+            <Position X="320.0000" Y="9.6000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="-0.4000" />
+            <PrePosition X="0.5000" Y="0.0100" />
             <PreSize X="0.3844" Y="0.1573" />
             <TextColor A="255" R="65" G="65" B="70" />
             <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
@@ -1043,13 +1043,13 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="RankingButton" ActionTag="1685291584" Tag="1463" VisibleForFrame="False" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="25.6000" RightMargin="452.4000" TopMargin="1194.0000" BottomMargin="-384.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="132" Scale9Height="128" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="RankingButton" ActionTag="1685291584" Tag="1463" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="25.6000" RightMargin="452.4000" TopMargin="800.4000" BottomMargin="9.6000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="132" Scale9Height="128" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="162.0000" Y="150.0000" />
             <AnchorPoint />
-            <Position X="25.6000" Y="-384.0000" />
+            <Position X="25.6000" Y="9.6000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.0400" Y="-0.4000" />
+            <PrePosition X="0.0400" Y="0.0100" />
             <PreSize X="0.2531" Y="0.1563" />
             <TextColor A="255" R="65" G="65" B="70" />
             <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
@@ -1058,13 +1058,13 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="VersusButton" ActionTag="-68004907" Tag="1462" VisibleForFrame="False" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="451.4000" RightMargin="25.6000" TopMargin="1193.0000" BottomMargin="-384.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="133" Scale9Height="129" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="VersusButton" ActionTag="-68004907" Tag="1462" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="451.4000" RightMargin="25.6000" TopMargin="799.4000" BottomMargin="9.6000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="133" Scale9Height="129" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="163.0000" Y="151.0000" />
             <AnchorPoint ScaleX="1.0000" />
-            <Position X="614.4000" Y="-384.0000" />
+            <Position X="614.4000" Y="9.6000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.9600" Y="-0.4000" />
+            <PrePosition X="0.9600" Y="0.0100" />
             <PreSize X="0.2547" Y="0.1573" />
             <TextColor A="255" R="65" G="65" B="70" />
             <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
@@ -1073,7 +1073,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="lifeBG" ActionTag="60709847" Tag="60" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="132.0000" RightMargin="132.0000" TopMargin="852.0000" BottomMargin="48.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="lifeBG" ActionTag="60709847" Tag="60" VisibleForFrame="False" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="132.0000" RightMargin="132.0000" TopMargin="1044.0000" BottomMargin="-144.0000" ctype="SpriteObjectData">
             <Size X="376.0000" Y="60.0000" />
             <Children>
               <AbstractNodeData Name="lifeBar" ActionTag="-675434661" Tag="61" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="18.8000" RightMargin="17.2000" TopMargin="14.5000" BottomMargin="14.5000" ctype="SpriteObjectData">
@@ -1101,15 +1101,15 @@
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5000" />
-            <Position X="320.0000" Y="48.0000" />
+            <Position X="320.0000" Y="-144.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.0500" />
+            <PrePosition X="0.5000" Y="-0.1500" />
             <PreSize X="0.5875" Y="0.0625" />
             <FileData Type="Normal" Path="Images/resources-1x/life_bg.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="lifeBG2" ActionTag="-1685214329" Tag="223" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="694.1661" RightMargin="-430.1661" TopMargin="852.0000" BottomMargin="48.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="lifeBG2" ActionTag="-1685214329" Tag="223" VisibleForFrame="False" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="772.0000" RightMargin="-508.0000" TopMargin="1044.0000" BottomMargin="-144.0000" ctype="SpriteObjectData">
             <Size X="376.0000" Y="60.0000" />
             <Children>
               <AbstractNodeData Name="lifeBar2" ActionTag="-1857335698" Tag="224" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="18.8000" RightMargin="17.2000" TopMargin="14.5000" BottomMargin="14.5000" ctype="SpriteObjectData">
@@ -1137,10 +1137,10 @@
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5000" />
-            <Position X="882.1661" Y="48.0000" />
+            <Position X="960.0000" Y="-144.0000" />
             <Scale ScaleX="0.5000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="1.3784" Y="0.0500" />
+            <PrePosition X="1.5000" Y="-0.1500" />
             <PreSize X="0.5875" Y="0.0625" />
             <FileData Type="Normal" Path="Images/resources-1x/life_bg.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
@@ -1172,7 +1172,7 @@
             <PrePosition X="0.2850" Y="0.5300" />
             <PreSize X="0.0000" Y="0.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="leftRaft" ActionTag="1761883152" Tag="212" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="-124.0000" RightMargin="320.0000" TopMargin="-211.5000" BottomMargin="-211.5000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="leftRaft" ActionTag="1761883152" Tag="212" VisibleForFrame="False" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="-124.0000" RightMargin="320.0000" TopMargin="-537.9000" BottomMargin="114.9000" ctype="SpriteObjectData">
             <Size X="444.0000" Y="1383.0000" />
             <Children>
               <AbstractNodeData Name="rankingButton" ActionTag="864866421" Tag="144" IconVisible="False" LeftMargin="84.7072" RightMargin="197.2928" TopMargin="1155.5558" BottomMargin="77.4442" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="132" Scale9Height="128" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
@@ -1228,15 +1228,15 @@
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
-            <Position X="320.0000" Y="480.0000" />
-            <Scale ScaleX="0.4047" ScaleY="0.4047" />
+            <Position X="320.0000" Y="806.4000" />
+            <Scale ScaleX="0.3333" ScaleY="0.0010" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.5000" />
+            <PrePosition X="0.5000" Y="0.8400" />
             <PreSize X="0.2375" Y="0.4812" />
             <FileData Type="Normal" Path="Images/resources-3x/leftRaft@3x.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="rightRaft" ActionTag="-425583861" Tag="213" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="320.0000" RightMargin="-133.0000" TopMargin="-211.5000" BottomMargin="-211.5000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="rightRaft" ActionTag="-425583861" Tag="213" VisibleForFrame="False" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="320.0000" RightMargin="-133.0000" TopMargin="-537.9000" BottomMargin="114.9000" ctype="SpriteObjectData">
             <Size X="453.0000" Y="1383.0000" />
             <Children>
               <AbstractNodeData Name="perfectScoreLabel" ActionTag="-1404305814" Tag="137" IconVisible="False" LeftMargin="40.0000" RightMargin="251.0000" TopMargin="529.5304" BottomMargin="791.4696" FontSize="50" LabelText="000000" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="3.0000" ShadowOffsetY="-3.0000" ShadowEnabled="True" ctype="TextObjectData">
@@ -1321,11 +1321,11 @@
                 <Scale ScaleX="1.2736" ScaleY="1.2736" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.6627" Y="0.1101" />
-                <PreSize X="0.3575" Y="0.1082" />
+                <PreSize X="0.3598" Y="0.1085" />
                 <TextColor A="255" R="65" G="65" B="70" />
                 <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
-                <PressedFileData Type="Normal" Path="Images/resources-1x/TopButtonPressed.png" Plist="" />
-                <NormalFileData Type="Normal" Path="Images/resources-1x/TopButton.png" Plist="" />
+                <PressedFileData Type="Normal" Path="Images/resources-1x/homeButtonPressed.png" Plist="" />
+                <NormalFileData Type="Normal" Path="Images/resources-1x/homeButton.png" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
@@ -1390,10 +1390,10 @@
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleY="0.5000" />
-            <Position X="320.0000" Y="480.0000" />
-            <Scale ScaleX="0.4047" ScaleY="0.4047" />
+            <Position X="320.0000" Y="806.4000" />
+            <Scale ScaleX="0.3300" ScaleY="0.0010" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.5000" />
+            <PrePosition X="0.5000" Y="0.8400" />
             <PreSize X="0.2375" Y="0.4812" />
             <FileData Type="Normal" Path="Images/resources-3x/rightRaft@3x.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
@@ -1525,8 +1525,8 @@
                 <PreSize X="0.5397" Y="0.1943" />
                 <TextColor A="255" R="65" G="65" B="70" />
                 <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
-                <PressedFileData Type="Normal" Path="Images/resources-1x/TopButtonPressed.png" Plist="" />
-                <NormalFileData Type="Normal" Path="Images/resources-1x/TopButton.png" Plist="" />
+                <PressedFileData Type="Normal" Path="Images/resources-1x/homeButtonPressed.png" Plist="" />
+                <NormalFileData Type="Normal" Path="Images/resources-1x/homeButton.png" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>

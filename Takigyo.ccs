@@ -68,6 +68,8 @@
             <Image Name="SettingButtonPressed.png" />
             <Image Name="new.png" />
             <Image Name="cloud2.png" />
+            <Image Name="homeButton.png" />
+            <Image Name="homeButtonPressed.png" />
           </Folder>
           <Folder Name="resources-2x">
             <Image Name="BottomRock@2x.png" />
