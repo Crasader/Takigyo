@@ -39,7 +39,7 @@ public:
     ObstacleType type;
 };
 
-static const float PRESENT_OUTPUT_POTENTIAL = 3.0f;
+static const float PRESENT_OUTPUT_POTENTIAL = 10.0f;
 
 static const float COUNT_DOWN_TIME = 5.0f;
 
