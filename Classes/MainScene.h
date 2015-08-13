@@ -95,6 +95,7 @@ private:
     void gotHit();
     void setGameActive(bool active);
     void playTimingAnimation();
+    void playSlowAnimation();
     void sendDataOverNetwork();
     void setSinglePlayMode();
     void setMultiPlayMode();

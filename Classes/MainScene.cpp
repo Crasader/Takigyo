@@ -417,6 +417,7 @@ void MainScene::dropObstacles(ObstacleType obstacleType, float tempo) {
                     ActionTimeline* rockTimeline = CSLoader::createTimeline("Rock.csb");
                     obstacle->runAction(rockTimeline);
                     rockTimeline->play("rollingRock", false);
+                    this->playSlowAnimation();
                 } else if (obstacleType == ObstacleType::Heart) {
                     float remainingAura = this->auraLeft + RECOVERY;
                     this->setRemainingAura(remainingAura);
@@ -770,8 +771,26 @@ void MainScene::triggerGameOver()
     this->gameState = GameState::GameOver;
 }
 
+void MainScene::playSlowAnimation() {
+CCLOG("SLOW");
+    auto good = Sprite::create("slow.png");
+    good->setPosition(Vec2(this->visibleSize.width * 0.29f, this->visibleSize.height * 0.5f));
+    good->setScale(2.0f, 2.0f);
+    auto comboUp          = MoveBy::create(0.3f, Vec2(0,65));
+    auto comboFade        = FadeTo::create(0.3f, 0.0f);
+    auto comboScale       = ScaleTo::create(0.1f, 0.1f);
+    auto easeIn           = EaseIn::create(comboScale, 4);
+    good->runAction(Sequence::create(
+                                     comboUp,
+                                     comboFade,
+                                     easeIn,
+                                     CallFunc::create([good](){good->removeFromParent();}),
+                                     NULL));
+    this->rootNode->addChild(good);
+}
+
 void MainScene::playTimingAnimation() {
-    if (this->touchingTime < 0.1) {
+    if (this->touchingTime < 0.5) {
         auto perfect = Sprite::create("perfect.png");
         perfect->setPosition(Vec2(this->visibleSize.width * 0.29f, this->visibleSize.height * 0.5f));
         perfect->setScale(2.0f, 2.0f);
