@@ -21,7 +21,6 @@
             <Image Name="life_bg.png" />
             <Image Name="FallenRock.png" />
             <Image Name="heart.png" />
-            <Image Name="Ken.png" />
             <Image Name="life.png" />
             <Image Name="Ranking.png" />
             <Image Name="PlayButton.png" />
@@ -31,11 +30,8 @@
             <Image Name="Ten.png" />
             <Image Name="title.png" />
             <Image Name="waterfall.png" />
-            <Image Name="waterfall2.png" />
             <Image Name="eveningBackground.png" />
             <Image Name="eveningMask.png" />
-            <Image Name="introLeftRaft.png" />
-            <Image Name="introRightRaft.png" />
             <Image Name="perfect.png" />
             <Image Name="good.png" />
             <Image Name="great.png" />
@@ -51,12 +47,9 @@
             <Image Name="breakingHeart2.png" />
             <Image Name="breakingHeart3.png" />
             <Image Name="breakingHeart4.png" />
-            <Image Name="RubberDuckyKen.png" />
             <Image Name="RubberDuckyTen.png" />
             <Image Name="VersusButtonPressed.png" />
             <Image Name="VersusButton.png" />
-            <Image Name="VersusButton2.png" />
-            <Image Name="VersusButtonPressed2.png" />
             <Image Name="multiLeftRaft.png" />
             <Image Name="multiRightRaft.png" />
             <Image Name="RankingPressed.png" />
