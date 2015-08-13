@@ -1,5 +1,5 @@
 <GameProjectFile>
-  <PropertyGroup Type="Node" Name="Rock" ID="b3dc3844-dbd6-4bae-bd66-121be969071f" Version="2.3.1.2" />
+  <PropertyGroup Type="Node" Name="Rock" ID="b3dc3844-dbd6-4bae-bd66-121be969071f" Version="2.3.2.0" />
   <Content ctype="GameProjectContent">
     <Content>
       <Animation Duration="120" Speed="1.0000" ActivedAnimationName="rollingRock">
@@ -176,7 +176,7 @@
             <FileData Type="Normal" Path="Images/resources-1x/rock2.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="breakingRock" ActionTag="909753710" Tag="400" VisibleForFrame="False" Alpha="0" IconVisible="False" LeftMargin="-184.5000" RightMargin="-184.5000" TopMargin="69.0000" BottomMargin="-191.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="breakingRock" ActionTag="909753710" VisibleForFrame="False" Alpha="0" Tag="400" IconVisible="False" LeftMargin="-184.5000" RightMargin="-184.5000" TopMargin="69.0000" BottomMargin="-191.0000" ctype="SpriteObjectData">
             <Size X="369.0000" Y="122.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position Y="-130.0000" />

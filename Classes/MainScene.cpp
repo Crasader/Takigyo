@@ -901,7 +901,7 @@ void MainScene::setupTouchHandling() {
             case GameState::Playing:
                 if (this->gettingHit == false) {
                     this->character->setNen(Nen::Ken);
-                    this->soundId = CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("ken.wav", true);
+                    this->soundId = CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("woosh.wav", true);
                     this->sendDataOverNetwork();
                 }
                 break;

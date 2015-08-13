@@ -1,5 +1,5 @@
 <GameProjectFile>
-  <PropertyGroup Type="Node" Name="Waiting" ID="9eb18306-ad80-43be-a32d-392ca6daecaa" Version="2.3.1.2" />
+  <PropertyGroup Type="Node" Name="Waiting" ID="9eb18306-ad80-43be-a32d-392ca6daecaa" Version="2.3.2.0" />
   <Content ctype="GameProjectContent">
     <Content>
       <Animation Duration="119" Speed="1.0000" ActivedAnimationName="waiting">
@@ -51,7 +51,7 @@
       <ObjectData Name="Node" Tag="881" ctype="GameNodeObjectData">
         <Size X="0.0000" Y="0.0000" />
         <Children>
-          <AbstractNodeData Name="Waiting" ActionTag="543732051" Tag="882" VisibleForFrame="False" Alpha="0" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="-180.0000" RightMargin="-180.0000" TopMargin="-135.0000" BottomMargin="-135.0000" FontSize="60" LabelText="Waiting&#xA;for&#xA;opponent" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="4" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="Waiting" ActionTag="543732051" VisibleForFrame="False" Alpha="0" Tag="882" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="-180.0000" RightMargin="-180.0000" TopMargin="-135.0000" BottomMargin="-135.0000" FontSize="60" LabelText="Waiting&#xA;for&#xA;opponent" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="4" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="360.0000" Y="270.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position />

@@ -42,7 +42,7 @@ void Character::setNen(Nen nen)
     this->runAction(characterTimeline);
     if (this->nen == Nen::Ken)
     {
-        characterTimeline->play("Ken", false);
+        characterTimeline->play("Ken", true);
     }
     else
     {
