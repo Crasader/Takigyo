@@ -2,7 +2,7 @@
   <PropertyGroup Type="Node" Name="OpponentCharacter" ID="b7cf7753-5ca4-45be-9edd-385ea10e04f4" Version="2.3.2.0" />
   <Content ctype="GameProjectContent">
     <Content>
-      <Animation Duration="49" Speed="1.0000" ActivedAnimationName="Ken">
+      <Animation Duration="46" Speed="1.0000" ActivedAnimationName="Ken">
         <Timeline ActionTag="-616467882" Property="VisibleForFrame">
           <BoolFrame FrameIndex="0" Tween="False" Value="False" />
           <BoolFrame FrameIndex="31" Tween="False" Value="False" />
@@ -14,31 +14,20 @@
         <Timeline ActionTag="1341341742" Property="VisibleForFrame">
           <BoolFrame FrameIndex="0" Tween="False" Value="False" />
           <BoolFrame FrameIndex="31" Tween="False" Value="True" />
-          <BoolFrame FrameIndex="37" Tween="False" Value="True" />
-          <BoolFrame FrameIndex="43" Tween="False" Value="True" />
-          <BoolFrame FrameIndex="49" Tween="False" Value="True" />
+          <BoolFrame FrameIndex="41" Tween="False" Value="True" />
         </Timeline>
         <Timeline ActionTag="1341341742" Property="FileData">
           <TextureFrame FrameIndex="31" Tween="False">
             <TextureFile Type="Normal" Path="Images/resources-1x/RubberDuckyPunch.png" Plist="" />
           </TextureFrame>
-          <TextureFrame FrameIndex="34" Tween="False">
+          <TextureFrame FrameIndex="36" Tween="False">
             <TextureFile Type="Normal" Path="Images/resources-1x/RubberDuckyPunch2.png" Plist="" />
           </TextureFrame>
-          <TextureFrame FrameIndex="37" Tween="False">
-            <TextureFile Type="Normal" Path="Images/resources-1x/RubberDuckyPunch.png" Plist="" />
-          </TextureFrame>
-          <TextureFrame FrameIndex="40" Tween="False">
-            <TextureFile Type="Normal" Path="Images/resources-1x/RubberDuckyPunch2.png" Plist="" />
-          </TextureFrame>
-          <TextureFrame FrameIndex="43" Tween="False">
+          <TextureFrame FrameIndex="41" Tween="False">
             <TextureFile Type="Normal" Path="Images/resources-1x/RubberDuckyPunch.png" Plist="" />
           </TextureFrame>
           <TextureFrame FrameIndex="46" Tween="False">
             <TextureFile Type="Normal" Path="Images/resources-1x/RubberDuckyPunch2.png" Plist="" />
-          </TextureFrame>
-          <TextureFrame FrameIndex="49" Tween="False">
-            <TextureFile Type="Normal" Path="Images/resources-1x/RubberDuckyPunch.png" Plist="" />
           </TextureFrame>
         </Timeline>
       </Animation>

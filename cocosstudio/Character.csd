@@ -2,7 +2,7 @@
   <PropertyGroup Type="Node" Name="Character" ID="a58d6a62-cfa3-442f-8b50-e485becd7713" Version="2.3.2.0" />
   <Content ctype="GameProjectContent">
     <Content>
-      <Animation Duration="49" Speed="1.0000" ActivedAnimationName="Ken">
+      <Animation Duration="46" Speed="1.0000" ActivedAnimationName="Ken">
         <Timeline ActionTag="-616467882" Property="VisibleForFrame">
           <BoolFrame FrameIndex="0" Tween="False" Value="False" />
           <BoolFrame FrameIndex="31" Tween="False" Value="False" />
@@ -29,23 +29,14 @@
           <TextureFrame FrameIndex="31" Tween="False">
             <TextureFile Type="Normal" Path="Images/resources-1x/RubberDuckyPunch.png" Plist="" />
           </TextureFrame>
-          <TextureFrame FrameIndex="34" Tween="False">
+          <TextureFrame FrameIndex="36" Tween="False">
             <TextureFile Type="Normal" Path="Images/resources-1x/RubberDuckyPunch2.png" Plist="" />
           </TextureFrame>
-          <TextureFrame FrameIndex="37" Tween="False">
-            <TextureFile Type="Normal" Path="Images/resources-1x/RubberDuckyPunch.png" Plist="" />
-          </TextureFrame>
-          <TextureFrame FrameIndex="40" Tween="False">
-            <TextureFile Type="Normal" Path="Images/resources-1x/RubberDuckyPunch2.png" Plist="" />
-          </TextureFrame>
-          <TextureFrame FrameIndex="43" Tween="False">
+          <TextureFrame FrameIndex="41" Tween="False">
             <TextureFile Type="Normal" Path="Images/resources-1x/RubberDuckyPunch.png" Plist="" />
           </TextureFrame>
           <TextureFrame FrameIndex="46" Tween="False">
             <TextureFile Type="Normal" Path="Images/resources-1x/RubberDuckyPunch2.png" Plist="" />
-          </TextureFrame>
-          <TextureFrame FrameIndex="49" Tween="False">
-            <TextureFile Type="Normal" Path="Images/resources-1x/RubberDuckyPunch.png" Plist="" />
           </TextureFrame>
         </Timeline>
       </Animation>
@@ -93,15 +84,15 @@
             <FileData Type="Normal" Path="Images/resources-1x/RubberDuckyTen.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="KenCyduck" ActionTag="1341341742" Tag="67" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="-42.0000" RightMargin="-42.0000" TopMargin="-121.0000" ctype="SpriteObjectData">
-            <Size X="84.0000" Y="121.0000" />
+          <AbstractNodeData Name="KenCyduck" ActionTag="1341341742" Tag="67" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="-42.5000" RightMargin="-42.5000" TopMargin="-120.0000" ctype="SpriteObjectData">
+            <Size X="85.0000" Y="120.0000" />
             <AnchorPoint ScaleX="0.5000" />
             <Position />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
-            <FileData Type="Normal" Path="Images/resources-1x/RubberDuckyPunch.png" Plist="" />
+            <FileData Type="Normal" Path="Images/resources-1x/RubberDuckyPunch2.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
         </Children>
