@@ -1,12 +1,10 @@
 <Solution>
-  <PropertyGroup Name="Takigyo" Version="2.3.1.2" Type="CocosStudio" />
+  <PropertyGroup Name="Takigyo" Version="2.3.2.0" Type="CocosStudio" />
   <SolutionFolder>
     <Group ctype="ResourceGroup">
       <RootFolder Name=".">
         <Project Name="MainScene.csd" Type="Scene" />
         <Project Name="Character.csd" Type="Node" />
-        <PlistParticleFile Name="particle_waterfall.plist" />
-        <PlistParticleFile Name="shibuki.plist" />
         <Folder Name="Fonts">
           <TTF Name="Game of Three.ttf" />
           <TTF Name="njnaruto.ttf" />
@@ -70,6 +68,8 @@
             <Image Name="cloud2.png" />
             <Image Name="homeButton.png" />
             <Image Name="homeButtonPressed.png" />
+            <Image Name="RubberDuckyPunch.png" />
+            <Image Name="RubberDuckyPunch2.png" />
           </Folder>
           <Folder Name="resources-2x">
             <Image Name="BottomRock@2x.png" />
@@ -127,7 +127,6 @@
         <Project Name="LevelNode.csd" Type="Node" />
         <TTF Name="Game of Three.ttf" />
         <Project Name="Rock.csd" Type="Node" />
-        <PlistParticleFile Name="nami.plist" />
         <Image Name="heart.png" />
         <Project Name="Heart.csd" Type="Node" />
         <PlistParticleFile Name="recover.plist" />
