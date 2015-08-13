@@ -1,5 +1,5 @@
 <GameProjectFile>
-  <PropertyGroup Type="Node" Name="LevelNode" ID="b70b88f1-649b-472f-985f-b57dd2b7d830" Version="2.3.2.0" />
+  <PropertyGroup Type="Node" Name="LevelNode" ID="b70b88f1-649b-472f-985f-b57dd2b7d830" Version="2.3.1.2" />
   <Content ctype="GameProjectContent">
     <Content>
       <Animation Duration="119" Speed="1.0000" ActivedAnimationName="levelUp">
@@ -55,7 +55,7 @@
       <ObjectData Name="Node" Tag="881" ctype="GameNodeObjectData">
         <Size X="0.0000" Y="0.0000" />
         <Children>
-          <AbstractNodeData Name="Level" ActionTag="543732051" Alpha="0" Tag="882" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="-30.0000" RightMargin="-30.0000" TopMargin="-60.0000" BottomMargin="-60.0000" FontSize="80" LabelText="0" OutlineSize="4" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+          <AbstractNodeData Name="Level" ActionTag="543732051" Tag="882" Alpha="0" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="-30.0000" RightMargin="-30.0000" TopMargin="-60.0000" BottomMargin="-60.0000" FontSize="80" LabelText="0" OutlineSize="4" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="60.0000" Y="120.0000" />
             <Children>
               <AbstractNodeData Name="Text" ActionTag="702009461" Tag="883" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="-120.0000" RightMargin="-120.0000" TopMargin="-80.4000" BottomMargin="80.4000" FontSize="80" LabelText="LEVEL" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">

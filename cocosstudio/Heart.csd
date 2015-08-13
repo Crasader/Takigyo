@@ -1,5 +1,5 @@
 <GameProjectFile>
-  <PropertyGroup Type="Node" Name="Heart" ID="8bc93c0e-97ff-4678-9428-1c602a891811" Version="2.3.2.0" />
+  <PropertyGroup Type="Node" Name="Heart" ID="8bc93c0e-97ff-4678-9428-1c602a891811" Version="2.3.1.2" />
   <Content ctype="GameProjectContent">
     <Content>
       <Animation Duration="71" Speed="1.0000" ActivedAnimationName="fallingHeart">
@@ -142,7 +142,7 @@
             <FileData Type="Normal" Path="Images/resources-1x/heart.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="breakingHeart" ActionTag="909753710" VisibleForFrame="False" Alpha="128" Tag="400" IconVisible="False" LeftMargin="-66.5000" RightMargin="-66.5000" TopMargin="-45.0000" BottomMargin="-45.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="breakingHeart" ActionTag="909753710" Tag="400" VisibleForFrame="False" Alpha="128" IconVisible="False" LeftMargin="-66.5000" RightMargin="-66.5000" TopMargin="-45.0000" BottomMargin="-45.0000" ctype="SpriteObjectData">
             <Size X="133.0000" Y="90.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position />

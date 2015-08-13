@@ -1,5 +1,5 @@
 <GameProjectFile>
-  <PropertyGroup Type="Node" Name="OpponentCharacter" ID="b7cf7753-5ca4-45be-9edd-385ea10e04f4" Version="2.3.2.0" />
+  <PropertyGroup Type="Node" Name="OpponentCharacter" ID="b7cf7753-5ca4-45be-9edd-385ea10e04f4" Version="2.3.1.2" />
   <Content ctype="GameProjectContent">
     <Content>
       <Animation Duration="50" Speed="1.0000">
@@ -43,7 +43,7 @@
             <FileData Type="Normal" Path="Images/resources-1x/CharacterShadow.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Ten" ActionTag="-990567327" VisibleForFrame="False" Tag="65" IconVisible="True" TopMargin="-110.0000" BottomMargin="110.0000" ctype="ParticleObjectData">
+          <AbstractNodeData Name="Ten" ActionTag="-990567327" Tag="65" VisibleForFrame="False" IconVisible="True" TopMargin="-110.0000" BottomMargin="110.0000" ctype="ParticleObjectData">
             <Size X="0.0000" Y="0.0000" />
             <AnchorPoint />
             <Position Y="110.0000" />
@@ -54,7 +54,7 @@
             <FileData Type="Normal" Path="ten.plist" Plist="" />
             <BlendFunc Src="770" Dst="1" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Ken" ActionTag="-616467882" VisibleForFrame="False" Tag="66" IconVisible="True" TopMargin="-100.0000" BottomMargin="100.0000" ctype="ParticleObjectData">
+          <AbstractNodeData Name="Ken" ActionTag="-616467882" Tag="66" VisibleForFrame="False" IconVisible="True" TopMargin="-100.0000" BottomMargin="100.0000" ctype="ParticleObjectData">
             <Size X="0.0000" Y="0.0000" />
             <AnchorPoint />
             <Position Y="100.0000" />
@@ -76,7 +76,7 @@
             <FileData Type="Normal" Path="Images/resources-1x/RubberDuckyTen.png" Plist="" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="KenCyduck" ActionTag="1341341742" VisibleForFrame="False" Tag="67" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="-49.0000" RightMargin="-49.0000" TopMargin="-115.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="KenCyduck" ActionTag="1341341742" Tag="67" VisibleForFrame="False" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="-49.0000" RightMargin="-49.0000" TopMargin="-115.0000" ctype="SpriteObjectData">
             <Size X="98.0000" Y="115.0000" />
             <AnchorPoint ScaleX="0.5000" />
             <Position />

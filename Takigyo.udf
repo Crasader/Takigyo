@@ -1,4 +1,4 @@
-<UserData Version="2.3.2.0">
+<UserData Version="2.3.1.2">
   <Properties>
     <Item Key="CocosRecentOperation">
       <Value ctype="CocosRecentOperation">
@@ -19,11 +19,8 @@
         <iOS_BundleID Value="iPhone Developer: Shota Oiyama (AY76Q872SX)" />
         <Platform Value="None" />
         <RunPlatform Value="None" />
-        <FrameworkVersion Value="cocos2d-x-3.7" />
+        <FrameworkVersion Value="cocos2d-x-3.6" />
         <IsDebugKeystore Value="True" />
-        <KeystorePassword Value="" />
-        <KeystoreAliasName Value="" />
-        <KeystoreAliasPassword Value="" />
         <EnableSourceMap Value="False" />
         <EnableHTML5Advanced Value="False" />
       </Value>
