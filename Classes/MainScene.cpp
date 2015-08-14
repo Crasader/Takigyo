@@ -274,6 +274,8 @@ void MainScene::update(float dt)
         if (this->loadNext == true && this->onMultiPlayerMode == false) {
             LevelInfo* levelInfo    = LevelInfo::createPatternWithRound(this->gameRound);
             this->currentPattern    = levelInfo->getCurrentPattern();
+            this->currentPatternId  = levelInfo->getCurrentPatternId();
+            //CCLOG("PatternId:%d", this->currentPatternId);
             this->currentLevel      = levelInfo->getCurrentLevel();
             this->currentDuration   = levelInfo->getCurrentDuration();
             this->currentTempo      = levelInfo->getCurrentTempo();
@@ -772,7 +774,6 @@ void MainScene::triggerGameOver()
 }
 
 void MainScene::playSlowAnimation() {
-CCLOG("SLOW");
     auto good = Sprite::create("slow.png");
     good->setPosition(Vec2(this->visibleSize.width * 0.29f, this->visibleSize.height * 0.5f));
     good->setScale(2.0f, 2.0f);

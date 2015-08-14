@@ -55,13 +55,13 @@
       <ObjectData Name="Node" Tag="881" ctype="GameNodeObjectData">
         <Size X="0.0000" Y="0.0000" />
         <Children>
-          <AbstractNodeData Name="Level" ActionTag="543732051" Alpha="0" Tag="882" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="-30.0000" RightMargin="-30.0000" TopMargin="-60.0000" BottomMargin="-60.0000" FontSize="80" LabelText="0" OutlineSize="4" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="60.0000" Y="120.0000" />
+          <AbstractNodeData Name="Level" ActionTag="543732051" Alpha="139" Tag="882" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="-30.0000" RightMargin="-30.0000" TopMargin="76.5024" BottomMargin="-196.5024" FontSize="80" LabelText="000" HorizontalAlignmentType="HT_Center" VerticalAlignmentType="VT_Center" OutlineSize="4" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="180.0000" Y="120.0000" />
             <Children>
               <AbstractNodeData Name="Text" ActionTag="702009461" Tag="883" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="-120.0000" RightMargin="-120.0000" TopMargin="-80.4000" BottomMargin="80.4000" FontSize="80" LabelText="LEVEL" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
                 <Size X="300.0000" Y="120.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="30.0000" Y="140.4000" />
+                <Position X="90.0000" Y="140.4000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="0" G="0" B="0" />
                 <PrePosition X="0.5000" Y="1.1700" />
@@ -72,7 +72,7 @@
               </AbstractNodeData>
             </Children>
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position />
+            <Position Y="-136.5024" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="0" G="0" B="0" />
             <PrePosition />
