@@ -740,7 +740,7 @@ void MainScene::triggerGameOver()
     auto currentRankName    = rankInfo->getCurrentRankName();
     auto currentRank      = rankInfo->getCurrentRank();
     
-    auto rankLabel = resultRightRaft->getChildByName<cocos2d::ui::Text*>("rankLabel");
+    auto rankLabel = resultRightRaft->getChildByName<cocos2d::ui::TextBMFont*>("rankLabel");
     rankLabel->setString(currentRankName.c_str());
     
     auto fromTopLabel = resultRightRaft->getChildByName<cocos2d::ui::Text*>("fromTopLabel");

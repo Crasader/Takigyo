@@ -8,7 +8,7 @@
         <Folder Name="Fonts">
           <TTF Name="Game of Three.ttf" />
           <TTF Name="njnaruto.ttf" />
-          <TTF Name="AoyagiKouzanFont2.ttf" />
+          <Fnt Name="aoyagi.fnt" />
         </Folder>
         <PlistParticleFile Name="ten.plist" />
         <Project Name="Clouds.csd" Type="Node" />
@@ -124,8 +124,6 @@
         <PlistParticleFile Name="recover.plist" />
         <PlistParticleFile Name="splash2.plist" />
         <Project Name="OpponentCharacter.csd" Type="Node" />
-        <TTF Name="AoyagiKouzanFontSousyo2.ttf" />
-        <TTF Name="aoyagireisyosimo_ttf_2_01.ttf" />
         <Project Name="Waiting.csd" Type="Node" />
         <Image Name="waterfall@3x.png" />
         <Project Name="Result.csd" Type="Node" />
